@@ -1,0 +1,2763 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Credibility Decision</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@500;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --brand-navy:#080828;
+  --brand-blue:#4D88E8;
+  --brand-teal:#40BDA9;
+  --brand-amber:#FFBC3A;
+  --brand-coral:#F26A44;
+  --brand-mist:#EBF4FF;
+
+  --r-s:10px; --r-m:16px; --r-l:24px; --r-xl:32px; --r-pill:999px;
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px; --s7:48px; --s8:72px;
+
+  --f-display:'Playfair Display',Georgia,serif;
+  --f-body:'Inter',system-ui,sans-serif;
+  --f-ar-display:'Noto Kufi Arabic','Noto Sans Arabic',sans-serif;
+  --f-ar-body:'Noto Sans Arabic','Segoe UI',Tahoma,sans-serif;
+
+  --e-out:cubic-bezier(.16,1,.3,1);
+  --e-soft:cubic-bezier(.4,0,.2,1);
+}
+
+[data-theme="dark"]{
+  --bg:#070720;
+  --bg-deep:#04041a;
+  --room-1:#0B1230;
+  --room-2:#060a22;
+  --desk-1:#10142e;
+  --desk-2:#070a1c;
+  --surface:#111336;
+  --surface-2:#171a44;
+  --surface-3:#1d2052;
+  --sunken:#0B0C2A;
+  --text:#F2F5FF;
+  --text-2:#AFB6E0;
+  --text-3:#7F86B8;
+  --line:rgba(255,255,255,.12);
+  --line-2:rgba(255,255,255,.24);
+  --accent:var(--brand-teal);
+  --accent-ink:#04231E;
+  --link:#8FB8FF;
+  --focus:#9FC6FF;
+  --paper:#EDE7DA;
+  --paper-2:#E2DACA;
+  --paper-ink:#2A2A33;
+  --shadow-1:0 2px 8px rgba(0,0,0,.45);
+  --shadow-2:0 18px 50px rgba(0,0,0,.55);
+  --shadow-3:0 40px 90px rgba(0,0,0,.6);
+  --glow-teal:0 0 0 1px rgba(64,189,169,.5), 0 0 22px rgba(64,189,169,.35);
+  --topbar:rgba(6,8,26,.82);
+}
+
+[data-theme="light"]{
+  --bg:#FFFFFF;
+  --bg-deep:#F4F7FD;
+  --room-1:#E7EEFB;
+  --room-2:#DCE6F8;
+  --desk-1:#D7E0F2;
+  --desk-2:#C9D4EB;
+  --surface:#FFFFFF;
+  --surface-2:#F7F9FE;
+  --surface-3:#EEF3FC;
+  --sunken:#EBF1FB;
+  --text:#0B0C28;
+  --text-2:#434768;
+  --text-3:#6A6F94;
+  --line:rgba(8,8,40,.14);
+  --line-2:rgba(8,8,40,.3);
+  --accent:#15907C;
+  --accent-ink:#FFFFFF;
+  --link:#1B5FD0;
+  --focus:#0F49B8;
+  --paper:#FFFFFF;
+  --paper-2:#F3F1E9;
+  --paper-ink:#23232B;
+  --shadow-1:0 1px 3px rgba(8,8,40,.1);
+  --shadow-2:0 10px 30px rgba(8,8,40,.12);
+  --shadow-3:0 24px 60px rgba(8,8,40,.16);
+  --glow-teal:0 0 0 1px rgba(21,144,124,.45), 0 0 16px rgba(21,144,124,.18);
+  --topbar:rgba(255,255,255,.88);
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--f-body);
+  font-size:17px;
+  line-height:1.6;
+  min-height:100vh;
+  overflow-x:hidden;
+  transition:background .5s var(--e-soft), color .5s var(--e-soft);
+}
+html[lang="ar"] body{font-family:var(--f-ar-body);line-height:1.85;}
+img,svg{max-width:100%;}
+button{font:inherit;color:inherit;background:none;border:none;}
+h1,h2,h3,h4,p,ul,ol,figure,dl,dd{margin:0;padding:0;}
+ul,ol{list-style:none;}
+/* Belt and braces: a list-item inside a flex container can still paint a
+   marker in some engines, and these lists draw their own numbered badges. */
+li{list-style:none;}
+li::marker{content:"";}
+table{border-collapse:collapse;}
+
+.sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+.skip{position:absolute;inset-inline-start:16px;top:-70px;background:var(--accent);color:var(--accent-ink);padding:12px 20px;border-radius:var(--r-s);z-index:999;font-weight:700;transition:top .25s var(--e-out);}
+.skip:focus{top:16px;}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:6px;}
+
+/* ================= topbar ================= */
+.topbar{
+  position:fixed;top:0;inset-inline:0;z-index:60;
+  display:flex;align-items:center;justify-content:space-between;gap:var(--s3);
+  padding:calc(var(--s3) + env(safe-area-inset-top,0px)) var(--s5) var(--s3);
+  background:var(--topbar);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid transparent;
+  transition:border-color .3s, background .3s;
+}
+.topbar.scrolled{border-bottom-color:var(--line);}
+.brandmark{display:flex;align-items:center;gap:var(--s3);min-height:34px;}
+.brandmark .logo-wrap{display:inline-flex;align-items:center;line-height:0;padding:7px 11px;border-radius:var(--r-s);transition:background .4s;}
+[data-theme="dark"] .brandmark .logo-wrap{background:#F2F5FF;}
+.brandmark svg{width:76px;height:auto;display:block;}
+.ctrl-group{display:flex;align-items:center;gap:var(--s2);}
+.pill-select{position:relative;}
+.pill-select>button{
+  display:inline-flex;align-items:center;gap:var(--s2);
+  border:1px solid var(--line-2);border-radius:var(--r-pill);
+  padding:9px 16px;min-height:42px;cursor:pointer;
+  font-size:.88rem;font-weight:600;color:var(--text);
+  transition:border-color .25s, background .25s, transform .25s var(--e-out);
+}
+.pill-select>button:hover{border-color:var(--accent);transform:translateY(-1px);}
+.pill-select>button .caret{transition:transform .3s var(--e-out);}
+.pill-select>button[aria-expanded="true"] .caret{transform:rotate(180deg);}
+.pill-menu{
+  position:absolute;inset-inline-end:0;top:calc(100% + 8px);
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-m);
+  box-shadow:var(--shadow-2);padding:6px;min-width:156px;z-index:70;
+  opacity:0;transform:translateY(-8px) scale(.97);pointer-events:none;
+  transition:opacity .22s var(--e-out), transform .22s var(--e-out);
+}
+.pill-menu.open{opacity:1;transform:none;pointer-events:auto;}
+.pill-menu button{
+  display:flex;width:100%;align-items:center;gap:var(--s2);
+  padding:10px 14px;border-radius:var(--r-s);cursor:pointer;text-align:start;
+  font-size:.9rem;font-weight:600;min-height:44px;
+  transition:background .18s;
+}
+.pill-menu button:hover{background:var(--surface-3);}
+.pill-menu button[aria-checked="true"]{color:var(--accent);}
+.pill-menu button .tick{margin-inline-start:auto;opacity:0;transition:opacity .2s;}
+.pill-menu button[aria-checked="true"] .tick{opacity:1;}
+
+/* ================= progress rail ================= */
+.rail{
+  position:fixed;top:calc(62px + env(safe-area-inset-top,0px));inset-inline:0;z-index:55;
+  height:2px;background:transparent;
+}
+.rail i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand-blue),var(--brand-teal));transition:width .7s var(--e-out);}
+
+main{padding-top:0;}
+.wrap{max-width:1180px;margin-inline:auto;padding-inline:var(--s5);}
+.wrap-n{max-width:820px;margin-inline:auto;padding-inline:var(--s5);}
+
+/* ================= HERO : the desk scene ================= */
+.hero{
+  position:relative;min-height:100svh;display:flex;align-items:center;
+  overflow:hidden;isolation:isolate;
+  padding:calc(96px + env(safe-area-inset-top,0px)) 0 var(--s7);
+}
+.hero-room{position:absolute;inset:0;z-index:-3;background:
+  radial-gradient(120% 90% at 78% 8%, var(--room-1) 0%, var(--room-2) 48%, var(--bg-deep) 100%);}
+.hero-lamp{
+  position:absolute;z-index:-2;top:-14%;inset-inline-end:-6%;
+  width:min(760px,78vw);aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle at 50% 50%, rgba(255,188,58,.22), rgba(255,188,58,.07) 42%, transparent 70%);
+  filter:blur(8px);
+  animation:lampBreathe 9s ease-in-out infinite;
+}
+[data-theme="light"] .hero-lamp{background:radial-gradient(circle at 50% 50%, rgba(77,136,232,.18), transparent 70%);}
+@keyframes lampBreathe{0%,100%{opacity:.85;transform:scale(1);}50%{opacity:1;transform:scale(1.05);}}
+.hero-desk{
+  position:absolute;z-index:-2;inset-inline:0;bottom:0;height:42%;
+  background:linear-gradient(180deg,var(--desk-1),var(--desk-2));
+  border-top:1px solid rgba(255,255,255,.07);
+}
+[data-theme="light"] .hero-desk{border-top-color:rgba(8,8,40,.08);}
+.hero-desk::after{
+  content:"";position:absolute;inset-inline:0;top:0;height:140px;
+  background:linear-gradient(180deg,rgba(255,255,255,.055),transparent);
+}
+.hero-vignette{position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(130% 100% at 30% 40%, transparent 42%, rgba(0,0,0,.42) 100%);}
+[data-theme="light"] .hero-vignette{background:radial-gradient(130% 100% at 30% 40%, transparent 55%, rgba(8,8,40,.08) 100%);}
+
+.hero-grid{display:grid;grid-template-columns:1fr;gap:var(--s8);align-items:center;}
+@media(min-width:1000px){.hero-grid{grid-template-columns:minmax(0,1.02fr) minmax(0,1fr);gap:var(--s7);}}
+
+.hero-title{
+  font-family:var(--f-display);
+  font-size:clamp(3rem,7.4vw,5.6rem);
+  font-weight:600;line-height:.98;letter-spacing:-.022em;
+  margin-block-end:var(--s4);
+}
+html[lang="ar"] .hero-title{font-family:var(--f-display);}
+.hero-title .ln{display:block;overflow:hidden;}
+.hero-title .ln>span{display:block;transform:translateY(104%);}
+.hero-sub{
+  font-family:var(--f-display);
+  font-size:clamp(1.25rem,2.7vw,1.85rem);
+  font-weight:500;line-height:1.35;color:var(--text);
+  margin-block-end:var(--s5);max-width:22ch;
+}
+html[lang="ar"] .hero-sub{font-family:var(--f-ar-display);font-weight:600;max-width:26ch;line-height:1.65;}
+.hero-lede{font-size:1.06rem;color:var(--text-2);margin-block-end:var(--s6);max-width:44ch;}
+.hero-meta{
+  position:absolute;inset-inline-start:var(--s5);bottom:calc(var(--s6) + env(safe-area-inset-bottom,0px));
+  font-size:.92rem;color:var(--text-3);letter-spacing:.01em;
+}
+@media(max-width:999px){.hero-meta{position:static;margin-block-start:var(--s6);}}
+
+.cta{
+  display:inline-flex;align-items:center;gap:var(--s3);
+  background:var(--brand-teal);color:#04231E;
+  border-radius:var(--r-pill);padding:17px 34px;min-height:58px;
+  font-size:1.06rem;font-weight:700;cursor:pointer;
+  box-shadow:0 10px 34px rgba(64,189,169,.32);
+  transition:transform .3s var(--e-out), box-shadow .3s var(--e-out), background .25s;
+}
+.cta:hover{transform:translateY(-3px);box-shadow:0 16px 44px rgba(64,189,169,.45);background:#4ACDB8;}
+.cta:active{transform:translateY(0);}
+.cta .arw{transition:transform .35s var(--e-out);}
+.cta:hover .arw{transform:translateX(6px);}
+html[dir="rtl"] .cta .arw{transform:scaleX(-1);}
+html[dir="rtl"] .cta:hover .arw{transform:scaleX(-1) translateX(6px);}
+
+/* -------- 3D folder rack -------- */
+.rack{
+  position:relative;
+  perspective:1700px;perspective-origin:50% 42%;
+  padding-block:var(--s4) var(--s8);
+}
+.rack-tray{
+  display:flex;justify-content:center;align-items:flex-end;gap:clamp(6px,1.4vw,16px);
+  transform-style:preserve-3d;
+  transform:rotateX(9deg) rotateY(-11deg);
+}
+.dossier{
+  position:relative;width:clamp(124px,15.5vw,196px);
+  transform-style:preserve-3d;
+  transition:transform .55s var(--e-out), filter .55s var(--e-out);
+  filter:drop-shadow(0 24px 34px rgba(0,0,0,.5));
+}
+[data-theme="light"] .dossier{filter:drop-shadow(0 18px 28px rgba(8,8,40,.22));}
+.dossier:nth-child(1){transform:translateZ(-42px) translateY(10px) rotateY(5deg);}
+.dossier:nth-child(2){transform:translateZ(14px) translateY(-14px);}
+.dossier:nth-child(3){transform:translateZ(-42px) translateY(10px) rotateY(-5deg);}
+.rack:hover .dossier:nth-child(1){transform:translateZ(-30px) translateY(4px) rotateY(3deg);}
+.rack:hover .dossier:nth-child(2){transform:translateZ(26px) translateY(-20px);}
+.rack:hover .dossier:nth-child(3){transform:translateZ(-30px) translateY(4px) rotateY(-3deg);}
+
+.dossier-tab{
+  position:absolute;top:-19px;inset-inline-start:12%;
+  background:linear-gradient(180deg,var(--paper),var(--paper-2));
+  color:var(--paper-ink);
+  font-family:var(--f-display);font-weight:600;font-size:clamp(.82rem,1.25vw,1.02rem);
+  padding:5px 16px 7px;border-radius:7px 7px 0 0;
+  box-shadow:0 -2px 6px rgba(0,0,0,.18);
+  letter-spacing:.01em;
+}
+html[lang="ar"] .dossier-tab{font-family:var(--f-ar-display);}
+.dossier-body{
+  background:linear-gradient(170deg,var(--paper),var(--paper-2));
+  border-radius:4px 4px 7px 7px;
+  padding:9px 9px 13px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.6);
+}
+.dossier-photo{
+  width:100%;aspect-ratio:3/3.55;border-radius:3px;overflow:hidden;
+  background:#cfd8e8;box-shadow:0 1px 4px rgba(0,0,0,.18);
+}
+.dossier-photo svg{display:block;width:100%;height:100%;}
+.dossier-lines{display:flex;flex-direction:column;gap:5px;margin-block-start:9px;}
+.dossier-lines i{display:block;height:4px;border-radius:2px;background:#9FB0C9;opacity:.75;}
+.dossier-lines i:nth-child(1){width:92%;}
+.dossier-lines i:nth-child(2){width:66%;}
+.dossier-lines i:nth-child(3){width:80%;background:var(--brand-blue);opacity:.5;}
+.dossier-clip{
+  position:absolute;top:-9px;inset-inline-end:16%;width:13px;height:40px;
+  border:2.5px solid #9BA6BC;border-bottom-color:transparent;border-radius:7px 7px 0 0;
+  opacity:.85;
+}
+
+/* -------- enquiry budget console -------- */
+.console{
+  position:relative;margin-block-start:calc(-1 * var(--s7));
+  margin-inline:auto;width:fit-content;
+  background:linear-gradient(165deg,var(--surface-2),var(--surface));
+  border:1px solid var(--line);border-radius:var(--r-xl);
+  padding:var(--s4) var(--s6) var(--s5);
+  box-shadow:var(--shadow-3);
+  text-align:center;z-index:2;
+}
+.console-label{font-size:.9rem;color:var(--text-2);font-weight:600;margin-block-end:var(--s3);}
+.orbs{display:flex;align-items:center;gap:var(--s2);}
+.orb-link{width:clamp(20px,3vw,40px);height:1.5px;background:var(--line-2);}
+.orb{
+  position:relative;width:clamp(48px,6.4vw,62px);aspect-ratio:1;border-radius:50%;
+  display:grid;place-items:center;
+  font-family:var(--f-display);font-style:italic;font-size:1.26rem;font-weight:600;
+  color:var(--brand-teal);
+  border:2px solid var(--brand-teal);
+  box-shadow:var(--glow-teal), inset 0 0 18px rgba(64,189,169,.14);
+  transition:all .5s var(--e-out);
+}
+.orb.spent{
+  color:var(--text-3);border-color:var(--line-2);
+  box-shadow:none;background:var(--sunken);
+  transform:scale(.9);
+}
+.orb.spending{animation:orbSpend .62s var(--e-out) forwards;}
+@keyframes orbSpend{
+  0%{transform:scale(1);}
+  38%{transform:scale(1.22);box-shadow:0 0 0 10px rgba(64,189,169,.22),0 0 30px rgba(64,189,169,.5);}
+  100%{transform:scale(.9);box-shadow:none;}
+}
+
+/* -------- hero entrance choreography -------- */
+.rise{opacity:0;transform:translateY(26px);}
+.is-ready .rise{animation:riseIn .75s var(--e-out) forwards;}
+@keyframes riseIn{to{opacity:1;transform:none;}}
+.is-ready .hero-title .ln>span{animation:lineIn .9s var(--e-out) forwards;}
+@keyframes lineIn{to{transform:none;}}
+.is-ready .hero-title .ln:nth-child(1)>span{animation-delay:.05s;}
+.is-ready .hero-title .ln:nth-child(2)>span{animation-delay:.14s;}
+.d1{animation-delay:.26s!important;} .d2{animation-delay:.34s!important;}
+.d3{animation-delay:.42s!important;} .d4{animation-delay:.5s!important;}
+.dossier{opacity:0;}
+.is-ready .dossier{animation:dossierIn .85s var(--e-out) forwards;}
+@keyframes dossierIn{from{opacity:0;transform:translateY(46px) rotateX(26deg);}to{opacity:1;}}
+.is-ready .dossier:nth-child(1){animation-delay:.3s;}
+.is-ready .dossier:nth-child(2){animation-delay:.38s;}
+.is-ready .dossier:nth-child(3){animation-delay:.46s;}
+.console{opacity:0;}
+.is-ready .console{animation:riseIn .8s var(--e-out) .58s forwards;}
+
+/* ================= shared screen furniture ================= */
+.screen{padding-block:calc(104px + env(safe-area-inset-top,0px)) var(--s8);animation:screenIn .5s var(--e-out);}
+@keyframes screenIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+
+/* ---- professional progress rail ---- */
+.prog{margin-block-end:var(--s7);}
+.prog-track{position:relative;display:flex;align-items:flex-start;}
+.prog-line{position:absolute;inset-inline:0;top:13px;height:2px;background:var(--line);border-radius:2px;}
+.prog-line i{display:block;height:100%;width:0;border-radius:2px;
+  background:linear-gradient(90deg,var(--brand-blue),var(--brand-teal));
+  transition:width .8s var(--e-out);}
+html[dir="rtl"] .prog-line i{background:linear-gradient(270deg,var(--brand-blue),var(--brand-teal));}
+.prog-step{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;gap:9px;background:none;}
+.prog-node{
+  width:28px;height:28px;border-radius:50%;display:grid;place-items:center;
+  background:var(--bg);border:2px solid var(--line);color:var(--text-3);
+  font-size:.74rem;font-weight:700;font-family:var(--f-body);
+  transition:all .45s var(--e-out);
+}
+.prog-step.done .prog-node{background:var(--brand-teal);border-color:var(--brand-teal);color:var(--accent-ink);}
+.prog-step.now .prog-node{
+  border-color:var(--brand-teal);color:var(--brand-teal);background:var(--bg);
+  box-shadow:0 0 0 5px rgba(64,189,169,.16);transform:scale(1.14);
+}
+.prog-label{font-size:.76rem;font-weight:600;color:var(--text-3);text-align:center;line-height:1.35;}
+.prog-step.now .prog-label{color:var(--text);}
+.prog-step.done .prog-label{color:var(--text-2);}
+@media(max-width:560px){
+  .prog-label{font-size:.66rem;}
+  .prog-node{width:24px;height:24px;font-size:.68rem;}
+  .prog-line{top:11px;}
+}
+
+.eyebrow{font-size:.78rem;font-weight:700;color:var(--accent);letter-spacing:.04em;margin-block-end:var(--s3);}
+.h-screen{
+  font-family:var(--f-display);font-size:clamp(1.95rem,4vw,2.9rem);font-weight:600;
+  line-height:1.14;letter-spacing:-.015em;margin-block-end:var(--s4);
+}
+html[lang="ar"] .h-screen{font-family:var(--f-ar-display);line-height:1.5;}
+.lede{color:var(--text-2);font-size:1.04rem;line-height:1.8;max-width:64ch;}
+.h-sec{font-size:1.12rem;font-weight:700;margin-block:var(--s7) var(--s4);}
+.h-sub{font-size:1rem;font-weight:700;margin-block:var(--s5) var(--s3);}
+
+.back{
+  display:inline-flex;align-items:center;gap:var(--s2);color:var(--text-3);
+  font-weight:600;font-size:.92rem;cursor:pointer;min-height:44px;margin-block-end:var(--s5);
+  transition:color .2s, gap .25s var(--e-out);
+}
+.back:hover{color:var(--text);gap:12px;}
+html[dir="rtl"] .back svg{transform:scaleX(-1);}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:var(--s2);
+  border-radius:var(--r-pill);padding:15px 30px;min-height:52px;
+  font-size:1rem;font-weight:700;cursor:pointer;border:2px solid transparent;
+  transition:transform .28s var(--e-out), background .25s, border-color .25s, box-shadow .28s;
+}
+.btn:active{transform:translateY(1px) scale(.99);}
+.btn-primary{background:var(--brand-teal);color:#04231E;box-shadow:0 8px 26px rgba(64,189,169,.28);}
+.btn-primary:hover{background:#4ACDB8;transform:translateY(-2px);box-shadow:0 14px 34px rgba(64,189,169,.4);}
+.btn-ghost{border-color:var(--line-2);color:var(--text);}
+.btn-ghost:hover{border-color:var(--accent);background:var(--surface-2);}
+.btn:disabled{opacity:.42;cursor:not-allowed;transform:none!important;box-shadow:none;}
+.btns{display:flex;gap:var(--s3);flex-wrap:wrap;align-items:center;}
+.btns-split{justify-content:space-between;}
+
+/* ================= accordion (brief details) ================= */
+.acc{border:1px solid var(--line);border-radius:var(--r-m);background:var(--surface);margin-block-end:var(--s3);overflow:hidden;}
+.acc-head{
+  width:100%;display:flex;align-items:center;gap:var(--s3);text-align:start;
+  padding:var(--s4) var(--s5);cursor:pointer;min-height:60px;
+  transition:background .25s;
+}
+.acc-head:hover{background:var(--surface-2);}
+.acc-ico{
+  flex:none;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;
+  background:var(--surface-3);color:var(--accent);transition:all .35s var(--e-out);
+}
+.acc[open] .acc-ico, .acc.open .acc-ico{background:rgba(64,189,169,.16);}
+.acc-t{flex:1;font-weight:700;font-size:1rem;}
+.acc-chev{flex:none;color:var(--text-3);transition:transform .35s var(--e-out);}
+.acc.open .acc-chev{transform:rotate(180deg);}
+.acc-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s var(--e-out);}
+.acc.open .acc-panel{grid-template-rows:1fr;}
+.acc-inner{overflow:hidden;}
+.acc-pad{padding:0 var(--s5) var(--s5);border-block-start:1px solid var(--line);padding-block-start:var(--s4);}
+.acc-pad p{color:var(--text-2);font-size:.98rem;line-height:1.85;margin-block-end:var(--s3);}
+.acc-pad p:last-child{margin-block-end:0;}
+.acc-pad ol{counter-reset:d;display:flex;flex-direction:column;gap:var(--s3);}
+.acc-pad ol li{display:block;list-style:none;counter-increment:d;position:relative;padding-inline-start:32px;color:var(--text-2);font-size:.97rem;line-height:1.8;}
+.acc-pad ol li::before{
+  content:counter(d);position:absolute;inset-inline-start:0;top:2px;
+  width:22px;height:22px;border-radius:50%;background:var(--surface-3);color:var(--text);
+  font-size:.72rem;font-weight:700;display:grid;place-items:center;font-family:var(--f-body);
+}
+.meta-grid{display:grid;gap:var(--s4);grid-template-columns:1fr;}
+@media(min-width:680px){.meta-grid{grid-template-columns:repeat(3,1fr);}}
+.meta-cell{border-inline-start:2px solid var(--brand-teal);padding-inline-start:var(--s4);}
+.meta-k{font-size:.72rem;font-weight:700;color:var(--text-3);margin-block-end:5px;}
+.meta-v{font-size:.98rem;font-weight:700;font-family:var(--f-body);margin-block-end:5px;}
+.meta-d{font-size:.88rem;color:var(--text-2);line-height:1.7;}
+
+/* responsibility strip stays visible */
+.bounds{
+  border:1px solid rgba(77,136,232,.4);background:rgba(77,136,232,.07);
+  border-radius:var(--r-m);padding:var(--s5);margin-block:var(--s5);
+}
+.bounds h3{font-size:.95rem;font-weight:700;margin-block-end:var(--s3);display:flex;align-items:center;gap:8px;color:var(--brand-blue);}
+[data-theme="light"] .bounds h3{color:#1B5FD0;}
+.bounds p{font-size:.96rem;color:var(--text-2);line-height:1.85;margin:0;}
+.bounds p+p{margin-block-start:var(--s3);}
+
+.summary-line{
+  font-size:1.14rem;line-height:1.85;color:var(--text);font-weight:500;
+  margin-block-end:var(--s5);max-width:66ch;
+}
+.summary-line b{color:var(--accent);font-weight:700;}
+
+/* ================= investigation ================= */
+.inv-top{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--s4);flex-wrap:wrap;margin-block-end:var(--s6);}
+.budget-dock{
+  display:flex;align-items:center;gap:var(--s3);
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-pill);
+  padding:9px 18px 9px 12px;box-shadow:var(--shadow-1);
+}
+.budget-dock .orbs{gap:6px;}
+.budget-dock .orb{width:30px;font-size:.82rem;border-width:1.5px;}
+.budget-dock .orb-link{width:10px;}
+.budget-dock .bd-text{font-size:.88rem;font-weight:700;white-space:nowrap;}
+.budget-dock.out .bd-text{color:var(--brand-amber);}
+
+.people{display:grid;gap:var(--s4);grid-template-columns:1fr;}
+@media(min-width:780px){.people{grid-template-columns:repeat(3,1fr);}}
+.person{
+  border:1.5px solid var(--line);border-radius:var(--r-l);background:var(--surface);
+  padding:var(--s5);display:flex;flex-direction:column;gap:var(--s3);
+  transition:border-color .3s, transform .35s var(--e-out), box-shadow .35s;
+  animation:blockIn .5s var(--e-out) both;
+}
+.person:nth-child(1){animation-delay:.04s;}
+.person:nth-child(2){animation-delay:.12s;}
+.person:nth-child(3){animation-delay:.2s;}
+.person:hover{transform:translateY(-3px);box-shadow:var(--shadow-2);border-color:var(--line-2);}
+.person-top{display:flex;align-items:center;gap:var(--s3);}
+.person-face{width:56px;height:56px;border-radius:var(--r-m);overflow:hidden;flex:none;background:var(--surface-3);}
+.person-face svg{width:100%;height:100%;display:block;}
+.person-name{font-family:var(--f-display);font-size:1.26rem;font-weight:600;}
+html[lang="ar"] .person-name{font-family:var(--f-ar-display);}
+.person-pips{display:flex;gap:4px;margin-block-start:5px;}
+.person-pips i{width:16px;height:3px;border-radius:2px;background:var(--line-2);transition:background .35s;}
+.person-pips i.on{background:var(--brand-teal);}
+.person-bio{font-size:.92rem;color:var(--text-2);line-height:1.75;}
+.asks{display:flex;flex-direction:column;gap:var(--s2);margin-block-start:auto;padding-block-start:var(--s3);}
+.ask-btn{
+  display:flex;align-items:center;gap:var(--s3);width:100%;text-align:start;
+  border:1.5px solid var(--line);border-radius:var(--r-m);padding:var(--s3) var(--s4);
+  cursor:pointer;min-height:56px;font-size:.92rem;line-height:1.5;
+  transition:border-color .25s, background .25s, transform .25s var(--e-out);
+}
+.ask-btn:hover:not(:disabled){border-color:var(--accent);background:var(--surface-2);transform:translateX(2px);}
+html[dir="rtl"] .ask-btn:hover:not(:disabled){transform:translateX(-2px);}
+.ask-btn:disabled{opacity:.45;cursor:not-allowed;}
+.ask-btn.done{border-color:rgba(64,189,169,.45);background:rgba(64,189,169,.07);}
+.ask-seal{flex:none;width:28px;height:28px;border-radius:8px;display:grid;place-items:center;background:var(--surface-3);color:var(--text-3);transition:all .35s var(--e-out);}
+.ask-btn.done .ask-seal{background:rgba(64,189,169,.18);color:var(--accent);}
+.ask-q{flex:1;font-weight:600;}
+.ask-cost{flex:none;font-size:.72rem;font-weight:700;color:var(--text-3);}
+.ask-btn.done .ask-cost{color:var(--accent);}
+
+/* ================= focused evidence reader ================= */
+.reader-scrim{
+  position:fixed;inset:0;z-index:88;background:rgba(3,4,20,.72);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  display:grid;place-items:center;padding:var(--s4);
+  animation:fade .3s;
+}
+.reader{
+  width:100%;max-width:680px;max-height:90vh;overflow-y:auto;
+  background:linear-gradient(175deg,var(--paper),var(--paper-2));
+  color:var(--paper-ink);border-radius:var(--r-l);
+  box-shadow:var(--shadow-3);position:relative;
+  animation:readerIn .55s var(--e-out);
+  transform-origin:center top;
+}
+[data-theme="light"] .reader{background:var(--surface);color:var(--text);border:1px solid var(--line);}
+@keyframes readerIn{
+  from{opacity:0;transform:perspective(900px) rotateX(-14deg) translateY(28px) scale(.95);}
+  to{opacity:1;transform:none;}
+}
+.reader::before{
+  content:"";position:absolute;inset-inline:0;top:0;height:4px;border-radius:var(--r-l) var(--r-l) 0 0;
+  background:linear-gradient(90deg,var(--brand-blue),var(--brand-teal));
+  transform-origin:inline-start;animation:scanIn .7s var(--e-out);
+}
+@keyframes scanIn{from{transform:scaleX(0);}to{transform:scaleX(1);}}
+.reader-head{padding:var(--s6) var(--s6) var(--s4);border-block-end:1px dashed rgba(0,0,0,.16);}
+[data-theme="light"] .reader-head{border-block-end-color:var(--line);}
+.reader-who{font-size:.78rem;font-weight:700;color:#5A6072;margin-block-end:6px;}
+[data-theme="light"] .reader-who{color:var(--text-3);}
+.reader-kind{font-family:var(--f-display);font-size:1.4rem;font-weight:600;line-height:1.3;}
+html[lang="ar"] .reader-kind{font-family:var(--f-ar-display);}
+.reader-body{padding:var(--s5) var(--s6) var(--s6);}
+.reader-q{font-size:.84rem;color:#5A6072;margin-block-end:var(--s4);font-style:italic;}
+[data-theme="light"] .reader-q{color:var(--text-3);}
+.reader-text{font-size:1.04rem;line-height:2;}
+.reader-foot{padding:0 var(--s6) var(--s6);display:flex;gap:var(--s3);flex-wrap:wrap;}
+.reader-close{
+  position:absolute;inset-inline-end:var(--s4);top:var(--s4);
+  width:38px;height:38px;border-radius:50%;cursor:pointer;
+  background:rgba(0,0,0,.07);color:#5A6072;display:grid;place-items:center;font-size:1.3rem;line-height:1;
+}
+[data-theme="light"] .reader-close{background:var(--surface-3);color:var(--text-2);}
+.reader-stamp{
+  position:absolute;inset-inline-start:var(--s6);bottom:var(--s5);
+  font-size:.62rem;font-weight:700;letter-spacing:.08em;color:rgba(90,96,114,.45);
+  border:1.5px solid rgba(90,96,114,.26);padding:3px 9px;border-radius:4px;transform:rotate(-5deg);
+}
+[data-theme="light"] .reader-stamp{display:none;}
+
+/* collected evidence on demand */
+.vault-btn{display:inline-flex;align-items:center;gap:8px;}
+.vault-list{display:flex;flex-direction:column;gap:var(--s3);}
+.vault-item{border:1px solid var(--line);border-radius:var(--r-m);padding:var(--s4);background:var(--surface-2);}
+.vault-who{font-size:.76rem;font-weight:700;color:var(--accent);}
+.vault-kind{font-size:.96rem;font-weight:700;margin-block:3px var(--s2);}
+.vault-text{font-size:.92rem;color:var(--text-2);line-height:1.8;}
+
+/* ================= brief : creative layered cards ================= */
+.brief-stage{position:relative;isolation:isolate;}
+.brief-bg{position:absolute;inset:-120px -40px 0;z-index:-2;overflow:hidden;pointer-events:none;}
+.brief-bg i{position:absolute;display:block;border-radius:50%;filter:blur(70px);opacity:.5;}
+.brief-bg i:nth-child(1){width:460px;height:460px;top:-90px;inset-inline-end:-70px;background:rgba(77,136,232,.4);animation:drift1 18s ease-in-out infinite;}
+.brief-bg i:nth-child(2){width:380px;height:380px;top:220px;inset-inline-start:-110px;background:rgba(64,189,169,.32);animation:drift2 22s ease-in-out infinite;}
+.brief-bg i:nth-child(3){width:300px;height:300px;top:560px;inset-inline-end:10%;background:rgba(255,188,58,.16);animation:drift1 26s ease-in-out infinite reverse;}
+[data-theme="light"] .brief-bg i{opacity:.32;}
+@keyframes drift1{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(-40px,36px) scale(1.09);}}
+@keyframes drift2{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(44px,-30px) scale(1.07);}}
+.brief-grid-bg{
+  position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:64px 64px;
+  -webkit-mask-image:radial-gradient(70% 55% at 50% 22%,#000,transparent 78%);
+  mask-image:radial-gradient(70% 55% at 50% 22%,#000,transparent 78%);
+  opacity:.5;
+}
+
+.story{display:grid;gap:var(--s4);grid-template-columns:1fr;margin-block:var(--s6);}
+@media(min-width:860px){.story{grid-template-columns:repeat(3,1fr);}}
+.scard{
+  position:relative;border-radius:var(--r-l);padding:var(--s6) var(--s5) var(--s5);
+  background:linear-gradient(165deg,var(--surface-2),var(--surface));
+  border:1px solid var(--line);overflow:hidden;
+  box-shadow:var(--shadow-1);
+  transition:transform .45s var(--e-out), box-shadow .45s var(--e-out), border-color .45s;
+  animation:cardRise .7s var(--e-out) both;
+}
+.scard:nth-child(1){animation-delay:.05s;}
+.scard:nth-child(2){animation-delay:.15s;}
+.scard:nth-child(3){animation-delay:.25s;}
+@keyframes cardRise{from{opacity:0;transform:translateY(28px) rotateX(10deg);}to{opacity:1;transform:none;}}
+.scard:hover{transform:translateY(-6px);box-shadow:var(--shadow-2);border-color:var(--line-2);}
+.scard::before{
+  content:"";position:absolute;inset-inline:0;top:0;height:3px;
+  background:linear-gradient(90deg,var(--brand-blue),var(--brand-teal));
+  transform:scaleX(0);transform-origin:inline-start;transition:transform .5s var(--e-out);
+}
+.scard:hover::before{transform:scaleX(1);}
+.scard-n{
+  position:absolute;inset-inline-end:var(--s4);top:var(--s3);
+  font-family:var(--f-display);font-style:italic;font-size:3.2rem;font-weight:600;
+  color:var(--text);opacity:.07;line-height:1;pointer-events:none;
+}
+.scard-ico{
+  width:42px;height:42px;border-radius:12px;display:grid;place-items:center;
+  background:rgba(64,189,169,.14);color:var(--brand-teal);margin-block-end:var(--s4);
+  transition:transform .45s var(--e-out);
+}
+.scard:hover .scard-ico{transform:rotate(-8deg) scale(1.08);}
+.scard h3{font-size:1.02rem;font-weight:700;margin-block-end:var(--s3);line-height:1.5;}
+.scard p{font-size:.94rem;color:var(--text-2);line-height:1.85;}
+.scard ol{list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:var(--s3);margin-block-start:var(--s2);}
+.scard ol li{display:block;list-style:none;counter-increment:s;position:relative;padding-inline-start:28px;font-size:.92rem;color:var(--text-2);line-height:1.75;}
+.scard ol li::before{
+  content:counter(s);position:absolute;inset-inline-start:0;top:1px;
+  width:19px;height:19px;border-radius:50%;background:var(--surface-3);color:var(--text);
+  font-size:.68rem;font-weight:700;display:grid;place-items:center;font-family:var(--f-body);
+}
+
+.hero-method{
+  font-size:.74rem;color:var(--text-3);letter-spacing:.02em;
+  margin-block-start:var(--s4);line-height:1.8;
+}
+.hero-method b{color:var(--text-2);font-weight:600;}
+.hero-method span{opacity:.55;margin-inline:7px;}
+
+/* ================= reflection ================= */
+.reflect{
+  border:1px solid var(--line);border-radius:var(--r-l);padding:var(--s6);
+  background:linear-gradient(165deg,var(--surface-2),var(--surface));margin-block:var(--s7);
+}
+.reflect h3{font-size:1.08rem;font-weight:700;margin-block-end:var(--s3);}
+.reflect .lede{font-size:.95rem;margin-block-end:var(--s5);}
+.rq{margin-block-end:var(--s5);}
+.rq-q{font-size:.98rem;font-weight:600;line-height:1.8;margin-block-end:var(--s2);display:block;}
+.rq-ctx{font-size:.86rem;color:var(--text-3);line-height:1.75;margin-block-end:var(--s3);display:block;}
+.rq textarea{
+  width:100%;min-height:96px;resize:vertical;
+  background:var(--bg);color:var(--text);
+  border:1.5px solid var(--line);border-radius:var(--r-m);
+  padding:var(--s4);font:inherit;font-size:.95rem;line-height:1.8;
+  transition:border-color .25s, box-shadow .25s;
+}
+.rq textarea:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(64,189,169,.14);outline:none;}
+.rq textarea::placeholder{color:var(--text-3);opacity:.7;}
+.rq-count{font-size:.74rem;color:var(--text-3);margin-block-start:6px;display:block;text-align:end;}
+.reflect-note{font-size:.84rem;color:var(--text-3);line-height:1.75;padding-block-start:var(--s4);border-block-start:1px solid var(--line);}
+
+/* evidence open arrow */
+.ask-go{
+  flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
+  border:1.5px solid var(--line-2);color:var(--text-3);
+  transition:all .35s var(--e-out);
+}
+html[dir="rtl"] .ask-go svg{transform:scaleX(-1);}
+.ask-btn:hover:not(:disabled) .ask-go{border-color:var(--accent);background:var(--accent);color:var(--accent-ink);transform:scale(1.08);}
+.ask-btn.done .ask-go{border-color:rgba(64,189,169,.5);color:var(--accent);}
+.coverage{
+  display:flex;flex-wrap:wrap;align-items:center;gap:var(--s2);
+  font-size:.85rem;color:var(--text-2);line-height:1.8;
+  background:var(--surface-2);border:1px solid var(--line);
+  border-radius:var(--r-m);padding:var(--s3) var(--s4);margin-block-end:var(--s4);
+}
+.coverage b{color:var(--text-3);font-weight:700;font-size:.78rem;}
+.cov-sep{width:1px;height:16px;background:var(--line-2);margin-inline:var(--s2);}
+.ro-k{display:inline-block;font-size:.72rem;font-weight:700;color:var(--text-3);margin-inline-end:6px;}
+.ro-k.ro-sup{color:var(--accent);}
+.ro-k.ro-lim{color:var(--brand-amber);}
+.followup{
+  margin-block-start:var(--s4);padding:var(--s4);
+  border:1px solid var(--brand-amber);border-radius:var(--r-m);
+  background:rgba(255,188,58,.07);
+  animation:wizIn .4s var(--e-out);
+}
+.followup-q{font-size:.94rem;font-weight:700;color:var(--brand-amber);margin-block-end:var(--s3);line-height:1.7;}
+.followup .pick{background:var(--surface);}
+
+/* ================= wizard : one question per step ================= */
+.wiz{max-width:760px;margin-inline:auto;}
+.wiz-card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-l);
+  padding:var(--s6);box-shadow:var(--shadow-1);
+  animation:wizIn .45s var(--e-out);
+}
+@keyframes wizIn{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:none;}}
+.wiz-card.back-in{animation:wizBack .45s var(--e-out);}
+@keyframes wizBack{from{opacity:0;transform:translateY(-14px);}to{opacity:1;transform:none;}}
+.wiz-count{font-size:.76rem;font-weight:700;color:var(--text-3);margin-block-end:var(--s2);}
+.wiz-q{font-size:clamp(1.2rem,2.6vw,1.5rem);font-weight:700;line-height:1.5;margin-block-end:var(--s3);}
+.wiz-help{font-size:.95rem;color:var(--text-2);line-height:1.8;margin-block-end:var(--s5);}
+.wiz-foot{
+  display:flex;justify-content:space-between;gap:var(--s3);flex-wrap:wrap;
+  margin-block-start:var(--s6);padding-block-start:var(--s5);border-block-start:1px solid var(--line);
+}
+.wiz-chosen{
+  display:flex;align-items:center;gap:var(--s2);flex-wrap:wrap;
+  font-size:.84rem;color:var(--text-3);margin-block-end:var(--s4);
+}
+.wiz-chip{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--surface-3);border-radius:var(--r-pill);padding:5px 12px;
+  font-size:.78rem;font-weight:600;color:var(--text-2);
+}
+.wiz-chip b{color:var(--text);font-weight:700;}
+
+.picks{display:flex;flex-direction:column;gap:var(--s3);}
+.pick{
+  display:flex;gap:var(--s4);align-items:flex-start;
+  border:1.5px solid var(--line);border-radius:var(--r-m);
+  padding:var(--s4) var(--s5);cursor:pointer;min-height:56px;position:relative;
+  transition:border-color .28s, background .28s, transform .28s var(--e-out);
+}
+.pick:hover{border-color:var(--line-2);transform:translateX(2px);}
+html[dir="rtl"] .pick:hover{transform:translateX(-2px);}
+.pick input{position:absolute;opacity:0;width:1px;height:1px;}
+.pick-mark{
+  flex:none;width:24px;height:24px;border-radius:50%;border:2px solid var(--line-2);
+  display:grid;place-items:center;margin-block-start:2px;
+  transition:all .3s var(--e-out);
+}
+.pick-mark svg{opacity:0;transform:scale(.4);transition:all .3s var(--e-out);}
+.pick input[type="checkbox"]+.pick-mark{border-radius:7px;}
+.pick.on{border-color:var(--accent);background:var(--surface-2);}
+.pick.on .pick-mark{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);}
+.pick.on .pick-mark svg{opacity:1;transform:none;}
+.pick.on::after{
+  content:"";position:absolute;inset-block:14px;inset-inline-start:-1.5px;width:3px;
+  border-radius:3px;background:var(--accent);animation:growBar .35s var(--e-out);
+}
+@keyframes growBar{from{transform:scaleY(0);}to{transform:scaleY(1);}}
+.pick-body{flex:1;}
+.pick-title{font-weight:700;margin-block-end:5px;display:block;}
+.pick-text{font-size:.96rem;color:var(--text-2);line-height:1.8;display:block;}
+.pick.locked{opacity:.45;cursor:not-allowed;}
+.pick.locked:hover{transform:none;border-color:var(--line);}
+.pick-flag{
+  font-size:.7rem;font-weight:700;padding:3px 9px;border-radius:var(--r-pill);
+  background:var(--surface-3);color:var(--text-3);margin-inline-start:auto;white-space:nowrap;
+}
+.pick-alt{border-style:dashed;}
+.pick-alt.on{border-color:var(--brand-amber);background:rgba(255,188,58,.08);}
+.pick-alt.on .pick-mark{background:var(--brand-amber);border-color:var(--brand-amber);color:#3A2A00;}
+.pick-alt.on::after{background:var(--brand-amber);}
+.pick-face{width:46px;height:46px;border-radius:50%;overflow:hidden;background:var(--surface-3);flex:none;}
+.pick-face svg{width:100%;height:100%;display:block;}
+.pick-read{
+  font-size:.78rem;font-weight:700;color:var(--link);cursor:pointer;
+  margin-block-start:8px;text-decoration:underline;min-height:32px;display:inline-block;
+}
+
+.err{
+  display:flex;align-items:center;gap:8px;
+  color:var(--brand-coral);font-size:.9rem;font-weight:600;margin-block-start:var(--s4);
+  animation:shake .4s var(--e-soft);
+}
+@keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-5px);}75%{transform:translateX(5px);}}
+.empty-note{
+  font-size:.94rem;color:var(--text-3);padding:var(--s5);line-height:1.8;
+  border:1px dashed var(--line-2);border-radius:var(--r-m);text-align:center;
+}
+
+/* ================= result ================= */
+.verdict-card{
+  background:linear-gradient(165deg,var(--surface-2),var(--surface));
+  border:1px solid var(--line);border-radius:var(--r-l);padding:var(--s6);
+  box-shadow:var(--shadow-2);
+}
+.sum-row{display:flex;gap:var(--s4);padding-block:var(--s4);border-block-end:1px dashed var(--line);}
+.sum-row:last-child{border:none;}
+.sum-k{font-size:.78rem;font-weight:700;color:var(--text-3);width:32%;flex:none;line-height:1.7;}
+.sum-v{font-size:.96rem;color:var(--text);line-height:1.85;}
+
+.lens{
+  border:1px solid var(--line);border-radius:var(--r-l);background:var(--surface);
+  padding:var(--s6);margin-block-end:var(--s4);position:relative;overflow:hidden;
+  animation:blockIn .55s var(--e-out) both;
+}
+@keyframes blockIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+.lens::before{content:"";position:absolute;inset-block:0;inset-inline-start:0;width:3px;background:var(--accent);}
+.lens:nth-of-type(1){animation-delay:.05s;}
+.lens:nth-of-type(2){animation-delay:.18s;}
+.lens:nth-of-type(3){animation-delay:.31s;}
+.lens:nth-of-type(4){animation-delay:.44s;}
+.lens-k{font-size:.74rem;font-weight:700;color:var(--accent);margin-block-end:var(--s2);}
+.lens-t{font-size:1.08rem;font-weight:700;margin-block-end:var(--s4);line-height:1.5;}
+.lens p{color:var(--text-2);font-size:.98rem;line-height:1.9;margin-block-end:var(--s4);}
+.lens p:last-child{margin-block-end:0;}
+
+/* evidence read-out: supports / limits / not enough */
+.readout{border:1px solid var(--line);border-radius:var(--r-m);padding:var(--s4) var(--s5);margin-block-end:var(--s3);background:var(--surface-2);}
+.readout-h{display:flex;align-items:center;gap:var(--s2);flex-wrap:wrap;margin-block-end:var(--s3);}
+.readout-who{font-size:.86rem;font-weight:700;}
+.tagk{font-size:.68rem;font-weight:700;padding:4px 10px;border-radius:var(--r-pill);white-space:nowrap;}
+.tagk.supports{background:rgba(64,189,169,.16);color:var(--accent);}
+.tagk.limits{background:rgba(255,188,58,.18);color:#8A5C00;}
+[data-theme="dark"] .tagk.limits{color:var(--brand-amber);}
+.tagk.neutral{background:var(--surface-3);color:var(--text-3);}
+.readout p{font-size:.94rem;color:var(--text-2);line-height:1.85;margin:0;}
+.readout p+p{margin-block-start:var(--s2);}
+
+.factors{display:flex;flex-direction:column;gap:var(--s2);margin-block-start:var(--s4);}
+.factor{
+  display:flex;align-items:center;gap:var(--s3);
+  border:1.5px solid var(--line);border-radius:var(--r-m);padding:var(--s3) var(--s4);
+  font-size:.92rem;
+}
+.factor .f-dot{width:9px;height:9px;border-radius:50%;flex:none;background:var(--line-2);}
+.factor .f-name{font-weight:700;}
+.factor .f-state{margin-inline-start:auto;font-size:.78rem;font-weight:700;color:var(--text-3);white-space:nowrap;}
+.factor.known{border-color:rgba(64,189,169,.45);}
+.factor.known .f-dot{background:var(--brand-teal);box-shadow:0 0 0 4px rgba(64,189,169,.16);}
+.factor.known .f-state{color:var(--accent);}
+.factor.open .f-dot{background:var(--brand-amber);box-shadow:0 0 0 4px rgba(255,188,58,.16);}
+.factor.open .f-state{color:var(--brand-amber);}
+
+.late{
+  margin-block-start:var(--s4);border:1px solid var(--brand-amber);
+  background:rgba(255,188,58,.08);border-radius:var(--r-m);padding:var(--s5);
+}
+.late-k{font-size:.74rem;font-weight:700;color:var(--brand-amber);margin-block-end:var(--s3);display:flex;align-items:center;gap:6px;}
+.late-who{font-size:.88rem;font-weight:700;margin-block-end:var(--s2);}
+.late p{font-size:.93rem;color:var(--text-2);line-height:1.85;margin:0;}
+.late .late-note{margin-block-start:var(--s3);font-size:.86rem;color:var(--text-3);}
+
+.concept{border:1px solid var(--line);border-radius:var(--r-l);padding:var(--s6);background:var(--surface-2);margin-block:var(--s7);}
+.concept h3{font-size:1.05rem;font-weight:700;margin-block-end:var(--s3);}
+.concept p{color:var(--text-2);font-size:.97rem;line-height:1.9;}
+.triad{display:grid;gap:var(--s3);grid-template-columns:1fr;margin-block-start:var(--s5);}
+@media(min-width:720px){.triad{grid-template-columns:repeat(3,1fr);}}
+.triad div{border:1px solid var(--line);border-radius:var(--r-m);padding:var(--s4);background:var(--surface);}
+.triad b{display:block;font-size:.93rem;margin-block-end:6px;}
+.triad span{font-size:.86rem;color:var(--text-2);line-height:1.75;}
+
+.archive{display:grid;gap:var(--s4);grid-template-columns:1fr;}
+@media(min-width:760px){.archive{grid-template-columns:repeat(3,1fr);}}
+.arch-col h4{font-size:.92rem;font-weight:700;margin-block-end:var(--s3);display:flex;align-items:center;gap:8px;}
+.arch-col h4 i{width:8px;height:8px;border-radius:50%;background:var(--brand-teal);}
+.arch-item{border:1px solid var(--line);border-radius:var(--r-m);padding:var(--s4);margin-block-end:var(--s2);background:var(--surface);}
+.arch-kind{font-size:.88rem;font-weight:600;line-height:1.6;}
+.arch-tag{font-size:.68rem;font-weight:700;padding:3px 9px;border-radius:var(--r-pill);display:inline-block;margin-block-start:8px;}
+.arch-tag.before{background:rgba(64,189,169,.15);color:var(--accent);}
+.arch-tag.after{background:rgba(255,188,58,.15);color:var(--brand-amber);}
+.arch-open{font-size:.8rem;color:var(--link);cursor:pointer;text-decoration:underline;margin-block-start:10px;min-height:32px;display:inline-block;}
+
+.compare-wrap{overflow-x:auto;margin-block:var(--s5);}
+.compare{width:100%;min-width:520px;}
+.compare th,.compare td{text-align:start;padding:var(--s4);border-block-end:1px solid var(--line);font-size:.92rem;vertical-align:top;line-height:1.75;}
+.compare thead th{font-size:.76rem;color:var(--text-3);font-weight:700;}
+.compare td.diff{background:rgba(255,188,58,.1);}
+.diff-pin{font-size:.68rem;font-weight:700;color:var(--brand-amber);display:block;margin-block-start:5px;}
+
+.finale{
+  border-radius:var(--r-xl);padding:var(--s8) var(--s6);margin-block:var(--s7) var(--s6);
+  text-align:center;position:relative;overflow:hidden;
+  background:linear-gradient(160deg,#0C1038,#070720 70%);border:1px solid var(--line);
+}
+[data-theme="light"] .finale{background:linear-gradient(160deg,#EEF3FD,#E3EBF9);}
+.finale::before{content:"";position:absolute;inset-inline:0;top:0;height:220px;
+  background:radial-gradient(60% 100% at 50% 0%, rgba(64,189,169,.18), transparent 70%);}
+.finale h2{font-family:var(--f-display);font-size:clamp(1.7rem,3.6vw,2.4rem);font-weight:600;
+  margin-block-end:var(--s4);position:relative;color:#F2F5FF;}
+[data-theme="light"] .finale h2{color:var(--text);}
+.finale p{color:#AFB6E0;max-width:56ch;margin-inline:auto;margin-block-end:var(--s4);position:relative;line-height:1.9;}
+[data-theme="light"] .finale p{color:var(--text-2);}
+.pledge{
+  position:relative;border:1px solid rgba(64,189,169,.4);background:rgba(64,189,169,.08);
+  border-radius:var(--r-m);padding:var(--s5);margin-block:var(--s5);text-align:start;
+}
+.pledge-k{font-size:.74rem;font-weight:700;color:var(--brand-teal);margin-block-end:var(--s2);}
+.pledge-v{font-size:1.02rem;font-weight:600;color:#F2F5FF;line-height:1.85;}
+[data-theme="light"] .pledge-v{color:var(--text);}
+.finale .qs{margin-block:var(--s5);display:flex;flex-direction:column;gap:var(--s2);position:relative;}
+.finale .qs span{font-size:1.02rem;font-weight:600;color:#F2F5FF;line-height:1.8;}
+[data-theme="light"] .finale .qs span{color:var(--text);}
+
+/* ================= dialog / toast ================= */
+.scrim{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:var(--s4);
+  background:rgba(3,4,20,.66);backdrop-filter:blur(6px);animation:fade .25s;}
+@keyframes fade{from{opacity:0;}to{opacity:1;}}
+.dialog{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-l);
+  padding:var(--s6);max-width:520px;width:100%;box-shadow:var(--shadow-3);
+  max-height:88vh;overflow-y:auto;animation:dlgIn .4s var(--e-out);
+}
+@keyframes dlgIn{from{opacity:0;transform:translateY(20px) scale(.96);}to{opacity:1;transform:none;}}
+.dialog h3{font-size:1.2rem;font-weight:700;margin-block-end:var(--s4);line-height:1.5;}
+.dialog p{color:var(--text-2);margin-block-end:var(--s5);line-height:1.85;}
+.dlg-cost{display:flex;align-items:center;gap:var(--s3);background:var(--surface-2);
+  border:1px solid var(--line);border-radius:var(--r-m);padding:var(--s4);margin-block-end:var(--s5);}
+.dlg-cost .orbs{gap:5px;}
+.dlg-cost .orb{width:26px;font-size:.72rem;border-width:1.5px;}
+.dlg-cost .orb-link{width:8px;}
+.dlg-cost span{font-size:.86rem;color:var(--text-2);font-weight:600;}
+.toast{position:fixed;inset-inline:0;bottom:calc(22px + env(safe-area-inset-bottom,0px));
+  z-index:95;display:flex;justify-content:center;pointer-events:none;padding-inline:var(--s4);}
+.toast div{background:var(--surface-3);border:1px solid var(--line-2);color:var(--text);
+  border-radius:var(--r-pill);padding:12px 22px;font-size:.9rem;font-weight:600;
+  box-shadow:var(--shadow-2);animation:toastIn .45s var(--e-out);}
+@keyframes toastIn{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:none;}}
+.spark{position:fixed;width:12px;height:12px;border-radius:50%;z-index:80;pointer-events:none;
+  background:var(--brand-teal);box-shadow:0 0 18px rgba(64,189,169,.9);}
+
+@media(max-width:620px){
+  body{font-size:16px;}
+  .wrap,.wrap-n{padding-inline:var(--s4);}
+  .screen{padding-block:calc(92px + env(safe-area-inset-top,0px)) var(--s7);}
+  .wiz-card,.verdict-card,.lens,.concept,.dialog{padding:var(--s5) var(--s4);}
+  .finale{padding:var(--s6) var(--s4);}
+  .sum-row{flex-direction:column;gap:6px;}
+  .sum-k{width:auto;}
+  .topbar{padding-inline:var(--s4);}
+  .brandmark svg{width:62px;}
+  .reader-head,.reader-body,.reader-foot{padding-inline:var(--s5);}
+  .btns-split{flex-direction:column-reverse;align-items:stretch;}
+  .btns-split .btn{width:100%;}
+}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important;scroll-behavior:auto!important;
+  }
+  .hero-title .ln>span{transform:none!important;}
+  .rise,.dossier,.console{opacity:1!important;transform:none!important;}
+  .spark{display:none!important;}
+  .acc-panel{transition:none;}
+}
+
+/* ======================================================================
+   AMBIENCE — a living background on every screen. The hue shifts per
+   stage, but only in the glows; text and surface contrast never move.
+   ====================================================================== */
+:root{
+  --amb-1:77,136,232;    /* blue  */
+  --amb-2:64,189,169;    /* teal  */
+  --amb-3:255,188,58;    /* amber */
+  --amb-str:.30;
+  --glass-blur:18px;
+}
+[data-theme="light"]{--amb-str:.17;}
+
+html[data-stage="start"]  {--amb-1:77,136,232; --amb-2:64,189,169; --amb-3:255,188,58;}
+html[data-stage="brief"]  {--amb-1:77,136,232; --amb-2:77,136,232; --amb-3:64,189,169;}
+html[data-stage="inv"]    {--amb-1:64,189,169; --amb-2:77,136,232; --amb-3:64,189,169;}
+html[data-stage="decide"] {--amb-1:255,188,58; --amb-2:64,189,169; --amb-3:77,136,232;}
+html[data-stage="result"] {--amb-1:64,189,169; --amb-2:77,136,232; --amb-3:64,189,169;}
+
+.ambient{position:fixed;inset:0;z-index:-5;overflow:hidden;pointer-events:none;}
+.ambient b{
+  position:absolute;display:block;border-radius:50%;
+  filter:blur(90px);opacity:var(--amb-str);
+  transition:background 1.2s var(--e-soft), opacity 1.2s var(--e-soft);
+  will-change:transform;
+}
+.ambient b:nth-child(1){width:46vw;height:46vw;min-width:420px;min-height:420px;top:-14%;inset-inline-end:-10%;
+  background:rgb(var(--amb-1));animation:amb1 26s ease-in-out infinite;}
+.ambient b:nth-child(2){width:38vw;height:38vw;min-width:340px;min-height:340px;top:36%;inset-inline-start:-12%;
+  background:rgb(var(--amb-2));animation:amb2 32s ease-in-out infinite;}
+.ambient b:nth-child(3){width:30vw;height:30vw;min-width:280px;min-height:280px;bottom:-12%;inset-inline-end:18%;
+  background:rgb(var(--amb-3));animation:amb3 38s ease-in-out infinite;}
+@keyframes amb1{0%,100%{transform:translate3d(0,0,0) scale(1);}50%{transform:translate3d(-6vw,5vh,0) scale(1.14);}}
+@keyframes amb2{0%,100%{transform:translate3d(0,0,0) scale(1);}50%{transform:translate3d(5vw,-6vh,0) scale(1.1);}}
+@keyframes amb3{0%,100%{transform:translate3d(0,0,0) scale(1);}50%{transform:translate3d(-4vw,-4vh,0) scale(1.18);}}
+
+/* fine grain so the gradients never band */
+.ambient::after{
+  content:"";position:absolute;inset:-200%;opacity:.028;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 7s steps(6) infinite;
+}
+@keyframes grain{
+  0%{transform:translate(0,0);}20%{transform:translate(-4%,3%);}40%{transform:translate(3%,-4%);}
+  60%{transform:translate(-3%,-3%);}80%{transform:translate(4%,4%);}100%{transform:translate(0,0);}
+}
+/* faint grid, masked so it fades out */
+.ambient i{
+  position:absolute;inset:0;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:72px 72px;opacity:.4;
+  -webkit-mask-image:radial-gradient(80% 60% at 50% 10%,#000,transparent 80%);
+  mask-image:radial-gradient(80% 60% at 50% 10%,#000,transparent 80%);
+}
+
+/* the hero draws its own scene, so soften the ambience behind it */
+html[data-stage="start"] .ambient b{opacity:calc(var(--amb-str) * .5);}
+
+/* ======================================================================
+   GLASS — surfaces become translucent panes over the ambience.
+   ====================================================================== */
+[data-theme="dark"]{
+  --glass:rgba(23,26,68,.62);
+  --glass-2:rgba(17,19,54,.55);
+  --glass-br:rgba(255,255,255,.1);
+  --glass-hi:rgba(255,255,255,.055);
+}
+[data-theme="light"]{
+  --glass:rgba(255,255,255,.72);
+  --glass-2:rgba(255,255,255,.6);
+  --glass-br:rgba(8,8,40,.1);
+  --glass-hi:rgba(255,255,255,.65);
+}
+.glass{
+  background:var(--glass);
+  backdrop-filter:blur(var(--glass-blur)) saturate(150%);
+  -webkit-backdrop-filter:blur(var(--glass-blur)) saturate(150%);
+  border:1px solid var(--glass-br);
+  position:relative;
+}
+/* top sheen */
+.glass::after{
+  content:"";position:absolute;inset-inline:0;top:0;height:1px;pointer-events:none;
+  background:linear-gradient(90deg,transparent,var(--glass-hi),transparent);
+}
+.wiz-card,.verdict-card,.lens,.concept,.person,.scard,.reflect,
+.dialog,.budget-dock,.arch-item,.readout,.method-card,.vault-item,.coverage{
+  background:var(--glass)!important;
+  backdrop-filter:blur(var(--glass-blur)) saturate(150%);
+  -webkit-backdrop-filter:blur(var(--glass-blur)) saturate(150%);
+  border-color:var(--glass-br);
+}
+.reader{
+  backdrop-filter:blur(22px) saturate(160%);
+  -webkit-backdrop-filter:blur(22px) saturate(160%);
+}
+.topbar{background:var(--glass-2);}
+
+/* ======================================================================
+   MICRO-INTERACTIONS
+   ====================================================================== */
+/* ripple */
+.rip{position:absolute;border-radius:50%;pointer-events:none;transform:scale(0);
+  background:currentColor;opacity:.26;animation:rip .6s var(--e-out) forwards;}
+@keyframes rip{to{transform:scale(2.6);opacity:0;}}
+.btn,.cta,.pick,.ask-btn,.scard,.sw-btn{position:relative;overflow:hidden;}
+.pick,.ask-btn{isolation:isolate;}
+
+/* pointer-tracking sheen on cards */
+.scard,.person,.wiz-card{--mx:50%;--my:50%;}
+.scard::after,.person::after{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:0;
+  background:radial-gradient(420px circle at var(--mx) var(--my),rgba(var(--amb-2),.16),transparent 62%);
+  transition:opacity .45s var(--e-soft);
+}
+.scard:hover::after,.person:hover::after{opacity:1;}
+
+/* tilt */
+.tilt{transform-style:preserve-3d;transition:transform .35s var(--e-out);}
+
+/* buttons get a travelling highlight */
+.btn-primary::before,.cta::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(110deg,transparent 28%,rgba(255,255,255,.42) 48%,transparent 68%);
+  transform:translateX(-120%);
+}
+.btn-primary:hover::before,.cta:hover::before{animation:sheen .85s var(--e-out);}
+@keyframes sheen{to{transform:translateX(120%);}}
+
+/* progress rail: a pulse rides the filled line */
+.prog-line i{position:relative;overflow:hidden;}
+.prog-line i::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.75),transparent);
+  transform:translateX(-100%);animation:railPulse 2.8s ease-in-out infinite;
+}
+@keyframes railPulse{0%{transform:translateX(-100%);}55%,100%{transform:translateX(100%);}}
+.prog-step.now .prog-node{animation:nodePulse 2.4s ease-in-out infinite;}
+@keyframes nodePulse{
+  0%,100%{box-shadow:0 0 0 5px rgba(64,189,169,.16);}
+  50%{box-shadow:0 0 0 9px rgba(64,189,169,.05);}
+}
+
+/* selection pop */
+.pick.on .pick-mark{animation:markPop .4s var(--e-out);}
+@keyframes markPop{0%{transform:scale(.6);}60%{transform:scale(1.18);}100%{transform:scale(1);}}
+
+/* orbs breathe while unspent */
+.orb:not(.spent){animation:orbBreathe 3.6s ease-in-out infinite;}
+@keyframes orbBreathe{0%,100%{box-shadow:var(--glow-teal),inset 0 0 18px rgba(64,189,169,.14);}
+  50%{box-shadow:0 0 0 1px rgba(64,189,169,.6),0 0 30px rgba(64,189,169,.45),inset 0 0 22px rgba(64,189,169,.2);}}
+
+/* evidence card lifts as it unlocks */
+.ask-btn.done{animation:unlocked .6s var(--e-out);}
+@keyframes unlocked{0%{transform:scale(1);}35%{transform:scale(1.015);}100%{transform:scale(1);}}
+
+/* lens bars draw themselves */
+.lens::before{transform-origin:top;animation:drawBar .7s var(--e-out) both;}
+@keyframes drawBar{from{transform:scaleY(0);}to{transform:scaleY(1);}}
+
+/* sound toggle */
+.sfx-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:42px;height:42px;border-radius:50%;cursor:pointer;
+  border:1px solid var(--line-2);color:var(--text);
+  transition:border-color .25s,background .25s,transform .25s var(--e-out);
+}
+.sfx-btn:hover{border-color:var(--accent);transform:translateY(-1px);}
+.sfx-btn[aria-pressed="false"]{color:var(--text-3);}
+.sfx-btn .wave{transition:opacity .25s;}
+.sfx-btn[aria-pressed="false"] .wave{opacity:.25;}
+
+@media (prefers-reduced-motion: reduce){
+  .ambient b,.ambient::after,.prog-line i::after,.prog-step.now .prog-node,
+  .orb:not(.spent),.ask-btn.done,.lens::before{animation:none!important;}
+  .rip{display:none!important;}
+  .btn-primary::before,.cta::before{display:none!important;}
+  .scard::after,.person::after{display:none!important;}
+}
+@media(max-width:620px){ :root{--glass-blur:12px;} .ambient i{display:none;} }
+</style>
+</head>
+<body>
+<div class="ambient" aria-hidden="true"><b></b><b></b><b></b><i></i></div>
+<a href="#main" class="skip" id="skip-link">تخطَّ إلى المحتوى</a>
+
+<header class="topbar" id="topbar">
+  <div class="brandmark">
+    <span class="logo-wrap" aria-label="Logo">
+      <svg viewBox="0 0 99 33" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Logo">
+        <path d="M31.7043 0.694367V8.00083C31.7043 8.10685 31.6167 8.1952 31.5073 8.1952H28.3776C28.2682 8.1952 28.185 8.10685 28.185 8.00083V4.1709C28.185 4.15765 28.1719 4.1444 28.1543 4.1444H24.2805C24.1754 4.1444 24.0879 4.05605 24.0879 3.95003V0.694367C24.0879 0.588349 24.1754 0.5 24.2805 0.5H31.5073C31.6167 0.5 31.7043 0.588349 31.7043 0.694367Z" fill="#080828"/>
+        <path d="M31.7043 12.648V32.1775C31.7043 32.3542 31.5599 32.5 31.3848 32.5H0.315161C0.140072 32.5 0 32.3542 0 32.1775V0.822473C0 0.645775 0.140072 0.5 0.315161 0.5H19.8333C20.0084 0.5 20.1484 0.645775 20.1484 0.822473V12.3299H31.3848C31.5599 12.3299 31.7043 12.4713 31.7043 12.648Z" fill="#080828"/>
+        <path d="M40.9531 15.0249C39.173 15.0249 37.7416 14.7952 36.659 14.3358V12.264C37.2718 12.4937 37.9298 12.6807 38.6331 12.825C39.3393 12.9693 40.0411 13.0415 40.7386 13.0415C41.8329 13.0415 42.6543 12.9119 43.2029 12.6527C43.7516 12.3936 44.0259 11.8767 44.0259 11.1022C44.0259 10.6281 43.9121 10.2482 43.6844 9.96252C43.4568 9.67391 43.0789 9.42506 42.5507 9.21597C42.0255 9.00982 41.3003 8.79189 40.3753 8.56219C38.8957 8.17345 37.8569 7.68017 37.2587 7.08234C36.6604 6.48746 36.3613 5.66581 36.3613 4.6174C36.3613 3.39524 36.802 2.4396 37.6833 1.75048C38.5675 1.06136 39.885 0.716797 41.6359 0.716797C42.4326 0.716797 43.1825 0.774223 43.8858 0.889077C44.592 1.00393 45.1435 1.13351 45.5404 1.27781V3.34518C44.4607 2.92994 43.2657 2.72232 41.9554 2.72232C40.9312 2.72232 40.1345 2.85779 39.5655 3.12872C38.9935 3.40261 38.7075 3.89883 38.7075 4.6174C38.7075 5.03264 38.8082 5.36984 39.0096 5.629C39.208 5.88816 39.5523 6.1105 40.0426 6.29603C40.5358 6.48451 41.2157 6.69361 42.0824 6.92331C43.2059 7.20897 44.0784 7.55059 44.7 7.94816C45.3186 8.34279 45.752 8.8022 46 9.3264C46.248 9.85061 46.3721 10.4425 46.3721 11.1022C46.3721 12.3244 45.9241 13.283 45.0283 13.978C44.1324 14.6759 42.774 15.0249 40.9531 15.0249Z" fill="#080828"/>
+        <path d="M48.6348 14.8088V0.933594H50.9635V7.31239L56.8114 0.933594H59.5034L54.4434 6.53492L59.7179 14.8088H57.2404L52.9901 8.0236L50.9635 10.2191V14.8088H48.6348Z" fill="#080828"/>
+        <path d="M61.9805 14.8088V0.933594H64.3048V14.8088H61.9805Z" fill="#080828"/>
+        <path d="M66.998 14.8088V0.933594H69.3267V12.9976H76.3697V14.8088H66.998Z" fill="#080828"/>
+        <path d="M78.2031 14.8088V0.933594H80.5318V12.9976H87.5792V14.8088H78.2031Z" fill="#080828"/>
+        <path d="M93.5761 15.0249C91.796 15.0249 90.3661 14.7952 89.2864 14.3358V12.264C89.8963 12.4937 90.5543 12.6807 91.2605 12.825C91.9638 12.9693 92.6642 13.0415 93.3616 13.0415C94.4588 13.0415 95.2818 12.9119 95.8304 12.6527C96.3761 12.3936 96.6489 11.8767 96.6489 11.1022C96.6489 10.6281 96.5351 10.2482 96.3075 9.96252C96.0799 9.67391 95.7034 9.42506 95.1782 9.21597C94.65 9.00982 93.9234 8.79189 92.9983 8.56219C91.5188 8.17345 90.4799 7.68017 89.8817 7.08234C89.2835 6.48746 88.9844 5.66581 88.9844 4.6174C88.9844 3.39524 89.4265 2.4396 90.3107 1.75048C91.192 1.06136 92.5081 0.716797 94.2589 0.716797C95.0556 0.716797 95.807 0.774223 96.5132 0.889077C97.2165 1.00393 97.768 1.13351 98.1678 1.27781V3.34518C97.0852 2.92994 95.8887 2.72232 94.5785 2.72232C93.5542 2.72232 92.7576 2.85779 92.1885 3.12872C91.6195 3.40261 91.3349 3.89883 91.3349 4.6174C91.3349 5.03264 91.4342 5.36984 91.6326 5.629C91.834 5.88816 92.1798 6.1105 92.67 6.29603C93.1603 6.48451 93.8402 6.69361 94.7098 6.92331C95.8333 7.20897 96.7044 7.55059 97.323 7.94816C97.9417 8.34279 98.3765 8.8022 98.6274 9.3264C98.8755 9.85061 98.9995 10.4425 98.9995 11.1022C98.9995 12.3244 98.5516 13.283 97.6557 13.978C96.7569 14.6759 95.397 15.0249 93.5761 15.0249Z" fill="#080828"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M36.791 32.4963V18.6211H43.4488C44.8145 18.6211 45.8256 18.945 46.4822 19.5929C47.1359 20.2379 47.4627 21.1493 47.4627 22.3273C47.4627 23.0754 47.3139 23.7041 47.0162 24.2136C46.7157 24.7231 46.3173 25.1074 45.8213 25.3665C46.4895 25.5521 47.0192 25.8863 47.4102 26.3693C47.8012 26.8493 47.9967 27.5561 47.9967 28.4897C47.9967 29.8414 47.6378 30.8471 46.9199 31.5068C46.1992 32.1665 45.1428 32.4963 43.7508 32.4963H36.791ZM39.1153 24.5493H43.1293C43.9113 24.5493 44.4702 24.3652 44.8057 23.9971C45.1413 23.632 45.3091 23.1401 45.3091 22.5217C45.3091 21.8031 45.1384 21.2686 44.797 20.9182C44.4526 20.5648 43.8121 20.3881 42.8754 20.3881H39.1153V24.5493ZM39.1153 30.7779H43.2562C44.082 30.7779 44.6876 30.6012 45.0728 30.2478C45.4579 29.8974 45.6505 29.2833 45.6505 28.4057C45.6505 27.6901 45.4609 27.1556 45.0815 26.8022C44.7051 26.4518 44.0193 26.2765 43.0242 26.2765H39.1153V30.7779Z" fill="#080828"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M49.1074 32.4963L54.3601 18.6211H56.9646L62.1735 32.4963H59.7791L58.4134 28.9226H52.885L51.5193 32.4963H49.1074ZM53.2483 27.1114H58.0326L55.6383 20.7547L53.2483 27.1114Z" fill="#080828"/>
+        <path d="M64.4551 32.4963V18.6211H66.508L73.6779 28.8342V18.6211H75.9847V32.4963H73.9362L66.7838 22.3052V32.4963H64.4551Z" fill="#080828"/>
+        <path d="M78.6992 32.4963V18.6211H81.0235V24.9999L86.8759 18.6211H89.5635L84.5034 24.2224L89.778 32.4963H87.3005L83.0546 25.7111L81.0235 27.9066V32.4963H78.6992Z" fill="#080828"/>
+      </svg>
+    </span>
+  </div>
+
+  <div class="ctrl-group">
+    <div class="pill-select" id="lang-select">
+      <button type="button" aria-haspopup="true" aria-expanded="false" data-act="menu" data-menu="lang">
+        <span id="lang-current">العربية</span>
+        <svg class="caret" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 4.5L6 8l3.5-3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="pill-menu" role="menu" id="lang-menu">
+        <button type="button" role="menuitemradio" aria-checked="true" data-act="lang" data-v="ar">العربية<span class="tick">✓</span></button>
+        <button type="button" role="menuitemradio" aria-checked="false" data-act="lang" data-v="en">English<span class="tick">✓</span></button>
+      </div>
+    </div>
+
+    <button class="sfx-btn" type="button" id="sfx-toggle" data-act="sfx" aria-pressed="true" aria-label="Sound">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M4 9.5h3.2L12 5.6v12.8L7.2 14.5H4z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+        <path class="wave" d="M15.5 9.2a4 4 0 010 5.6M18.2 6.6a7.6 7.6 0 010 10.8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <div class="pill-select" id="theme-select">
+      <button type="button" aria-haspopup="true" aria-expanded="false" data-act="menu" data-menu="theme">
+        <span id="theme-current">داكن</span>
+        <svg class="caret" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 4.5L6 8l3.5-3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="pill-menu" role="menu" id="theme-menu">
+        <button type="button" role="menuitemradio" aria-checked="false" data-act="theme" data-v="light" id="opt-light">فاتح<span class="tick">✓</span></button>
+        <button type="button" role="menuitemradio" aria-checked="true" data-act="theme" data-v="dark" id="opt-dark">داكن<span class="tick">✓</span></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="rail"><i id="rail-fill"></i></div>
+
+<main id="main" tabindex="-1"></main>
+
+<div id="layer"></div>
+<div id="toast-layer"></div>
+<div class="sr" id="live" aria-live="polite" role="status"></div>
+<script>
+'use strict';
+
+/* ===========================================================
+   THE CREDIBILITY DECISION — individual scenario activity
+   Concept reference (method only, NOT a source for the
+   characters or events, which are training fiction):
+   Mayer, Davis & Schoorman (1995), An Integrative Model of
+   Organizational Trust. https://www.jstor.org/stable/258792
+   Calibration practice: NiCE, Calibrate Forms and Evaluations.
+   Support/outcome practice: FCA, Consumer support outcome.
+   FCA rules are not presented as rules for an Egyptian bank.
+   =========================================================== */
+
+function portrait(id, mode){
+  var cy = mode === 'square' ? 40 : 44;
+  var P = {
+    omar:{skin:'#B07A52',skin2:'#9A6743',hair:'#2B2118',suit:'#243B5E',shirt:'#F2F4F8',tie:'#4D88E8',bg1:'#D7E2F2',bg2:'#B8C9E4'},
+    salma:{skin:'#C08B63',skin2:'#A87450',hair:'#3A2519',suit:'#2F6F63',shirt:'#F7F5F0',tie:'#40BDA9',bg1:'#D8E8E4',bg2:'#B9D3CD'},
+    karim:{skin:'#C9956B',skin2:'#AD7C56',hair:'#241B14',suit:'#2A2F4A',shirt:'#FFFFFF',tie:'#F26A44',bg1:'#E0E0EE',bg2:'#C3C4DC'}
+  }[id];
+  var hair = {
+    omar:'<path d="M31 '+(cy-6)+'c0-11 8-18 19-18s19 7 19 18c0 3-1 6-1 6s-2-9-6-11c-3-2-7 1-12 1s-9-3-12-1c-4 2-6 11-6 11s-1-3-1-6z" fill="'+P.hair+'"/>',
+    salma:'<path d="M29 '+(cy-2)+'c0-13 9-21 21-21s21 8 21 21c0 9-2 20-4 25-1-4-2-14-2-19 0 0-7 4-17 4-5 0-9-1-12-3-2 5-3 14-3 18-3-6-4-17-4-25z" fill="'+P.hair+'"/>'
+         +'<path d="M28 '+(cy+8)+'c-2 12-1 24 2 31 2-8 2-20 2-27zM70 '+(cy+8)+'c2 12 1 24-2 31-2-8-2-20-2-27z" fill="'+P.hair+'"/>',
+    karim:'<path d="M31 '+(cy-5)+'c0-12 8-19 19-19s19 7 19 19c0 2 0 4-1 5-1-6-3-10-5-11-4-2-8 1-13 1s-9-3-13 0c-2 2-4 6-5 11-1-1-1-3-1-6z" fill="'+P.hair+'"/>'
+  }[id];
+  var glasses = id === 'karim'
+    ? '<g fill="none" stroke="#3A3F55" stroke-width="2"><rect x="33" y="'+(cy+1)+'" width="15" height="12" rx="5"/><rect x="52" y="'+(cy+1)+'" width="15" height="12" rx="5"/><path d="M48 '+(cy+7)+'h4M33 '+(cy+6)+'l-4 1M67 '+(cy+6)+'l4 1"/></g>' : '';
+  var beard = id === 'omar'
+    ? '<path d="M35 '+(cy+12)+'c0 10 7 17 15 17s15-7 15-17c0 0-3 10-15 10s-15-10-15-10z" fill="'+P.hair+'" opacity=".9"/>' : '';
+  var collar = id === 'salma'
+    ? '<path d="M50 96c-7 0-13 3-16 7 4-9 10-14 16-14s12 5 16 14c-3-4-9-7-16-7z" fill="'+P.shirt+'"/>'
+    : '<path d="M42 90l8 11 8-11 5 3-8 14h-10l-8-14z" fill="'+P.shirt+'"/><path d="M50 101l4 5-2 12h-4l-2-12z" fill="'+P.tie+'"/>';
+  return '<svg viewBox="0 0 100 118" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" preserveAspectRatio="xMidYMid slice">'
+    +'<defs><linearGradient id="bg-'+id+'-'+mode+'" x1="0" y1="0" x2="0" y2="1">'
+    +'<stop offset="0" stop-color="'+P.bg1+'"/><stop offset="1" stop-color="'+P.bg2+'"/></linearGradient></defs>'
+    +'<rect width="100" height="118" fill="url(#bg-'+id+'-'+mode+')"/>'
+    +'<path d="M50 '+(cy+46)+'c-18 0-30 10-33 26h66c-3-16-15-26-33-26z" fill="'+P.suit+'"/>'+collar
+    +'<path d="M44 '+(cy+30)+'h12v14c0 4-12 4-12 0z" fill="'+P.skin2+'"/>'
+    +'<ellipse cx="50" cy="'+(cy+6)+'" rx="19" ry="22" fill="'+P.skin+'"/>'
+    +'<ellipse cx="31" cy="'+(cy+8)+'" rx="3.4" ry="5" fill="'+P.skin+'"/>'
+    +'<ellipse cx="69" cy="'+(cy+8)+'" rx="3.4" ry="5" fill="'+P.skin+'"/>'+beard
+    +'<ellipse cx="42" cy="'+(cy+5)+'" rx="2" ry="2.3" fill="#2A2A33"/>'
+    +'<ellipse cx="58" cy="'+(cy+5)+'" rx="2" ry="2.3" fill="#2A2A33"/>'
+    +'<path d="M38 '+(cy-1)+'q4-2.5 8 0M54 '+(cy-1)+'q4-2.5 8 0" stroke="'+P.hair+'" stroke-width="2" fill="none" stroke-linecap="round"/>'
+    +'<path d="M50 '+(cy+8)+'v5" stroke="'+P.skin2+'" stroke-width="1.8" fill="none" stroke-linecap="round"/>'
+    +'<path d="M45 '+(cy+19)+'q5 3.5 10 0" stroke="'+P.skin2+'" stroke-width="2" fill="none" stroke-linecap="round"/>'
+    +hair+glasses+'</svg>';
+}
+
+var FACTORS=['ability','care','integrity'];
+var ORDER=['omar','salma','karim'];
+
+var PEOPLE={
+  omar:{id:'omar',name:{ar:'عمر',en:'Omar'},
+    bio:{ar:'قائد فريق من أربع سنين. فريقه بيتعامل مع استفسارات البطاقات والاعتراضات. شارك قبل كده في تطبيق تحديثات تشغيلية جوه فريقه ومع فرق تانية.',
+         en:'Team leader for four years. Leads a team handling card enquiries and disputes. Has helped implement operational updates within his team and across teams.'}},
+  salma:{id:'salma',name:{ar:'سلمى',en:'Salma'},
+    bio:{ar:'قائدة فريق من سنتين. فريقها بيتعامل مع استفسارات البطاقات والاعتراضات. نسّقت تطبيق تحديثات جوه فريقها، وحضرت اجتماعات مراجعة مشتركة.',
+         en:'Team leader for two years. Leads a team handling card enquiries and disputes. Has coordinated updates within her team and taken part in joint review meetings.'}},
+  karim:{id:'karim',name:{ar:'كريم',en:'Karim'},
+    bio:{ar:'قائد فريق من تلات سنين. فريقه بيتعامل مع استفسارات البطاقات والاعتراضات. نسّق متابعة مهام مشتركة بين الفرق، وبيشارك في مراجعات الأداء.',
+         en:'Team leader for three years. Leads a team handling card enquiries and disputes. Has coordinated shared tasks across teams and takes part in performance reviews.'}}
+};
+
+/* integrity question reworded so it matches what the evidence
+   actually shows: handling an update when information was incomplete. */
+var ASK={
+  ability:{ar:'إيه الدليل على إنه يقدر ينفّذ مهمة زي دي؟',en:'What shows they can deliver a similar task?'},
+  care:{ar:'اتعامل إزاي مع احتياجات قادة الفرق والموظفين؟',en:'How did they handle the needs of team leaders and agents?'},
+  integrity:{ar:'اتعامل إزاي مع التزام أو تحديث مهم لما المعلومات ما كانتش كاملة؟',en:'How did they handle an important commitment or update when the information was incomplete?'}
+};
+var KIND={
+  ability:{ar:'ملخص تطبيق سابق',en:'Previous rollout summary'},
+  care:{ar:'ملاحظة من مراجعة مشتركة',en:'Joint review note'},
+  integrity:{ar:'سجل متابعة التزام',en:'Commitment follow-up record'}
+};
+var FACTOR_NAME={
+  ability:{ar:'القدرة',en:'Ability'},
+  care:{ar:'الاهتمام بمصالح الآخرين',en:'Benevolence'},
+  integrity:{ar:'النزاهة',en:'Integrity'}
+};
+
+var EV={
+  omar_ability:{id:'omar_ability',who:'omar',factor:'ability',text:{
+    ar:'في تحديث سابق يخص تسجيل اعتراضات البطاقات، نسّق عمر الشرح بين تلات قادة فرق. لما ظهر اختلاف في فهم أحد الحقول، جمع أمثلة وطلب توضيحًا من الجهة المسؤولة قبل ما يعمّم الرد. مراجعة الجودة أكدت إن الفرق استخدمت التوضيح المعتمد.',
+    en:'During an earlier update to card dispute recording, Omar coordinated the briefing across three team leaders. When one field was interpreted differently, he collected examples and requested clarification before sharing an answer. Quality confirmed that the teams used the approved clarification.'}},
+  omar_care:{id:'omar_care',who:'omar',factor:'care',text:{
+    ar:'واحد من قادة الفرق اعترض على ميعاد جلسة مشتركة بسبب ضغط المكالمات. عمر طلب منه يوضح نقص التغطية، وعدّل الميعاد بعد التنسيق، من غير ما يلغي مشاركة الفريق أو يقلل من اعتراض القائد.',
+    en:'A team leader questioned the timing of a shared briefing because of call demand. Omar asked them to explain the coverage gap and coordinated a different time. He kept the team involved and did not dismiss the concern.'}},
+  omar_integrity:{id:'omar_integrity',who:'omar',factor:'integrity',text:{
+    ar:'عمر أكد في تحديث سابق إن شرح التوجيه اكتمل في الفرق التلاتة. بعد سؤال المشرف، بان إن واحد من القادة ما كملش الشرح. عمر صحح التحديث وتابع الجزء الناقص، لكنه ما كانش اتأكد من اكتمال الشرح قبل ما يأكده.',
+    en:'Omar reported that a previous briefing was complete across all three teams. After the supervisor asked, it became clear that one team leader had not finished. Omar corrected the update and followed up, but he had not verified completion before reporting it.'}},
+  salma_ability:{id:'salma_ability',who:'salma',factor:'ability',text:{
+    ar:'سلمى طبقت تحديثًا مشابهًا جوه فريقها. استخدمت أمثلة من المراجعة، واتأكدت من فهم الموظفين، وتابعت أول عينة مع الجودة. ما سبقش ليها تقود تطبيقًا مشتركًا بين تلات فرق أو تحل اختلافًا بين قادة الفرق.',
+    en:'Salma implemented a similar update within her team. She used review examples, checked agents’ understanding and reviewed the first sample with Quality. She has not yet led a rollout across three teams or resolved differences between team leaders.'}},
+  salma_care:{id:'salma_care',who:'salma',factor:'care',text:{
+    ar:'لما قائد فريق تاني قال إن أمثلة الشرح مش بتغطي الحالات اللي عنده، سلمى طلبت منه أمثلة وضمّتها لأسئلة فريقها. عرضت الاختلاف على المراجعة من غير ما تعتبر اعتراضه مقاومة أو تقصيرًا.',
+    en:'When another team leader said the briefing examples did not cover their cases, Salma asked for examples and added them to her team’s questions. She brought the difference to the review without treating the concern as resistance or poor performance.'}},
+  salma_integrity:{id:'salma_integrity',who:'salma',factor:'integrity',text:{
+    ar:'سلمى التزمت بإرسال ملخص مراجعة في ميعاد محدد. قبل الميعاد، بلّغت المشرف إن بعض الحالات محتاجة تحققًا إضافيًا. بعتت الجزء المؤكد في ميعاده، واتفقت على ميعاد للجزء الباقي والتزمت بيه.',
+    en:'Salma committed to sending a review summary by an agreed time. Before the deadline, she told the supervisor that some cases needed further checks. She sent the confirmed findings on time, agreed a deadline for the remaining work and met it.'}},
+  karim_ability:{id:'karim_ability',who:'karim',factor:'ability',text:{
+    ar:'كريم نسّق متابعة مهمة مشتركة بين تلات فرق، وحدد المسؤوليات ومواعيد التحديث بوضوح. في مراجعة للجودة، اعتبر إن اتفاق القادة على الشرح دليل كافي على تطبيق الموظفين. الجودة طلبت مراجعة حالات فعلية، وكريم تابع المراجعة.',
+    en:'Karim coordinated a shared task across three teams and clearly recorded responsibilities and update times. In a quality review, he treated agreement among team leaders as enough evidence of agent application. Quality requested a review of actual cases, which Karim then followed up.'}},
+  karim_care:{id:'karim_care',who:'karim',factor:'care',text:{
+    ar:'علشان يحل اختلافًا في توجيه، بعت كريم تعليمات مباشرة لموظفي فريق تاني قبل ما ينسّق مع قائدهم. قائد الفريق قال إن ده سبب ارتباكًا في المرجعية. كريم وضح قصده، لكن ما اتفقوش وقتها على طريقة تمنع تكرار الموقف.',
+    en:'To resolve a difference in guidance, Karim sent instructions directly to another team’s agents before coordinating with their team leader. The team leader said this created confusion about who was directing the team. Karim explained his intention, but they did not agree how to prevent it happening again.'}},
+  karim_integrity:{id:'karim_integrity',who:'karim',factor:'integrity',text:{
+    ar:'لما اتأخر رد جهة مشاركة، كريم حدّث سجل المهمة قبل ميعاده، ووضح اللي اكتمل واللي لسه مستني تأكيد. طلب من المشرف يتدخل في الجزء اللي خارج صلاحيته، وما سجّلش المهمة كمكتملة قبل التحقق.',
+    en:'When a partner function’s response was delayed, Karim updated the task record before the deadline. He separated completed work from work awaiting confirmation, asked the supervisor to help with the part outside his authority and did not report completion before checking.'}}
+};
+
+/* Per-evidence interpretation. Every piece gets its OWN read-out:
+   what it supports, what it limits, and what it does NOT establish. */
+var EV_READ={
+  omar_ability:{
+    supports:{ar:'خبرة فعلية في تنسيق شرح بين تلات قادة فرق، وفي وقف التعميم لحد ما ييجي التوضيح المعتمد.',en:'Real experience coordinating a briefing across three team leaders, and holding back a general answer until approved clarification arrived.'},
+    limits:{ar:'الواقعة دي عن تنسيق الشرح، مش عن دقة تقاريره بعد التنفيذ.',en:'This is about coordinating the briefing, not about the accuracy of his reporting afterwards.'},
+    notes:{ar:'ما تثبتش لوحدها إن تحديثاته عن الاكتمال متحقق منها.',en:'On its own it does not establish that his completion updates are verified.'}},
+  omar_care:{
+    supports:{ar:'طلب توضيح العجز بدل ما يرفض الاعتراض، وعدّل الميعاد من غير ما يشيل الفريق من المهمة.',en:'He asked for the coverage gap to be explained rather than dismissing the objection, and moved the time without dropping the team from the task.'},
+    limits:{ar:'واقعة واحدة عن توقيت جلسة. ما تغطيش المواقف اللي فيها تعارض أصعب.',en:'A single incident about scheduling. It does not cover harder conflicts.'},
+    notes:{ar:'ما تقولش حاجة عن قدرته على التنفيذ أو دقة تحديثاته.',en:'It says nothing about his delivery capability or the accuracy of his updates.'}},
+  omar_integrity:{
+    supports:{ar:'صحّح التحديث بنفسه وتابع الجزء الناقص لما اتسأل.',en:'He corrected the update himself and followed up the missing part once asked.'},
+    limits:{ar:'أعلن اكتمالًا ما كانش متحقق منه. يعني تحديثه النهائي محتاج أدلة، مش قبول تلقائي.',en:'He reported a completion he had not verified. His final update needs evidence, not automatic acceptance.'},
+    notes:{ar:'النص ما يثبتش إنه تعمّد التضليل. يثير سؤالًا عن طريقة تحققه قبل التأكيد، مش عن نيته.',en:'The record does not establish that he intended to mislead. It raises a question about how he verifies before confirming, not about his intent.'}},
+  salma_ability:{
+    supports:{ar:'طبقت تحديثًا مشابهًا بالكامل جوه فريقها: أمثلة، تحقق من الفهم، ومراجعة أول عينة مع الجودة.',en:'She ran a similar update end to end inside her team: examples, checking understanding, and reviewing the first sample with Quality.'},
+    limits:{ar:'التنسيق بين تلات فرق وحل اختلاف بين القادة لسه ما اتجربوش في الأدلة المتاحة.',en:'Coordinating across three teams and resolving differences between team leaders is untested in the available evidence.'},
+    notes:{ar:'ده نقص في الاختبار، مش دليل على عجز. فرق مهم عند تحديد الدعم.',en:'That is a gap in testing, not evidence of inability — an important distinction when choosing support.'}},
+  salma_care:{
+    supports:{ar:'تعاملت مع اعتراض قائد تاني كمعلومة، جمعت أمثلته ورفعت الاختلاف للمراجعة.',en:'She treated another leader’s objection as information, gathered his examples and raised the difference for review.'},
+    limits:{ar:'الموقف كان اختلافًا في الأمثلة، مش تعارضًا على الصلاحية أو الموارد.',en:'The situation was a difference about examples, not a conflict over authority or resources.'},
+    notes:{ar:'ما تثبتش لوحدها قدرتها تدير خلافًا بين قادة في مهمة هي المسؤولة عنها.',en:'On its own it does not establish that she can manage a disagreement between leaders on a task she owns.'}},
+  salma_integrity:{
+    supports:{ar:'بلّغت بالنقص قبل الميعاد مش بعده، سلّمت الجزء المؤكد في وقته، والتزمت بالميعاد الجديد.',en:'She flagged the shortfall before the deadline rather than after, delivered the confirmed part on time, and met the new date.'},
+    limits:{ar:'الواقعة عن تقرير فردي، مش عن تقرير بيجمع شغل تلات فرق.',en:'The record is about an individual report, not one consolidating three teams’ work.'},
+    notes:{ar:'دليل قوي على إن تحديثاتها بتعبر عن الواقع. ما يعوّضش نقص اختبار التنسيق.',en:'Strong evidence that her updates reflect reality. It does not compensate for the untested coordination.'}},
+  karim_ability:{
+    supports:{ar:'نظّم مهمة مشتركة بين تلات فرق بمسؤوليات ومواعيد واضحة، وتابع المراجعة لما الجودة طلبتها.',en:'He structured a shared task across three teams with clear responsibilities and update times, and followed up the review when Quality asked.'},
+    limits:{ar:'اعتبر اتفاق القادة دليلًا على تطبيق الموظفين. ده بالظبط الفرق اللي المهمة دي قايمة عليه.',en:'He treated leaders’ agreement as evidence of agent application — exactly the distinction this task turns on.'},
+    notes:{ar:'التنظيم عنده قوي. اللي محتاج متابعة هو نوع الدليل اللي بيقبله على التطبيق.',en:'His structuring is strong. What needs following up is the kind of evidence he accepts for application.'}},
+  karim_care:{
+    supports:{ar:'كان بيحاول يحل اختلافًا بسرعة، ووضّح قصده لما القائد اعترض.',en:'He was trying to resolve a difference quickly, and explained his intention when the leader objected.'},
+    limits:{ar:'تجاوز قائد الفريق وربك المرجعية قدام الموظفين، وما اتفقش على طريقة تمنع التكرار.',en:'He bypassed the team leader and blurred the reporting line in front of agents, and no way to prevent a repeat was agreed.'},
+    notes:{ar:'الأثر على وضوح الأدوار واضح. لكن واقعة واحدة ما تكفيش نستنتج منها نيته تجاه زمايله.',en:'The effect on role clarity is clear. But a single incident is not enough to infer his intent towards colleagues.'}},
+  karim_integrity:{
+    supports:{ar:'حدّث قبل الميعاد، فصل المكتمل عن المستني تأكيد، ورفع اللي خارج صلاحيته بدل ما يقفله.',en:'He updated before the deadline, separated completed work from work awaiting confirmation, and escalated what was outside his authority instead of closing it.'},
+    limits:{ar:'الواقعة عن تأخير جهة خارجية، مش عن تحقق من تطبيق الموظفين.',en:'The record concerns an external delay, not verification of agent application.'},
+    notes:{ar:'بيورّي إنه ما بيعلنش اكتمالًا قبل التحقق، وده بيوازن ملاحظة القدرة.',en:'It shows he does not report completion before checking, which balances the ability note.'}}
+};
+
+/* ---------------------------------------------------------------
+   Conclusions are deliberately GENERIC. They must never name a fact
+   the participant has not opened, so they are phrased as positions
+   about the strength of one's own evidence, and the coverage note
+   under them is built only from what the participant actually opened.
+   --------------------------------------------------------------- */
+/* ---------------------------------------------------------------
+   What each record actually CARRIES, so feedback can weigh content
+   rather than count pieces. "caution" = the record names a limit that
+   matters for THIS task. "mixed" = real strength plus a real limit.
+   --------------------------------------------------------------- */
+var EV_FLAG={
+  omar_ability:{dir:'strength'},
+  omar_care:{dir:'strength'},
+  omar_integrity:{dir:'caution'},
+  salma_ability:{dir:'mixed'},
+  salma_care:{dir:'strength'},
+  salma_integrity:{dir:'strength'},
+  karim_ability:{dir:'mixed'},
+  karim_care:{dir:'caution'},
+  karim_integrity:{dir:'strength'}
+};
+function evLabel(id){ return tx(PEOPLE[EV[id].who].name)+' — '+tx(KIND[EV[id].factor]); }
+function weigh(sn){
+  var own=sn.openedAt.filter(function(id){ return EV[id].who===sn.who; });
+  var caut=own.filter(function(id){ var f=EV_FLAG[id]; return f&&(f.dir==='caution'||f.dir==='mixed'); });
+  var str =own.filter(function(id){ var f=EV_FLAG[id]; return f&&f.dir==='strength'; });
+  return {own:own,n:own.length,caut:caut,str:str};
+}
+
+var CONCLUSIONS=[
+  {id:'c_full',text:{
+    ar:'الأدلة اللي عندي بتكفي إني أعتمد عليه في المهمة دي من غير متابعة زيادة عن المطلوب.',
+    en:'The evidence I have is enough to rely on them for this task without follow-up beyond what is required.'}},
+  {id:'c_scoped',text:{
+    ar:'أقدر أعتمد عليه في الجزء اللي أدلتي بتغطيه، والباقي محتاج تحقق أثناء التنفيذ.',
+    en:'I can rely on them for the part my evidence covers, and the rest needs checking during delivery.'}},
+  {id:'c_provisional',text:{
+    ar:'معلوماتي عنه محدودة. الاعتماد مبدئي لحد ما يظهر دليل مباشر.',
+    en:'My information about them is limited. Reliance is provisional until direct evidence appears.'}},
+  {id:'c_no',text:{
+    ar:'الأدلة اللي عندي ما بتكفيش إني أعتمد عليه في المهمة دي.',
+    en:'The evidence I have is not enough to rely on them for this task.'}}
+];
+
+/* Feedback weighs the CONTENT of the opened records against the chosen
+   position. Count only ever describes coverage, never strength. */
+function conclusionFB(sn){
+  var W=weigh(sn), ar=[], en=[];
+  var cautNames=W.caut.map(evLabel).join(sep());
+
+  if(sn.conclusion==='c_full'){
+    if(W.n===0){
+      ar.push('ما فتحتش أي دليل عنه، فالموقف ده مبني على الملف الأولي مش على دليل. الملف الأولي بيقول خبرة، ما بيقولش سلوك.');
+      en.push('You opened no evidence about them, so this rests on the opening profile rather than on evidence. The profile states experience, not behaviour.');
+    } else if(W.caut.length){
+      ar.push('من بين أدلتك، «'+cautNames+'» بيورّي حدًّا يخص المهمة دي بالذات، والموقف ده ما بيتسقش معاه. لما دليل بيشير لحدّ، الاستنتاج المناسب بيحدد الحدّ ده مش بيعديه.');
+      en.push('Among your pieces, “'+W.caut.map(evLabel).join('; ')+'” shows a limit bearing on this task, and this position does not sit with it. When a record points to a limit, the fitting conclusion names it rather than passing over it.');
+    } else if(W.n===3){
+      ar.push('فتحت أدلة عن العوامل التلاتة، لكن كفاية الاعتماد بتتوقف على مضمون الأدلة وصلتها بالمهمة، مش على عددها. أدلتك هنا ما فيهاش حدّ ظاهر، فالموقف ده قابل للدفاع — بشرط إن مراجعة العينة تفضل زي ما هي لأنها مطلوبة في المهمة نفسها.');
+      en.push('You opened evidence on all three factors, but sufficiency depends on what the records contain and how they bear on the task, not on how many there are. Yours show no visible limit, so this position is defensible — provided the sample review stays as it is, since the task itself requires it.');
+    } else {
+      ar.push('أدلتك ما فيهاش حدّ ظاهر، بس هي بتغطي '+W.n+' من تلات عوامل. الباقي مش متحقق منه، وده غير إنه «مفيش فيه مشكلة».');
+      en.push('Your pieces show no visible limit, but they cover '+W.n+' of three factors. The rest is unverified, which is different from being clear.');
+    }
+  }
+  else if(sn.conclusion==='c_scoped'){
+    ar.push('الموقف ده بيفصل اللي اتحقق منه عن اللي لأ، وده الشكل اللي بيخلي الدعم بعده مركّز على حدّ معروف. ');
+    en.push('This position separates what is verified from what is not, which lets the support target a known limit. ');
+    if(W.n===0){
+      ar.push('لكن أدلتك فاضية، فمفيش «جزء بتغطيه» أصلًا. الصياغة سليمة، والأدلة اللي ورا الصياغة ناقصة.');
+      en.push('But your evidence is empty, so there is no “part it covers”. The framing is sound; the evidence behind it is missing.');
+    } else if(W.caut.length){
+      ar.push('وبيتسق مع أدلتك: «'+cautNames+'» بيحدد بالظبط الجزء اللي محتاج تحقق، فالدعم اللي جاي بعده له هدف واضح.');
+      en.push('And it fits your evidence: “'+W.caut.map(evLabel).join('; ')+'” names exactly the part that needs checking, so the support that follows has a clear target.');
+    } else {
+      ar.push('أدلتك بتدعم الجزء اللي بتعتمد عليه، والجزء غير المغطى هو اللي يحدد المتابعة.');
+      en.push('Your evidence supports the part you are relying on, and the uncovered part defines the checks.');
+    }
+  }
+  else if(sn.conclusion==='c_provisional'){
+    if(W.n===0){
+      ar.push('قراءة دقيقة لحالتك. من غير دليل، أي حكم أوسع هيكون انطباعًا، والاعتماد المبدئي مع تحقق مناسب هو التصرف الصح.');
+      en.push('An accurate reading. With no evidence, any wider judgement would be an impression; provisional reliance with proportionate checks is the right move.');
+    } else if(W.caut.length){
+      ar.push('الحذر هنا مبني على حاجة حقيقية: «'+cautNames+'» فيه حدّ فعلًا. بس تقدر تروح أبعد من «مبدئي» وتسمّي الحدّ نفسه، علشان الدعم يشتغل عليه.');
+      en.push('The caution rests on something real: “'+W.caut.map(evLabel).join('; ')+'” does contain a limit. You can go further than “provisional” and name that limit, so the support can act on it.');
+    } else if(W.str.length>=2){
+      ar.push('عندك '+W.str.length+' أدلة ما فيهاش حدّ ظاهر. ده أكتر من «معلومات محدودة» — تقدر تحدد الجزء اللي أدلتك بتغطيه بدل ما تسيب الاعتماد كله مبدئي.');
+      en.push('You have '+W.str.length+' pieces with no visible limit. That is more than “limited information” — you can name the part your evidence covers instead of leaving all reliance provisional.');
+    } else {
+      ar.push('بدليل واحد، الاعتماد المبدئي قراءة معقولة لحالتك.');
+      en.push('With a single piece, provisional reliance is a reasonable reading of your situation.');
+    }
+  }
+  else {
+    ar.push('عدم اختبار القدرة ما بيثبتش العجز. قرر هل الدعم المتاح يكفي، ولا محتاج تحققًا إضافيًا قبل التكليف. ');
+    en.push('An untested capability does not establish inability. Decide whether the available support is enough, or whether you need an additional check before assigning. ');
+    if(W.n===0){
+      ar.push('وأنت ما فتحتش دليلًا عنه، فالموقف هنا مبني على غياب معلومات مش على معلومة.');
+      en.push('And you opened no evidence about them, so this rests on absent information rather than on information.');
+    } else if(W.caut.length){
+      ar.push('«'+cautNames+'» بيدي سببًا حقيقيًا للحذر. السؤال الباقي: الحدّ ده يتغطى بدعم، ولا خطره أكبر من إن الدعم يمسكه؟');
+      en.push('“'+W.caut.map(evLabel).join('; ')+'” gives a genuine reason for caution. The remaining question: can that limit be covered by support, or is the risk larger than support can hold?');
+    } else {
+      ar.push('أدلتك المفتوحة ما فيهاش حدّ ظاهر، فالموقف ده محتاج سبب غير اللي في الأدلة — زي ارتفاع خطر المهمة أو قلة المعلومات.');
+      en.push('Your opened pieces show no visible limit, so this position needs a reason outside the evidence — such as the risk of the task or the thinness of your information.');
+    }
+  }
+  return {ar:ar.join(''),en:en.join('')};
+}
+
+/* If the participant concludes they cannot rely on this leader, the
+   decision must not silently assign them anyway. */
+var CNO_PATHS=[
+  {id:'cno_change',text:{ar:'أرجع أختار قائد فريق تاني.',en:'Go back and choose a different team leader.'}},
+  {id:'cno_cond',text:{ar:'أكلّفه تكليفًا مبدئيًا مشروطًا بتحقق محدد قبل ما يكمل.',en:'Assign them provisionally, conditional on a specific check before they continue.'}}
+];
+/* A conditional assignment is only meaningful if the condition is named,
+   so the participant must state what must be confirmed and when. */
+var CNO_CHECKS=[
+  {id:'chk_accept',text:{ar:'أتأكد إن القادة التلاتة موافقين ينسّقوا من خلاله، قبل ما يبدأ.',en:'Confirm that all three team leaders accept coordinating through them, before they start.'}},
+  {id:'chk_sample',text:{ar:'أتأكد من نتيجة أول عينة حالات، قبل ما يكمل لباقي الفرق.',en:'Confirm the result of the first sample of cases, before they continue with the remaining teams.'}},
+  {id:'chk_match',text:{ar:'أتأكد إن تحديثه الأول مطابق لللي ظهر في الحالات، قبل ما أوسّع اعتمادي عليه.',en:'Confirm that their first update matches what the cases showed, before I rely on them more widely.'}}
+];
+var CNO_CHECK_FB={
+  chk_accept:{ar:'الشرط ده بيتعامل مع أكتر حاجة بتفشّل تنسيقًا بين فرق: إن القادة ما يكونوش مقتنعين بالمرجعية. وهو شرط تقدر تتحقق منه قبل ما المهمة تبدأ أصلًا.',
+    en:'This condition addresses the most common reason cross-team coordination fails: the leaders not accepting the reporting line. It is also checkable before the task starts at all.'},
+  chk_sample:{ar:'الشرط ده مربوط بدليل فعلي من الحالات مش بانطباع، وبيجي في نقطة بدري كفاية إن التصحيح يكون ممكن. خلي القائد عارف الشرط ده من البداية.',
+    en:'This condition is tied to actual evidence from the cases rather than an impression, and lands early enough for correction to be possible. Make sure the leader knows the condition from the start.'},
+  chk_match:{ar:'مقارنة التحديث باللي ظهر في الحالات بتختبر دقة التقرير نفسه، مش التنفيذ بس. ده شرط مناسب لو قلقك على التحديثات أكتر من القدرة.',
+    en:'Comparing the update with what the cases showed tests the accuracy of the reporting itself, not only the delivery. A fitting condition if your concern is about updates more than capability.'}
+};
+var CNO_FB={
+  cno_cond:{ar:'التكليف المبدئي المشروط موقف إداري متماسك: أنت ما بتتجاهلش استنتاجك، وبتحوّله لشرط. المهم إن الشرط يكون محددًا ومعروفًا للقائد من البداية، مش تحفظًا في دماغك.',
+    en:'A provisional, conditional assignment is a coherent position: you are not ignoring your conclusion, you are turning it into a condition. What matters is that the condition is specific and known to the leader from the start, not a private reservation.'}
+};
+
+/* Support options — the sample review is fixed in all of them, as the
+   brief requires it. They differ in additional support and its timing. */
+var SUPPORT={
+  omar:[
+    {id:'om_s1',text:{ar:'عمر ينسّق، ومراجعة العينة تتم مع الجودة كما هو مطلوب. قبل الإغلاق، كل قائد يأكد اكتمال شرح فريقه كتابة، وعمر يرفع التأكيدات مع نتيجة العينة.',en:'Omar coordinates, and the sample review runs with Quality as required. Before closing, each team leader confirms their own briefing in writing, and Omar submits those confirmations alongside the sample result.'}},
+    {id:'om_s2',text:{ar:'عمر ينسّق ويجمع نتيجة العينة. المشرف يحضر نقطة مراجعة واحدة بنهاية اليوم الأول، يتقارن فيها كلام القادة مع نتيجة العينة قدام الكل.',en:'Omar coordinates and gathers the sample result. The supervisor joins one review point at the end of day one, where the leaders’ accounts are compared with the sample result in front of everyone.'}},
+    {id:'om_s3',text:{ar:'عمر ينسّق ويرفع نتيجة العينة مع تحديثه النهائي. المشرف يراجع بعد ما عمر يسلّم، ويرجعله لو في فرق.',en:'Omar coordinates and submits the sample result with his final update. The supervisor reviews after Omar hands over, and goes back to him if there is a gap.'}}
+  ],
+  salma:[
+    {id:'sa_s1',text:{ar:'سلمى تنسّق، ومراجعة العينة كما هو مطلوب. المشرف يفتح الجلسة الأولى بتوضيح دورها وحدود صلاحيتها قدام القادة التلاتة، وبعدين تكمل هي.',en:'Salma coordinates, with the sample review as required. The supervisor opens the first session by stating her role and the limits of her authority in front of all three leaders, then she carries on.'}},
+    {id:'sa_s2',text:{ar:'سلمى تنسّق، ومراجعة العينة كما هو مطلوب. تتفق مع المشرف قبل البداية على خطة الجلسة وعلى نقطة رجوع محددة لو حصل اختلاف بين القادة، والمشرف ما يحضرش.',en:'Salma coordinates, with the sample review as required. She agrees the session plan and a specific escalation point with the supervisor before starting, and the supervisor does not attend.'}},
+    {id:'sa_s3',text:{ar:'سلمى تنسّق، ومراجعة العينة كما هو مطلوب. المشرف يتابع معاها على انفراد بعد كل خطوة بدل ما يظهر قدام القادة.',en:'Salma coordinates, with the sample review as required. The supervisor checks in with her privately after each step rather than appearing in front of the leaders.'}}
+  ],
+  karim:[
+    {id:'ka_s1',text:{ar:'كريم ينسّق من خلال القادة، ومراجعة العينة كما هو مطلوب. يتفقوا صراحة من البداية إن أي توجيه لموظفي فريق يعدي على قائده.',en:'Karim coordinates through the leaders, with the sample review as required. They agree explicitly at the start that any instruction to a team’s agents goes through that team’s leader.'}},
+    {id:'ka_s2',text:{ar:'كريم ينسّق، ومراجعة العينة تتم مع كل قائد في فريقه، وكريم يجمع النتايج ويوضح الفرق بين اللي القادة اتفقوا عليه واللي ظهر في الحالات.',en:'Karim coordinates, and the sample review runs with each leader inside their own team. Karim consolidates the results and sets out the difference between what the leaders agreed and what the cases showed.'}},
+    {id:'ka_s3',text:{ar:'كريم ينسّق، ومراجعة العينة كما هو مطلوب. المشرف يراجع معاه مسار التوجيه بعد أول اختلاف يظهر بين فريقين.',en:'Karim coordinates, with the sample review as required. The supervisor reviews the routing of instructions with him after the first difference appears between two teams.'}}
+  ]
+};
+
+var SUPPORT_FB={
+  om_s1:{key:['omar_integrity'],text:{
+    ar:'التأكيد الكتابي من كل قائد بيخلي الاكتمال له أثر مكتوب بدل ما يكون تأكيدًا شفهيًا، والتنسيق فاضل في إيد عمر بالكامل. الحدّ: التأكيدات نفسها محتاجة تتقارن مع نتيجة العينة، مش تتقبل لوحدها.',
+    en:'Written confirmation from each leader gives completion a written trace rather than a verbal assurance, and coordination stays fully with Omar. The limit: those confirmations still need comparing against the sample result, not accepting on their own.'}},
+  om_s2:{key:['omar_integrity'],text:{
+    ar:'وجودك في نقطة واحدة بيخلي المقارنة بين كلام القادة ونتيجة العينة تحصل قدام الكل، وده بيقلل احتمال إن فرق يعدي من غير ما حد ياخد باله. الحدّ: نقطة واحدة بنهاية اليوم ممكن تكون متأخرة لو الاختلاف ظهر من الصبح.',
+    en:'Being present at one point makes the comparison between the leaders’ accounts and the sample result happen in front of everyone, which lowers the chance of a gap passing unnoticed. The limit: a single end-of-day point may be late if the difference appeared that morning.'}},
+  om_s3:{key:['omar_integrity'],text:{
+    ar:'ده أقل تدخل منك، وبيحترم خبرة عمر في التنسيق. الحدّ: المراجعة بتيجي بعد التسليم، فلو في فرق هيتصحح متأخر. لو اخترته، حدد مدة واضحة للرجوع عليه.',
+    en:'This is the lightest touch from you and respects Omar’s coordination experience. The limit: the review lands after handover, so any gap is corrected late. If you choose it, set a clear turnaround for going back to him.'}},
+  sa_s1:{key:['salma_ability'],text:{
+    ar:'تثبيت الدور منك قدام القادة بيدي سلمى أرضية في الجزء اللي أدلتها ما بتغطيهوش: قبول القادة إنهم ينسّقوا من خلالها. والتنفيذ فاضل عندها. الحدّ: لازم توقف عند حدّ التوضيح وما تكملش الجلسة.',
+    en:'Establishing the role yourself in front of the leaders gives Salma standing in the part her evidence does not cover: whether they will coordinate through her. Execution stays hers. The limit: you have to stop at the clarification and not run the session.'}},
+  sa_s2:{key:['salma_ability'],text:{
+    ar:'اتفاق مسبق على الخطة ونقطة رجوع محددة بيدي استقلالية حقيقية وبيمنع إنها تستنى إذن في كل خطوة. الحدّ: دورها قدام القادة فاضل غير معلن.',
+    en:'Agreeing the plan and a specific escalation point in advance gives her real autonomy and stops her waiting for permission at every step. The limit: her standing in front of the leaders stays unstated.'}},
+  sa_s3:{key:['salma_ability'],text:{
+    ar:'المتابعة على انفراد بتحميها من إنها تبان مدعومة بالعافية، وبتديك صورة مستمرة. الحدّ: المتابعة بعد كل خطوة ممكن تتحول لإدارة مصغرة، والقادة لسه ما سمعوش منك إن التنسيق بيعدي عليها.',
+    en:'Checking in privately protects her from looking propped up and keeps you informed. The limit: a check after every step can slide into micromanagement, and the leaders still have not heard from you that coordination runs through her.'}},
+  ka_s1:{key:['karim_care'],text:{
+    ar:'الاتفاق الصريح على مسار التوجيه بيحوّل المسألة لقاعدة شغل بدل ما تبقى لومًا شخصيًا، وبيحمي وضوح الأدوار قدام الموظفين. الحدّ: ده ما بيلمسش نوع الدليل اللي كريم بيقبله على التطبيق.',
+    en:'An explicit agreement on routing turns the issue into a working rule rather than personal blame, and protects role clarity in front of agents. The limit: it does not touch the kind of evidence Karim accepts for application.'}},
+  ka_s2:{key:['karim_ability'],text:{
+    ar:'لما كريم يجمع النتايج ويوضح الفرق بين الاتفاق والتطبيق، بيكون بيمارس التفرقة دي بنفسه بدل ما حد يقولهاله. الحدّ: مسار التوجيه لسه ما اتفقش عليه.',
+    en:'Having Karim consolidate the results and spell out the difference between agreement and application makes him practise that distinction himself rather than being told it. The limit: the routing of instructions is still unagreed.'}},
+  ka_s3:{key:['karim_care'],text:{
+    ar:'مراجعة المسار بعد أول اختلاف بتسيبه يشتغل بطريقته الأول، وده احترام لخبرته في التنظيم. الحدّ: المراجعة بتيجي بعد اللحظة اللي الارتباك بيحصل فيها عادة، مش قبلها.',
+    en:'Reviewing the routing after the first difference lets him work his own way first, which respects his organisational strength. The limit: the review arrives after the moment confusion usually occurs, not before it.'}}
+};
+
+var MOVES={
+  omar:[
+    {id:'om_m1',text:{ar:'نراجع نتيجة العينة والتأكيدات مع بعض قبل ما نعتبر التطبيق مكتمل، وعمر يتابع أي اختلاف مع القادة.',en:'Review the sample result and the confirmations together before treating the rollout as complete, with Omar following up any difference with the leaders.'}},
+    {id:'om_m2',text:{ar:'عمر يقفل اليوم الأول بتحديث تقدم، ونراجع العينة أول اليوم التاني قبل الإغلاق النهائي.',en:'Omar closes day one with a progress update, and the sample is reviewed first thing on day two before final closure.'}},
+    {id:'om_m3',text:{ar:'المشرف يراجع تأكيدات القادة واحدة واحدة بنفسه قبل الإغلاق، وعمر يجمّع الباقي.',en:'The supervisor reviews each leader’s confirmation personally before closure, and Omar assembles the rest.'}}
+  ],
+  salma:[
+    {id:'sa_m1',text:{ar:'لو أظهرت المراجعة اختلافًا يحتاج معالجة، سلمى تدير النقاش بين القادة بنفسها، والمشرف حاضر ساكت ويتدخل بس لو وصلوا لطريق مسدود. ولو ما ظهرش اختلاف، ترفع نتيجة العينة كما هي.',en:'If the review shows a difference that needs handling, Salma runs the discussion between the leaders herself, with the supervisor present but silent, stepping in only at a deadlock. If no difference appears, she submits the sample result as it stands.'}},
+    {id:'sa_m2',text:{ar:'لو أظهرت المراجعة اختلافًا يحتاج معالجة، سلمى تجهّز تحليله وترفعه، والمشرف يدير النقاش مع القادة. ولو ما ظهرش اختلاف، ترفع نتيجة العينة كما هي.',en:'If the review shows a difference that needs handling, Salma prepares the analysis and escalates it, and the supervisor runs the discussion with the leaders. If no difference appears, she submits the sample result as it stands.'}},
+    {id:'sa_m3',text:{ar:'لو أظهرت المراجعة اختلافًا يحتاج معالجة، سلمى تتعامل معاه لوحدها بالكامل وترفع النتيجة النهائية بس. ولو ما ظهرش اختلاف، ترفع نتيجة العينة كما هي.',en:'If the review shows a difference that needs handling, Salma handles it entirely on her own and escalates only the final outcome. If no difference appears, she submits the sample result as it stands.'}}
+  ],
+  karim:[
+    {id:'ka_m1',text:{ar:'لو أظهرت المراجعة فرقًا في التطبيق، التصحيح يوصل الموظفين من خلال قائد كل فريق، وكريم يتابع أثره في عينة تانية. ولو ما ظهرش فرق، يرفع نتيجة العينة كما هي.',en:'If the review shows a difference in application, corrections reach agents through each team’s own leader, and Karim checks the effect in a second sample. If no difference appears, he submits the sample result as it stands.'}},
+    {id:'ka_m2',text:{ar:'لو أظهرت المراجعة فرقًا في التطبيق، كريم يجمع القادة التلاتة ويتفقوا على صيغة تصحيح موحدة، وكل واحد ينزلها لفريقه في نفس اليوم. ولو ما ظهرش فرق، يرفع نتيجة العينة كما هي.',en:'If the review shows a difference in application, Karim brings the three leaders together to agree one wording for the correction, and each takes it to their own team the same day. If no difference appears, he submits the sample result as it stands.'}},
+    {id:'ka_m3',text:{ar:'لو أظهرت المراجعة فرقًا في التطبيق، كريم يبعت التصحيح لكل الموظفين مرة واحدة علشان السرعة، والقادة ياخدوا نسخة في نفس الوقت. ولو ما ظهرش فرق، يرفع نتيجة العينة كما هي.',en:'If the review shows a difference in application, Karim sends the correction to all agents at once for speed, with the leaders copied at the same time. If no difference appears, he submits the sample result as it stands.'}}
+  ]
+};
+
+var MOVE_FB={
+  om_m1:{ar:'التحقق بيحصل قبل الإغلاق، والمسؤولية فاضلة عند عمر لأنه هو اللي بيتابع الاختلاف. الترتيب ده بيخلي الاكتمال مبني على نتيجة مكتوبة مش على تقدير.',en:'Verification happens before closure, and ownership stays with Omar because he follows up the difference. This order makes completion rest on a written result rather than on judgement.'},
+  om_m2:{ar:'الاختيار ده بيفرق بين تحديث التقدم وإعلان الاكتمال: اليوم الأول بيتقفل بتحديث، والإغلاق النهائي مستني نتيجة العينة. ده ترتيب سليم. الحدّ الوحيد إن أي تصحيح هيبدأ في اليوم التاني، فلو في فرق كبير الوقت المتاح لتصحيحه أقل.',en:'This option distinguishes a progress update from a declaration of completion: day one closes with an update, and final closure waits for the sample result. That is a sound order. The only limit is that any correction starts on day two, so a large gap has less time to be fixed.'},
+  om_m3:{ar:'مراجعتك بنفسك ممكن تساعد على اكتشاف الفجوات، لكنها بتنقل التحقق من عمر ليك. خد النتيجة منه بدل ما تجمعها بدالُه، علشان التحقق يفضل جزءًا من دوره.',en:'Reviewing it yourself may help surface gaps, but it moves the verification from Omar to you. Take the result from him rather than assembling it for him, so that checking stays part of his role.'},
+  sa_m1:{ar:'ده بيختبر الجزء اللي أدلتها ما بتغطيهوش — إدارة اختلاف بين قادة — ووجودك ساكت بيدي أمان من غير ما ياخد منها الدور.',en:'This tests the part her evidence does not cover — managing a disagreement between leaders — and your silent presence provides a safety net without taking the role from her.'},
+  sa_m2:{ar:'ده بيحمي المهمة في لحظة صعبة، والتحليل اللي بتجهزه شغل حقيقي. الحدّ: اللحظة اللي كانت هتختبر تنسيقها عدّت من غير ما تتجرب.',en:'This protects the task at a hard moment, and the analysis she prepares is real work. The limit: the moment that would have tested her coordination passes untested.'},
+  sa_m3:{ar:'ده بيديها الدور كامل، وممكن يكون مناسب لو الاختلاف بسيط. الحدّ: أول اختلاف بين قادة من غير غطا منك نقطة بداية صعبة، فاتأكد إن الباب مفتوح لو احتاجت ترجع لك.',en:'This gives her the role in full, and may suit a minor difference. The limit: a first cross-team disagreement with no cover from you is a hard starting point, so make sure the door is open if she needs it.'},
+  ka_m1:{ar:'ده بيعالج الاتنين مع بعض: التصحيح بيعدي على قادة الفرق فالأدوار بتفضل واضحة، والعينة التانية بتدي دليل على التطبيق مش على الاتفاق.',en:'This addresses both at once: the correction travels through the team leaders so roles stay clear, and the second sample gives evidence of application rather than agreement.'},
+  ka_m2:{ar:'الاتفاق على صيغة موحدة بيحل اختلاف الشرح، والتنزيل من خلال كل قائد بيحترم الأدوار. الحدّ: الاتفاق على الصيغة لسه مش دليل على إن الموظفين طبقوها.',en:'Agreeing one wording resolves the inconsistency, and each leader taking it to their own team respects roles. The limit: agreement on wording is still not evidence that agents applied it.'},
+  ka_m3:{ar:'السرعة ليها قيمة حقيقية لو الخطأ بيوصل لعملاء. الحدّ: نسخة للقادة مش نفس حاجة إن التوجيه يعدي عليهم، والفرق ده بيأثر على وضوح المرجعية قدام الموظفين. لو الوقت ضاغط، اتفق عليه كاستثناء معلن.',en:'Speed has real value if the error is reaching customers. The limit: copying the leaders is not the same as routing through them, and that difference affects role clarity in front of agents. If time is pressing, agree it as a stated exception.'}
+};
+
+var PLEDGES=[
+  {id:'pl1',text:{ar:'أرد على أي طلب توضيح يتبعتلي في نفس يوم الشغل، وأقول لو هحتاج وقت أطول.',en:'Answer any request for clarification sent to me the same working day, and say so if I need longer.'}},
+  {id:'pl2',text:{ar:'أوضح قدام القادة التلاتة حدود صلاحية القائد المختار قبل ما الجلسة تبدأ.',en:'State the limits of the selected leader’s authority in front of all three leaders before the session starts.'}},
+  {id:'pl3',text:{ar:'في أي نقطة بيرفعهالي، أوضح إيه اللي مستني تأكيد، وإيه اللي يقدر يمشي دلوقتي، وإمتى التحديث الجاي.',en:'On anything escalated to me, state what is awaiting confirmation, what can proceed now, and when the next update comes.'}}
+];
+var PLEDGE_FB={
+  pl1:{ar:'الالتزام ده بيقلل تعطّل العمل بسبب انتظار ردك. وإنك تقول لو هتتأخر هو نفس السلوك اللي بتقيّمه في سجل النزاهة عند قادة الفرق.',en:'This commitment reduces work stalling while waiting on your reply. And saying so when you will be late is the same behaviour you assess in the team leaders’ integrity records.'},
+  pl2:{ar:'ده بيتعامل مع الصلاحية قبل ما تبقى محل خلاف. وضوح الصلاحية حاجة أنت لوحدك تقدر تعلنها، وقائد الفريق ما يقدرش يعلنها لنفسه.',en:'This settles authority before it becomes contested. Stating authority is something only you can do; the team leader cannot state it for themselves.'},
+  pl3:{ar:'ده بيدي قائد الفريق حاجة يشتغل بيها: فصل اللي متوقف عن اللي ماشي، وميعاد معروف للتحديث. «لسه مستني» لوحدها حالة مش توجيه، والفرق ده هو نفسه اللي بتقيّمه في تحديثاتهم.',en:'This gives the team leader something to work with: what is blocked separated from what can move, and a known time for the next update. “Still pending” on its own is a status, not direction — the same distinction you assess in their updates.'}
+};
+
+var T={
+ nav:{skip:{ar:'تخطَّ إلى المحتوى',en:'Skip to content'},back:{ar:'رجوع',en:'Back'},
+   light:{ar:'فاتح',en:'Light'},dark:{ar:'داكن',en:'Dark'},langName:{ar:'العربية',en:'English'},
+   s1:{ar:'المهمة',en:'Brief'},s2:{ar:'الملفات',en:'Profiles'},s3:{ar:'القرار',en:'Decision'},s4:{ar:'المراجعة',en:'Review'}},
+ start:{t1:'The',t2:'Credibility Decision',
+   sub:{ar:'مين هتعتمد عليه؟ وإيه اللي محتاج تتأكد منه؟',en:'Who will you rely on? What do you need to verify?'},
+   lede:{ar:'ثلاثة قادة فرق. مهمة مشتركة. وثلاث فرص للاستفسار.',en:'Three team leaders. One shared task. Three enquiries.'},
+   meta:{ar:'نشاط فردي • 10–12 دقيقة',en:'Individual activity • 10–12 minutes'},
+   cta:{ar:'افتح المهمة',en:'Open the brief'},
+   budget:{ar:'ميزانية الاستفسار',en:'Your enquiry budget'},
+   resume:{ar:'هتكمل من محاولتك المحفوظة',en:'Continuing your saved attempt'},
+   method:{ar:'<b>Scenario-based learning</b><span>•</span><b>Evidence-informed judgment</b><span>•</span><b>Assessing trustworthiness</b>',
+     en:'<b>Scenario-based learning</b><span>•</span><b>Evidence-informed judgment</b><span>•</span><b>Assessing trustworthiness</b>'}},
+ brief:{eyebrow:{ar:'المهمة',en:'The brief'},
+   title:{ar:'توجيه واحد، تطبيق متسق',en:'One instruction, consistent application'},
+   summary:{ar:'أنت مشرف على ثلاثة قادة فرق في كول سنتر بنك. الجهة المسؤولة اعتمدت توضيحًا لطريقة تسجيل اعتراضات البطاقات وشرح الخطوة التالية للعميل. <b>اختار قائد فريق ينسّق تطبيقه في الفرق الثلاثة خلال يومَي عمل.</b>',
+     en:'You supervise three team leaders in a bank contact centre. The responsible function has approved a clarification on recording card disputes and explaining the next step to customers. <b>Choose a team leader to coordinate applying it across the three teams over two working days.</b>'},
+   accDetailT:{ar:'تفاصيل الموقف والمطلوب',en:'Situation and what is required'},
+   c1T:{ar:'اللي حصل',en:'What happened'},
+   c2T:{ar:'اللي المطلوب يحصل',en:'What needs to happen'},
+   c3T:{ar:'اللي متاح ليك',en:'What you have'},
+   d1:{ar:'مراجعة الجودة أظهرت إن بعض طلبات الاعتراض على معاملات البطاقات بترجع لاستكمال معلومات، وإن الموظفين مش دايمًا بيوضحوا للعميل الخطوة التالية بنفس الطريقة.',
+     en:'A quality review found that some card transaction dispute requests are returned for missing information, and that agents do not always explain the next step to customers in the same way.'},
+   d2:{ar:'التوجيه المعتمد متاح. الجودة هتراجع نفس العينة مع قادة الفرق. وقت الجلسة ووقت التنسيق متأكدين، والقادة الثلاثة متاحين للمهمة.',
+     en:'The approved instruction is available. Quality will review the same sample with the team leaders. Time for the briefing and coordination has been confirmed, and all three team leaders are available.'},
+   dutyT:{ar:'قائد الفريق المختار هيعمل إيه',en:'What the selected team leader will do'},
+   duty:{ar:['ينسّق جلسة قصيرة مع القادة الثلاثة باستخدام التوجيه المعتمد.','يجمع الأسئلة ويرفع أي غموض يحتاج توضيحًا.','يجمع نتائج مراجعة ثلاث حالات من كل فريق مع الجودة بنهاية اليوم الأول.'],
+     en:['Coordinate a short briefing with all three team leaders using the approved instruction.','Collect questions and raise any ambiguity that needs clarification.','Bring together the review findings from three cases per team with Quality by the end of day one.']},
+   boundsT:{ar:'حدود المسؤولية',en:'The boundaries of responsibility'},
+   boundsYou:{ar:'<b>أنت:</b> تنسّق للحصول على أي توضيح إضافي من الجهة المسؤولة، وتعتمد تنظيم العمل والموارد داخل صلاحياتك، وتتدخل في اللي يتجاوز صلاحية قائد الفريق.',
+     en:'<b>You:</b> coordinate any further clarification from the responsible function, approve how the work and resources are organised within your authority, and step in on anything beyond a team leader’s authority.'},
+   boundsThem:{ar:'<b>كل قائد فريق:</b> يظل مسؤولًا عن شرح التوجيه لموظفيه ومتابعة تطبيقه. القائد المختار بينسّق بينهم، وما بياخدش المسؤولية دي منهم.',
+     en:'<b>Each team leader:</b> remains responsible for briefing their own agents and checking application. The selected leader coordinates between them and does not take that responsibility from them.'},
+   mk1:{ar:'طريقة التعلم',en:'Learning method'},mv1:'Scenario-based learning',
+   md1:{ar:'ممارسة قرار إداري جوه موقف شغل واقعي.',en:'Practising a management decision inside a realistic work situation.'},
+   mk2:{ar:'المهارة المستهدفة',en:'Target skill'},mv2:'Evidence-informed judgment',
+   md2:{ar:'اختيار مبني على الأدلة المتاحة، مع إدراك اللي ما اتأكدناش منه.',en:'A choice built on available evidence, with awareness of what remains unverified.'},
+   mk3:{ar:'التطبيق',en:'Application'},mv3:'Assessing trustworthiness',
+   md3:{ar:'تقييم القدرة والاهتمام بمصالح الآخرين والنزاهة، وبعدين تحديد الدعم والمتابعة.',en:'Assessing ability, benevolence and integrity, then choosing support and checks.'},
+   goal:{ar:'هتقرا أدلة عن تصرفات قادة الفرق، تحدد إيه اللي تقدر تعتمد عليه فيه وإيه اللي لسه محتاج تحقق، وتختار الدعم والمتابعة المناسبين للحدّ ده.',
+     en:'You will read evidence about the team leaders’ actions, decide what you can rely on them for and what still needs verification, then choose the support and checks that fit that limit.'},
+   cta:{ar:'راجع الملفات',en:'Review the profiles'},
+   open:{ar:'افتح',en:'Open'}},
+ inv:{eyebrow:{ar:'الملفات',en:'The profiles'},
+   title:{ar:'راجع الملفات',en:'Review the profiles'},
+   lede:{ar:'كل استفسار يفتح دليلًا واحدًا عن قائد فريق واحد. الدليل بيتفتح في مساحة قراءة، وبيتحفظ معاك بعد كده.',
+     en:'Each enquiry reveals one piece of evidence about one team leader. Evidence opens in a reading space and stays saved for you afterwards.'},
+   left3:{ar:'باقي لك 3 فرص',en:'3 enquiries left'},left2:{ar:'باقي لك فرصتان',en:'2 enquiries left'},
+   left1:{ar:'باقي لك فرصة واحدة',en:'1 enquiry left'},left0:{ar:'خلصت فرصك',en:'No enquiries left'},
+   out:{ar:'استخدمت فرصك الثلاث. تقدر تراجع الأدلة اللي فتحتها وتبني قرارك.',en:'You have used all three enquiries. Review your evidence and build your decision.'},
+   noneLeft:{ar:'مفيش فرص',en:'None left'},costOne:{ar:'فرصة',en:'1 enquiry'},
+   opened:{ar:'مفتوح',en:'Opened'},reopen:{ar:'اقرأ تاني',en:'Read again'},
+   pips1:{ar:'دليل واحد مفتوح',en:'1 piece opened'},pips2:{ar:'دليلان مفتوحان',en:'2 pieces opened'},
+   pips3:{ar:'ثلاثة أدلة مفتوحة',en:'3 pieces opened'},nonePips:{ar:'ما فتحتش أدلة',en:'None opened'},
+   vault:{ar:'الأدلة اللي جمعتها',en:'Your collected evidence'},
+   vaultEmpty:{ar:'لسه ما فتحتش أي دليل.',en:'You have not opened any evidence yet.'},
+   record:{ar:'سجل داخلي',en:'Internal record'},
+   cta:{ar:'أكمل القرار',en:'Continue to decision'},
+   dlgCostT:{ar:'هتستخدم فرصة واحدة',en:'This will use one enquiry'},
+   dlgCostB:{ar:'هتستخدم فرصة واحدة لفتح الدليل ده.',en:'This will use one enquiry.'},
+   dlgCostOk:{ar:'افتح الدليل',en:'Reveal evidence'},
+   dlgLeftT:{ar:'لسه عندك فرص للاستفسار',en:'You still have enquiries available'},
+   dlgLeftB:{ar:'لسه عندك فرص للاستفسار. تكمل بالأدلة الحالية؟',en:'You still have enquiries available. Continue with your current evidence?'},
+   dlgLeftOk:{ar:'أكمل القرار',en:'Continue to decision'},dlgLeftNo:{ar:'أرجع للملفات',en:'Return to profiles'},
+   close:{ar:'إغلاق',en:'Close'},gotIt:{ar:'تمام',en:'Got it'}},
+ wiz:{of:{ar:'خطوة {a} من {b}',en:'Step {a} of {b}'},
+   next:{ar:'التالي',en:'Next'},prev:{ar:'السابق',en:'Previous'},
+   q1:{ar:'مين هينسّق المهمة؟',en:'Who will coordinate the task?'},
+   h1:{ar:'اختار قائد فريق واحد. تقدر ترجع تغيّره بعدين من غير ما تفقد باقي اختياراتك.',en:'Choose one team leader. You can come back and change this later without losing your other answers.'},
+   q2:{ar:'إيه الدليل اللي بيدعم الاعتماد عليه؟',en:'Which evidence supports relying on them?'},
+   h2:{ar:'اختار دليلًا أو دليلين من اللي فتحتهم. لو مفيش دليل بيدعم اختيارك، قول كده بصراحة.',en:'Choose one or two of the pieces you opened. If nothing supports your choice, say so openly.'},
+   q3:{ar:'إيه الدليل اللي بيحدّ الاعتماد عليه؟',en:'Which evidence limits relying on them?'},
+   h3:{ar:'كل قائد ليه حدود. تحديد الحدّ ده مش حكم عليه، ده اللي هيحدد الدعم المناسب.',en:'Every leader has limits. Naming the limit is not a judgement on them; it decides the right support.'},
+   q4:{ar:'إيه استنتاجك؟',en:'What is your conclusion?'},
+   h4:{ar:'إيه اللي تقدر تعتمد عليه فيه؟ وإيه اللي لسه محتاج تحقق؟',en:'What can you rely on them for, and what still needs verification?'},
+   q5:{ar:'إيه الدعم والمتابعة المناسبين للحدّ ده؟',en:'What support and checks fit that limit?'},
+   h5:{ar:'مراجعة ثلاث حالات من كل فريق مع الجودة مطلوبة في كل الحالات. الاختيار هنا عن الدعم الإضافي وتوقيته.',en:'Reviewing three cases per team with Quality is required in every option. The choice here is about the additional support and its timing.'},
+   q6:{ar:'إيه الحركة الثانية؟',en:'What is the second move?'},
+   h6:{ar:'بعد مراجعة اليوم الأول، إيه اللي بيحصل للاختلاف اللي ظهر؟',en:'After the day-one review, what happens to the difference that appeared?'},
+   q7:{ar:'علشان قائد الفريق يقدر يعتمد عليّ، هلتزم بـ…',en:'So that the team leader can rely on me, I will commit to…'},
+   h7:{ar:'المصداقية مش في اتجاه واحد. اختار التزامًا جوه صلاحيتك أنت.',en:'Credibility runs both ways. Choose a commitment that is inside your own authority.'},
+   alt2:{ar:'مفيش دليل مفتوح بيدعم الاعتماد عليه.',en:'No evidence I opened supports relying on them.'},
+   alt3:{ar:'مفيش دليل مفتوح بيحدّ الاعتماد عليه.',en:'No evidence I opened limits relying on them.'},
+   readFull:{ar:'اقرأ الدليل كامل',en:'Read the full evidence'},
+   noOpened:{ar:'ما فتحتش أي دليل. تقدر تكمل وتوضح كده، أو ترجع للملفات تستفسر.',en:'You have not opened any evidence. You can continue and say so, or go back to the profiles to enquire.'},
+   e1:{ar:'اختار قائد فريق.',en:'Choose a team leader.'},
+   e2:{ar:'اختار دليلًا، أو وضح إن مفيش دليل بيدعم الاختيار.',en:'Select evidence, or state that nothing supports the choice.'},
+   e3:{ar:'اختار دليلًا، أو وضح إن مفيش دليل بيحدّ الاختيار.',en:'Select evidence, or state that nothing limits the choice.'},
+   e4:{ar:'اختار استنتاجًا.',en:'Choose a conclusion.'},
+   e5:{ar:'اختار الدعم والمتابعة.',en:'Choose the support and checks.'},
+   e6:{ar:'اختار الحركة الثانية.',en:'Choose the second move.'},
+   e7:{ar:'اختار التزامًا.',en:'Choose a commitment.'},
+   max:{ar:'تقدر تختار دليلين بحد أقصى.',en:'You can select up to two pieces.'},
+   review:{ar:'راجع قراري',en:'Review my decision'},
+   confirmT:{ar:'تأكيد القرار',en:'Confirm your decision'},
+   confirmB:{ar:'بعد التأكيد، هتشوف تفسير كل دليل اخترته، والأدلة اللي ما فتحتهاش.',en:'After confirming, you will see an interpretation of each piece you selected, and the evidence you did not open.'},
+   confirmOk:{ar:'أكد القرار',en:'Confirm decision'},confirmNo:{ar:'أرجع أراجع',en:'Keep reviewing'}},
+ k:{leader:{ar:'القائد',en:'Leader'},supports:{ar:'دليل يدعم',en:'Supporting evidence'},
+   limits:{ar:'دليل يحدّ',en:'Limiting evidence'},conclusion:{ar:'الاستنتاج',en:'Conclusion'},
+   support:{ar:'الدعم والمتابعة',en:'Support and checks'},move:{ar:'الحركة الثانية',en:'Second move'},
+   pledge:{ar:'التزامي',en:'My commitment'},none:{ar:'لا يوجد',en:'None'}},
+ res:{eyebrow:{ar:'المراجعة',en:'The review'},title:{ar:'مراجعة قرارك',en:'Your decision review'},
+   yours:{ar:'قرارك كما أرسلته',en:'Your decision as submitted'},
+   lens1:{ar:'قراءة الأدلة اللي اخترتها',en:'Reading the evidence you selected'},
+   lens2:{ar:'استنتاجك',en:'Your conclusion'},
+   lens3:{ar:'ملاءمة الدعم',en:'Fit of support'},
+   lens4:{ar:'الحركة الثانية والمسؤولية',en:'Second move and ownership'},
+   lens5:{ar:'ما يحتاج تحققًا',en:'What needs verification'},
+   lens6:{ar:'مصداقيتك أنت',en:'Your own credibility'},
+   tagSupports:{ar:'بيدعم',en:'Supports'},tagLimits:{ar:'بيحدّ',en:'Limits'},tagNot:{ar:'ما بيثبتش',en:'Does not establish'},
+   noSupport:{ar:'قلت إن مفيش دليل مفتوح بيدعم الاعتماد عليه. ده إدراك صحيح لحدود معلوماتك، والاختيار بيفضل مبدئي لحد ما يظهر دليل مباشر.',
+     en:'You said nothing you opened supports relying on them. That is an accurate reading of your information, and the choice stays provisional until direct evidence appears.'},
+   noLimit:{ar:'قلت إن مفيش دليل مفتوح بيحدّ الاعتماد عليه. ده ممكن يكون صح لو أدلتك قليلة، لكن غياب الحدّ في الأدلة مش معناه غياب الحدّ في الواقع.',
+     en:'You said nothing you opened limits relying on them. That may be true with little evidence, but the absence of a limit in the evidence is not the absence of a limit in reality.'},
+   otherPerson:{ar:'الدليل ده عن قائد تاني. بيساعدك تقارن، لكنه ما بيقولش حاجة عن القائد اللي اخترته.',
+     en:'This piece is about a different leader. It helps you compare, but it says nothing about the leader you chose.'},
+   oneFactor:{ar:'الدليل على عامل واحد ما يثبتش العاملين التانيين تلقائيًا.',en:'Evidence of one factor does not automatically establish the other two.'},
+   known:{ar:'عندك دليل',en:'Evidence opened'},unknown:{ar:'لسه محتاج تحقق',en:'Still needs verification'},
+   lateK:{ar:'معلومة ما فتحتهاش قبل القرار',en:'Evidence you did not open before deciding'},
+   lateNote:{ar:'المعلومة دي بتوضح ليه اختيارك يحتاج مراجعة. مش محسوبة عليك، لأنها ما كانتش قدامك وقت القرار.',
+     en:'This clarifies why your choice needs review. It is not counted against you, because it was not in front of you when you decided.'},
+   conceptT:{ar:'المفهوم اللي طبقته',en:'The concept you applied'},
+   conceptB:{ar:'عوامل المصداقية: القدرة، والاهتمام بمصالح الآخرين، والنزاهة. الدليل على عامل واحد ما يثبتش العاملين التانيين تلقائيًا، والحدّ في عامل مش معناه إن الشخص مش أهل للاعتماد — معناه إن الاعتماد محتاج دعم مخصوص.',
+     en:'Factors of trustworthiness: ability, benevolence and integrity. Evidence of one factor does not automatically establish the other two, and a limit in one factor does not mean the person cannot be relied on — it means reliance needs specific support.'},
+   cAbility:{ar:'خبرة وتصرفات بتساعد على المهمة المحددة.',en:'Experience and actions that fit the specific task.'},
+   cCare:{ar:'أخذ احتياجات الناس بجدية بدل ما يعتبرها مقاومة.',en:'Taking people’s needs seriously instead of reading them as resistance.'},
+   cIntegrity:{ar:'التحديثات والالتزامات بتعبر عن اللي حصل فعلًا.',en:'Updates and commitments that match what actually happened.'},
+   archT:{ar:'الأدلة التسعة',en:'All nine pieces of evidence'},
+   archB:{ar:'تقدر تفتح أي دليل باقي مجانًا. ده مش استفسار جديد.',en:'You can open any remaining evidence for free. This is not a new enquiry.'},
+   before:{ar:'فتحته قبل القرار',en:'Opened before the decision'},after:{ar:'ظهر بعد القرار',en:'Revealed after the decision'},
+   openFree:{ar:'افتح',en:'Open'},
+   askKeep:{ar:'بعد ما شفت الصورة كاملة، هتثبت على اختيارك ولا هتعدّله؟',en:'With the full picture, would you keep or revise your choice?'},
+   keep:{ar:'هثبت',en:'Keep'},revise:{ar:'هعدّل',en:'Revise'},
+   kept:{ar:'ثبّت قرارك الأول.',en:'You kept your first decision.'},
+   editNote:{ar:'عدّل اختياراتك، وبعدين أكد المراجعة. قرارك الأول هيفضل محفوظ للمقارنة.',en:'Edit your choices, then confirm the revision. Your first decision stays saved for comparison.'},
+   confirmRev:{ar:'أكد المراجعة',en:'Confirm revision'},cancel:{ar:'إلغاء',en:'Cancel'},
+   compareT:{ar:'مقارنة القرارين',en:'Comparing both decisions'},
+   original:{ar:'القرار الأول',en:'First decision'},revised:{ar:'القرار المراجع',en:'Revised decision'},
+   changed:{ar:'اتغير',en:'changed'},
+   finaleT:'The Second Move',
+   finaleB:{ar:'الثقة بتبدأ بدليل على مسؤولية محددة. دعمك ومتابعتك بيحددوا إيه اللي قائد الفريق هيقدر يمتلكه بعد كده.',
+     en:'Trust starts with evidence for a specific responsibility. Your support and follow-up shape what the team leader can own next.'},
+   ask1:{ar:'إيه اللي قرارك بيحلّه دلوقتي؟',en:'What does your decision solve now?'},
+   ask2:{ar:'وإيه اللي بيجهّز له بعد كده؟',en:'What does it set up next?'},
+   download:{ar:'نزّل ملخص قراري',en:'Download my decision summary'},
+   again:{ar:'محاولة جديدة',en:'New attempt'},
+   againT:{ar:'تبدأ محاولة جديدة؟',en:'Start a new attempt?'},
+   againB:{ar:'قرارات المحاولة الحالية هتتمسح من التطبيق.',en:'The current attempt will be cleared from the app.'},
+   againOk:{ar:'ابدأ من جديد',en:'Start again'},againNo:{ar:'احتفظ بالمحاولة',en:'Keep this attempt'},
+   saved:{ar:'الملخص اتنزّل',en:'Summary downloaded'}},
+ sum:{title:{ar:'ملخص قراري — The Credibility Decision',en:'My decision summary — The Credibility Decision'},
+   openedBefore:{ar:'الأدلة اللي فتحتها قبل القرار',en:'Evidence opened before the decision'},
+   method:{ar:'طريقة التعلم: سيناريو، قراءة أدلة، استنتاج، قرار، Feedback، ومراجعة.',en:'Learning approach: scenario, reading evidence, conclusion, decision, feedback and reflection.'},
+   note:{ar:'ده وصف لطريقة النشاط، مش ادعاء إنه اختبار علمي لقياس الثقة.',en:'This describes the activity’s method. It is not a claim to be a scientific trust measure.'},
+   print:{ar:'اطبع',en:'Print'}}
+};
+
+/* reflection strings */
+T.reflect={
+  title:{ar:'اكتب لنفسك',en:'Notes to yourself'},
+  lede:{ar:'الأسئلة دي مالهاش إجابة صح وغلط، ومش بتتقيّم. اكتب اللي يخصك، وهيتحفظ معاك في الملخص.',
+    en:'These have no right answer and are not scored. Write what matters to you; it is saved into your summary.'},
+  q1:{ar:'إيه اللي خلاك تختار {who} بالذات؟ وهل ده كان مبنيًا على دليل فتحته ولا على انطباع من الملف الأولي؟',
+    en:'What made you choose {who} specifically? Was that based on evidence you opened, or on an impression from the opening profile?'},
+  c1:{ar:'اخترت {n} دليل عنه قبل القرار.',en:'You opened {n} piece(s) about them before deciding.'},
+  c1none:{ar:'ما فتحتش أي دليل عنه قبل القرار.',en:'You opened no evidence about them before deciding.'},
+  q2:{ar:'لو كان عندك فرصة استفسار رابعة، كنت هتسألها عن إيه؟ وليه النقطة دي بالذات؟',
+    en:'If you had a fourth enquiry, what would you have asked about? And why that point in particular?'},
+  c2:{ar:'العوامل اللي لسه من غير دليل عنده: {f}.',en:'Factors still without evidence for them: {f}.'},
+  c2all:{ar:'عندك دليل على العوامل التلاتة عنده.',en:'You have evidence on all three factors for them.'},
+  q3:{ar:'في شغلك الحقيقي، إمتى آخر مرة اعتمدت على حد بناءً على انطباع بدل دليل؟ وإيه اللي كنت هتعمله مختلف؟',
+    en:'In your own work, when did you last rely on someone based on an impression rather than evidence? What would you do differently?'},
+  c3:{ar:'ده الجزء اللي بينقل النشاط من حالة تدريبية لممارسة.',en:'This is the part that moves the activity from a training case into practice.'},
+  placeholder:{ar:'اكتب هنا…',en:'Write here…'},
+  note:{ar:'الإجابات دي محفوظة في متصفحك أنت بس، وبتتمسح لو بدأت محاولة جديدة.',
+    en:'These notes are saved in your browser only, and are cleared if you start a new attempt.'},
+  saved:{ar:'محفوظ',en:'Saved'},
+  inSummary:{ar:'ملاحظاتي',en:'My reflection notes'}
+};
+T.wiz.covHave={ar:'عندك دليل على:',en:'You have evidence on:'};
+T.wiz.covMiss={ar:'من غير دليل:',en:'No evidence on:'};
+T.res.filedSup={ar:'صنّفته كدليل يدعم',en:'You filed this as supporting'};
+T.res.filedLim={ar:'صنّفته كدليل يحدّ',en:'You filed this as limiting'};
+T.wiz.cnoQ={ar:'الاستنتاج ده بيتعارض مع إنك تكلّفه. تعمل إيه؟',en:'That conclusion conflicts with assigning them. What will you do?'};
+T.wiz.alreadyFiled={ar:'متصنّف في الخانة التانية',en:'filed on the other side'};
+T.wiz.e4b={ar:'اختار إيه اللي هتعمله بعد الاستنتاج ده.',en:'Choose what follows from that conclusion.'};
+T.wiz.cnoCheckQ={ar:'إيه اللي لازم تتأكد منه قبل ما يبدأ أو يكمل؟',en:'What must be confirmed before they start or continue?'};
+T.wiz.e4c={ar:'حدد التحقق المطلوب.',en:'Name the required check.'};
+T.k.condition={ar:'الشرط:',en:'Condition:'};
+T.nav.sfxOn={ar:'الصوت شغال — اضغط للكتم',en:'Sound on — click to mute'};
+T.nav.sfxOff={ar:'الصوت مكتوم — اضغط للتشغيل',en:'Sound muted — click to enable'};
+
+/* =================== state =================== */
+var KEY='tcd_v3';
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function orderFor(map){var o={};for(var w in map){o[w]=shuffle(map[w].map(function(x){return x.id;}));}return o;}
+
+function fresh(){
+  return {v:3,lang:'ar',theme:'dark',stage:'start',
+    opened:[],budget:3,
+    step:1,
+    who:null,evSup:[],noSup:false,evLim:[],noLim:false,
+    conclusion:null,cnoPath:null,cnoCheck:null,support:null,move:null,pledge:null,
+    supOrder:orderFor(SUPPORT),mvOrder:orderFor(MOVES),
+    plOrder:shuffle(PLEDGES.map(function(p){return p.id;})),
+    submitted:null,revised:null,kept:false,revising:false,buf:null,
+    accD:false,errs:{},dir:1,notes:{},sfx:true};
+}
+var S=load();
+function load(){
+  try{
+    var raw=localStorage.getItem(KEY); if(!raw) return fresh();
+    var p=JSON.parse(raw); if(!p||p.v!==3||typeof p!=='object') return fresh();
+    var f=fresh(); for(var k in f){ if(p[k]===undefined) p[k]=f[k]; }
+    if(!Array.isArray(p.opened)) p.opened=[];
+    if(!Array.isArray(p.evSup)) p.evSup=[];
+    if(!Array.isArray(p.evLim)) p.evLim=[];
+    if(typeof p.budget!=='number'||p.budget<0||p.budget>3) p.budget=Math.max(0,3-p.opened.length);
+    if(typeof p.step!=='number'||p.step<1||p.step>7) p.step=1;
+    p.errs={};p.revising=false;p.buf=null;p.dir=1;
+    return p;
+  }catch(e){ return fresh(); }
+}
+function save(){ try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){} }
+
+/* =================== helpers =================== */
+function tx(o){ if(o==null) return ''; if(typeof o==='string') return o; return o[S.lang]!=null?o[S.lang]:(o.ar||''); }
+function esc(s){ s=(s==null)?'':String(s); return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function br(s){ return esc(s).replace(/\n/g,'<br>'); }
+function $(id){ return document.getElementById(id); }
+function say(m){ var l=$('live'); if(l){ l.textContent=''; setTimeout(function(){ l.textContent=m; },40); } }
+function rm(){ return window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches; }
+function openedOf(w){ return S.opened.filter(function(id){ return EV[id].who===w; }); }
+function byId(list,id){ for(var i=0;i<list.length;i++){ if(list[i].id===id) return list[i]; } return null; }
+function optText(group,who,id){
+  var arr = who ? group[who] : group;
+  var f = byId(arr||[],id);
+  return f?f.text:null;
+}
+function supportText(id){ for(var w in SUPPORT){ var f=byId(SUPPORT[w],id); if(f) return f.text; } return null; }
+function moveTextOf(id){ for(var w in MOVES){ var f=byId(MOVES[w],id); if(f) return f.text; } return null; }
+function conclusionText(id){ var f=byId(CONCLUSIONS,id); return f?f.text:null; }
+function pledgeText(id){ var f=byId(PLEDGES,id); return f?f.text:null; }
+function sep(){ return S.lang==='ar'?'، ':', '; }
+function pipsLabel(n){ if(!n) return tx(T.inv.nonePips); return tx([null,T.inv.pips1,T.inv.pips2,T.inv.pips3][n]); }
+function leftLabel(){ return [T.inv.left0,T.inv.left1,T.inv.left2,T.inv.left3][S.budget]; }
+
+function icoCheck(s){ s=s||14; return '<svg width="'+s+'" height="'+s+'" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5l3.8 3.8L16 5.6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>'; }
+function icoArrow(){ return '<svg class="arw" width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3.5 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'; }
+function icoBack(){ return '<svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M16 10H4m5-5l-5 5 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'; }
+function icoLock(){ return '<svg width="15" height="15" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="4" y="8.5" width="12" height="8" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M7 8.5V6.6a3 3 0 016 0v1.9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>'; }
+function icoDoc(){ return '<svg width="15" height="15" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 3h6l4 4v10H5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M11 3v4h4M7.5 11h5M7.5 13.8h3.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>'; }
+function icoWarn(){ return '<svg width="15" height="15" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 3.6l7 12.2H3z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M10 8.3v3.2M10 13.8v.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>'; }
+function icoChev(){ return '<svg class="acc-chev" width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'; }
+function icoShield(){ return '<svg width="15" height="15" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 2.5l6 2.3v5c0 4-2.6 6.6-6 7.7-3.4-1.1-6-3.7-6-7.7v-5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>'; }
+
+function orbs(left){
+  var o='';
+  for(var i=0;i<3;i++){ if(i) o+='<span class="orb-link"></span>';
+    o+='<span class="orb'+(i>=left?' spent':'')+'" aria-hidden="true">'+(i+1)+'</span>'; }
+  return o;
+}
+
+/* =================== stage routing =================== */
+var STAGES=['start','brief','inv','decide','result'];
+var STEPS=7;
+function go(st){
+  S.stage=st; S.errs={}; save(); draw();
+  try{ window.scrollTo({top:0,behavior:rm()?'auto':'smooth'}); }catch(e){ try{window.scrollTo(0,0);}catch(e2){} }
+  setTimeout(function(){ var m=$('main'); if(m&&m.focus) m.focus(); },60);
+}
+function progIndex(){ return Math.max(0,STAGES.indexOf(S.stage)-1); }
+
+/* =================== shared bits =================== */
+function progress(){
+  var ks=[T.nav.s1,T.nav.s2,T.nav.s3,T.nav.s4], i=progIndex();
+  var pct = i<=0?0:(i/(ks.length-1))*100;
+  return '<div class="prog"><div class="prog-track">'
+    +'<span class="prog-line"><i style="width:'+pct+'%"></i></span>'
+    +ks.map(function(l,n){
+      var cls=n<i?'done':(n===i?'now':'');
+      return '<span class="prog-step '+cls+'">'
+        +'<span class="prog-node">'+(n<i?icoCheck(13):(n+1))+'</span>'
+        +'<span class="prog-label">'+esc(tx(l))+'</span></span>';
+    }).join('')+'</div></div>';
+}
+
+function viewStart(){
+  var resumed=S.submitted||S.opened.length>0;
+  return '<section class="hero" id="hero">'
+    +'<div class="hero-room"></div><div class="hero-lamp"></div><div class="hero-desk"></div><div class="hero-vignette"></div>'
+    +'<div class="wrap hero-grid"><div>'
+      +'<h1 class="hero-title"><span class="ln"><span>'+esc(T.start.t1)+'</span></span><span class="ln"><span>'+esc(T.start.t2)+'</span></span></h1>'
+      +'<p class="hero-sub rise d1">'+esc(tx(T.start.sub))+'</p>'
+      +'<p class="hero-lede rise d2">'+esc(tx(T.start.lede))+'</p>'
+      +'<div class="rise d3"><button class="cta" type="button" data-act="go" data-v="brief">'+esc(tx(T.start.cta))+icoArrow()+'</button></div>'
+      +'<p class="hero-method rise d4">'+tx(T.start.method)+'</p>'
+      +(resumed?'<p class="rise d4" style="margin-block-start:var(--s3);font-size:.84rem;color:var(--text-3)">'+esc(tx(T.start.resume))+'</p>':'')
+    +'</div><div><div class="rack"><div class="rack-tray">'
+      +ORDER.map(function(id){
+        return '<div class="dossier"><span class="dossier-tab">'+esc(tx(PEOPLE[id].name))+'</span>'
+          +'<span class="dossier-clip"></span><div class="dossier-body">'
+          +'<div class="dossier-photo">'+portrait(id,'tall')+'</div>'
+          +'<div class="dossier-lines"><i></i><i></i><i></i></div></div></div>';
+      }).join('')
+    +'</div><div class="console"><div class="console-label">'+esc(tx(T.start.budget))+'</div>'
+    +'<div class="orbs">'+orbs(S.budget)+'</div></div></div></div></div>'
+    +'<p class="hero-meta rise d4">'+esc(tx(T.start.meta))+'</p></section>';
+}
+
+/* =================== brief : summary first =================== */
+function acc(id,title,open,inner){
+  return '<div class="acc'+(open?' open':'')+'">'
+    +'<button class="acc-head" type="button" data-act="acc" data-v="'+id+'" aria-expanded="'+(!!open)+'">'
+      +'<span class="acc-ico">'+icoDoc()+'</span>'
+      +'<span class="acc-t">'+esc(title)+'</span>'+icoChev()+'</button>'
+    +'<div class="acc-panel"><div class="acc-inner"><div class="acc-pad">'+inner+'</div></div></div></div>';
+}
+
+function viewBrief(){
+  var duty=T.brief.duty[S.lang]||T.brief.duty.ar;
+  var icoAlert='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4.5l8.5 15H3.5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 10v4M12 16.6v.6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>';
+  var icoTarget='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="3.4" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>';
+  var icoBox='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 8l8-4 8 4v8l-8 4-8-4z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M4 8l8 4 8-4M12 12v8" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>';
+
+  return '<section class="screen brief-stage"><div class="brief-bg"><i></i><i></i><i></i></div><div class="brief-grid-bg"></div><div class="wrap">'
+    +'<button class="back" type="button" data-act="go" data-v="start">'+icoBack()+esc(tx(T.nav.back))+'</button>'
+    +progress()
+    +'<div class="wrap-n" style="padding-inline:0">'
+      +'<p class="eyebrow">'+esc(tx(T.brief.eyebrow))+'</p>'
+      +'<h1 class="h-screen">'+esc(tx(T.brief.title))+'</h1>'
+      +'<p class="summary-line">'+tx(T.brief.summary)+'</p>'
+    +'</div>'
+    +'<div class="story">'
+      +'<div class="scard"><span class="scard-n">01</span><span class="scard-ico">'+icoAlert+'</span>'
+        +'<h3>'+esc(tx(T.brief.c1T))+'</h3><p>'+esc(tx(T.brief.d1))+'</p></div>'
+      +'<div class="scard"><span class="scard-n">02</span><span class="scard-ico">'+icoTarget+'</span>'
+        +'<h3>'+esc(tx(T.brief.c2T))+'</h3><ol>'+duty.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ol></div>'
+      +'<div class="scard"><span class="scard-n">03</span><span class="scard-ico">'+icoBox+'</span>'
+        +'<h3>'+esc(tx(T.brief.c3T))+'</h3><p>'+esc(tx(T.brief.d2))+'</p></div>'
+    +'</div>'
+    +'<div class="wrap-n" style="padding-inline:0">'
+      +'<div class="bounds"><h3>'+icoShield()+esc(tx(T.brief.boundsT))+'</h3>'
+        +'<p>'+tx(T.brief.boundsYou)+'</p><p>'+tx(T.brief.boundsThem)+'</p></div>'
+      +'<p class="lede" style="margin-block:var(--s5)">'+esc(tx(T.brief.goal))+'</p>'
+      +'<div class="btns"><button class="btn btn-primary" type="button" data-act="go" data-v="inv">'+esc(tx(T.brief.cta))+icoArrow()+'</button></div>'
+    +'</div>'
+  +'</div></section>';
+}
+
+/* =================== investigation =================== */
+function viewInv(){
+  var cards=ORDER.map(function(w){
+    var p=PEOPLE[w], n=openedOf(w).length;
+    var asks=FACTORS.map(function(f){
+      var id=w+'_'+f, open=S.opened.indexOf(id)>-1, dead=!open&&S.budget<=0;
+      return '<button class="ask-btn'+(open?' done':'')+'" type="button" data-act="'+(open?'read':'ask')+'" data-v="'+id+'" '+(dead?'disabled':'')+'>'
+        +'<span class="ask-seal">'+(open?icoDoc():icoLock())+'</span>'
+        +'<span class="ask-q">'+esc(tx(ASK[f]))+'</span>'
+        +'<span class="ask-cost">'+(open?esc(tx(T.inv.reopen)):(dead?esc(tx(T.inv.noneLeft)):esc(tx(T.inv.costOne))))+'</span>'
+        +'<span class="ask-go">'+icoArrow()+'</span></button>';
+    }).join('');
+    return '<div class="person"><div class="person-top">'
+      +'<span class="person-face">'+portrait(w,'square')+'</span>'
+      +'<span><span class="person-name">'+esc(tx(p.name))+'</span>'
+      +'<span class="person-pips">'+[0,1,2].map(function(i){return '<i class="'+(i<n?'on':'')+'"></i>';}).join('')+'</span></span></div>'
+      +'<p class="person-bio">'+esc(tx(p.bio))+'</p>'
+      +'<div class="asks">'+asks+'</div></div>';
+  }).join('');
+
+  return '<section class="screen"><div class="wrap">'
+    +'<button class="back" type="button" data-act="go" data-v="brief">'+icoBack()+esc(tx(T.nav.back))+'</button>'
+    +progress()
+    +'<div class="inv-top"><div>'
+      +'<p class="eyebrow">'+esc(tx(T.inv.eyebrow))+'</p>'
+      +'<h1 class="h-screen">'+esc(tx(T.inv.title))+'</h1>'
+      +'<p class="lede">'+esc(tx(T.inv.lede))+'</p></div>'
+      +'<div class="budget-dock'+(S.budget<=0?' out':'')+'" id="dock">'
+        +'<span class="orbs">'+orbs(S.budget)+'</span>'
+        +'<span class="bd-text">'+esc(tx(leftLabel()))+'</span></div></div>'
+    +'<div class="people">'+cards+'</div>'
+    +'<div class="btns btns-split" style="margin-block-start:var(--s7)">'
+      +'<button class="btn btn-ghost vault-btn" type="button" data-act="vault">'+icoDoc()+esc(tx(T.inv.vault))+' ('+S.opened.length+')</button>'
+      +'<button class="btn btn-primary" type="button" data-act="toDecide">'+esc(tx(T.inv.cta))+icoArrow()+'</button></div>'
+  +'</div></section>';
+}
+
+/* =================== wizard =================== */
+function pick(o){
+  var cls='pick'+(o.on?' on':'')+(o.locked?' locked':'')+(o.alt?' pick-alt':'');
+  return '<label class="'+cls+'">'
+    +'<input type="'+o.type+'" name="'+(o.name||'')+'" value="'+(o.value||'')+'" '
+      +(o.on?'checked':'')+' '+(o.locked?'disabled':'')+' data-act="'+o.act+'">'
+    +'<span class="pick-mark">'+icoCheck(14)+'</span>'
+    +(o.face?'<span class="pick-face">'+portrait(o.face,'square')+'</span>':'')
+    +'<span class="pick-body">'
+      +(o.title?'<span class="pick-title">'+o.title+'</span>':'')
+      +(o.text?'<span class="pick-text">'+o.text+'</span>':'')
+      +(o.read?'<span class="pick-read" data-act="read" data-v="'+o.read+'" role="button" tabindex="0">'+esc(tx(T.wiz.readFull))+'</span>':'')
+    +'</span>'
+    +(o.flag?'<span class="pick-flag">'+esc(o.flag)+'</span>':'')+'</label>';
+}
+
+function evPicks(chosen,none,act,actNone,noneLabel,src,exclude){
+  var who=src.who; exclude=exclude||[];
+  if(!S.opened.length) return '<p class="empty-note">'+esc(tx(T.wiz.noOpened))+'</p>'
+    +pick({type:'checkbox',on:none,act:actNone,alt:true,title:esc(tx(noneLabel))});
+  var rows=S.opened.map(function(id){
+    var e=EV[id], on=chosen.indexOf(id)>-1;
+    var taken=!on&&exclude.indexOf(id)>-1;
+    var locked=(!on&&chosen.length>=2)||none||taken;
+    return pick({type:'checkbox',value:id,on:on,locked:locked,act:act,
+      title:esc(tx(PEOPLE[e.who].name))+' — '+esc(tx(KIND[e.factor])),
+      text:esc(tx(e.text)).slice(0,150)+'…', read:id,
+      flag:taken?tx(T.wiz.alreadyFiled):((who&&e.who!==who)?tx({ar:'عن قائد تاني',en:'another leader'}):'')});
+  }).join('');
+  return rows+pick({type:'checkbox',on:none,act:actNone,alt:true,title:esc(tx(noneLabel))});
+}
+
+function chips(src){
+  var out=[];
+  if(src.who) out.push('<span class="wiz-chip">'+esc(tx(T.k.leader))+': <b>'+esc(tx(PEOPLE[src.who].name))+'</b></span>');
+  if(src.evSup.length||src.noSup) out.push('<span class="wiz-chip">'+esc(tx(T.k.supports))+': <b>'+(src.noSup?esc(tx(T.k.none)):src.evSup.length)+'</b></span>');
+  if(src.evLim.length||src.noLim) out.push('<span class="wiz-chip">'+esc(tx(T.k.limits))+': <b>'+(src.noLim?esc(tx(T.k.none)):src.evLim.length)+'</b></span>');
+  return out.length?'<div class="wiz-chosen">'+out.join('')+'</div>':'';
+}
+
+function stepBody(n,src,prefix){
+  var a=prefix||'';
+  if(n===1){
+    return ORDER.map(function(id){
+      return pick({type:'radio',name:a+'who',value:id,on:src.who===id,act:a+'who',face:id,
+        title:esc(tx(PEOPLE[id].name)),text:esc(pipsLabel(openedOf(id).length))});
+    }).join('');
+  }
+  if(n===2) return evPicks(src.evSup,src.noSup,a+'evs',a+'nos',T.wiz.alt2,src,src.evLim);
+  if(n===3) return evPicks(src.evLim,src.noLim,a+'evl',a+'nol',T.wiz.alt3,src,src.evSup);
+  if(n===4){
+    if(!src.who) return '';
+    var list=coverageNote(src.who)+CONCLUSIONS.map(function(o){
+      return pick({type:'radio',name:a+'con',value:o.id,on:src.conclusion===o.id,act:a+'con',
+        text:esc(tx(o.text))});
+    }).join('');
+    if(src.conclusion==='c_no'){
+      list+='<div class="followup"><p class="followup-q">'+esc(tx(T.wiz.cnoQ))+'</p>'
+        +CNO_PATHS.map(function(o){
+          return pick({type:'radio',name:a+'cno',value:o.id,on:src.cnoPath===o.id,act:a+'cno',
+            text:esc(tx(o.text))});
+        }).join('')
+        +(src.cnoPath==='cno_cond'
+          ? '<p class="followup-q" style="margin-block:var(--s4) var(--s3)">'+esc(tx(T.wiz.cnoCheckQ))+'</p>'
+            +CNO_CHECKS.map(function(o){
+              return pick({type:'radio',name:a+'cnoc',value:o.id,on:src.cnoCheck===o.id,act:a+'cnoc',
+                text:esc(tx(o.text))});
+            }).join('')
+          : '')
+        +'</div>';
+    }
+    return list;
+  }
+  if(n===5){
+    if(!src.who) return '';
+    return (S.supOrder[src.who]||[]).map(function(id){
+      return pick({type:'radio',name:a+'sup',value:id,on:src.support===id,act:a+'sup',
+        text:esc(tx(supportText(id)))});
+    }).join('');
+  }
+  if(n===6){
+    if(!src.who) return '';
+    return (S.mvOrder[src.who]||[]).map(function(id){
+      return pick({type:'radio',name:a+'mv',value:id,on:src.move===id,act:a+'mv',
+        text:esc(tx(moveTextOf(id)))});
+    }).join('');
+  }
+  if(n===7){
+    return (S.plOrder||[]).map(function(id){
+      return pick({type:'radio',name:a+'pl',value:id,on:src.pledge===id,act:a+'pl',
+        text:esc(tx(pledgeText(id)))});
+    }).join('');
+  }
+  return '';
+}
+
+/* Shows ONLY what the participant has actually opened, so the step
+   never leaks a fact from an unopened record. */
+function coveredFactors(who){
+  return FACTORS.filter(function(f){ return S.opened.indexOf(who+'_'+f)>-1; });
+}
+function missingFactors(who){
+  return FACTORS.filter(function(f){ return S.opened.indexOf(who+'_'+f)===-1; });
+}
+function coverageNote(who){
+  var have=coveredFactors(who), miss=missingFactors(who);
+  var parts=[];
+  if(have.length) parts.push('<b>'+esc(tx(T.wiz.covHave))+'</b> '+esc(have.map(function(f){return tx(FACTOR_NAME[f]);}).join(sep())));
+  if(miss.length) parts.push('<b>'+esc(tx(T.wiz.covMiss))+'</b> '+esc(miss.map(function(f){return tx(FACTOR_NAME[f]);}).join(sep())));
+  if(!parts.length) return '';
+  return '<div class="coverage">'+parts.join('<span class="cov-sep"></span>')+'</div>';
+}
+
+function stepQ(n){ return [null,T.wiz.q1,T.wiz.q2,T.wiz.q3,T.wiz.q4,T.wiz.q5,T.wiz.q6,T.wiz.q7][n]; }
+function stepH(n){ return [null,T.wiz.h1,T.wiz.h2,T.wiz.h3,T.wiz.h4,T.wiz.h5,T.wiz.h6,T.wiz.h7][n]; }
+function stepErr(n){ return [null,T.wiz.e1,T.wiz.e2,T.wiz.e3,T.wiz.e4,T.wiz.e5,T.wiz.e6,T.wiz.e7][n]; }
+
+function stepValid(n,src){
+  if(n===1) return !!src.who;
+  if(n===2) return src.noSup||src.evSup.length>0;
+  if(n===3) return src.noLim||src.evLim.length>0;
+  if(n===4){
+    if(!src.conclusion) return false;
+    if(src.conclusion!=='c_no') return true;
+    if(!src.cnoPath) return false;
+    if(src.cnoPath==='cno_cond' && !src.cnoCheck) return false;
+    return true;
+  }
+  if(n===5) return !!src.support;
+  if(n===6) return !!src.move;
+  if(n===7) return !!src.pledge;
+  return true;
+}
+
+function viewDecide(){
+  var n=S.step, last=n===STEPS;
+  return '<section class="screen"><div class="wrap-n">'
+    +'<button class="back" type="button" data-act="go" data-v="inv">'+icoBack()+esc(tx(T.inv.eyebrow))+'</button>'
+    +progress()
+    +'<div class="wiz"><div class="wiz-card'+(S.dir<0?' back-in':'')+'" id="wizcard">'
+      +'<p class="wiz-count">'+esc(tx(T.wiz.of).replace('{a}',n).replace('{b}',STEPS))+'</p>'
+      +'<h1 class="wiz-q">'+esc(tx(stepQ(n)))+'</h1>'
+      +'<p class="wiz-help">'+esc(tx(stepH(n)))+'</p>'
+      +chips(S)
+      +'<div class="picks">'+stepBody(n,S,'')+'</div>'
+      +(S.errs.step?'<p class="err">'+icoWarn()+esc(tx(stepErr(n)))+'</p>':'')
+      +'<div class="wiz-foot">'
+        +(n>1?'<button class="btn btn-ghost" type="button" data-act="prev">'+icoBack()+esc(tx(T.wiz.prev))+'</button>':'<span></span>')
+        +'<button class="btn btn-primary" type="button" data-act="next">'+esc(tx(last?T.wiz.review:T.wiz.next))+icoArrow()+'</button>'
+      +'</div>'
+    +'</div></div></div></section>';
+}
+
+function snap(src){
+  return {who:src.who,evSup:src.evSup.slice(),noSup:src.noSup,evLim:src.evLim.slice(),noLim:src.noLim,
+    conclusion:src.conclusion,cnoPath:src.cnoPath,cnoCheck:src.cnoCheck,support:src.support,move:src.move,pledge:src.pledge,
+    openedAt:S.opened.slice()};
+}
+function evLine(ids,none){
+  if(none) return esc(tx(T.k.none));
+  if(!ids.length) return '—';
+  return ids.map(function(id){var e=EV[id];
+    return esc(tx(PEOPLE[e.who].name))+' — '+esc(tx(KIND[e.factor]));}).join(sep());
+}
+function sumRows(sn){
+  return '<div class="sum-row"><span class="sum-k">'+esc(tx(T.k.leader))+'</span><span class="sum-v">'+esc(tx(PEOPLE[sn.who].name))+'</span></div>'
+   +'<div class="sum-row"><span class="sum-k">'+esc(tx(T.k.supports))+'</span><span class="sum-v">'+evLine(sn.evSup,sn.noSup)+'</span></div>'
+   +'<div class="sum-row"><span class="sum-k">'+esc(tx(T.k.limits))+'</span><span class="sum-v">'+evLine(sn.evLim,sn.noLim)+'</span></div>'
+   +'<div class="sum-row"><span class="sum-k">'+esc(tx(T.k.conclusion))+'</span><span class="sum-v">'+esc(tx(conclusionText(sn.conclusion)))
+     +(sn.cnoPath?'<br><span style="color:var(--brand-amber);font-size:.88rem">'+esc(tx(byId(CNO_PATHS,sn.cnoPath).text))+'</span>':'')
+     +(sn.cnoCheck?'<br><span style="color:var(--brand-amber);font-size:.88rem"><b>'+esc(tx(T.k.condition))+'</b> '+esc(tx(byId(CNO_CHECKS,sn.cnoCheck).text))+'</span>':'')+'</span></div>'
+   +'<div class="sum-row"><span class="sum-k">'+esc(tx(T.k.support))+'</span><span class="sum-v">'+esc(tx(supportText(sn.support)))+'</span></div>'
+   +'<div class="sum-row"><span class="sum-k">'+esc(tx(T.k.move))+'</span><span class="sum-v">'+esc(tx(moveTextOf(sn.move)))+'</span></div>'
+   +'<div class="sum-row"><span class="sum-k">'+esc(tx(T.k.pledge))+'</span><span class="sum-v">'+esc(tx(pledgeText(sn.pledge)))+'</span></div>';
+}
+
+/* =================== result =================== */
+function readoutFor(id,role,who){
+  var e=EV[id], R=EV_READ[id];
+  var other = e.who!==who;
+  if(other){
+    return '<div class="readout"><div class="readout-h">'
+      +'<span class="readout-who">'+esc(tx(PEOPLE[e.who].name))+' — '+esc(tx(KIND[e.factor]))+'</span>'
+      +'<span class="tagk neutral">'+esc(tx(T.res.tagNot))+'</span></div>'
+      +'<p>'+esc(tx(T.res.otherPerson))+'</p></div>';
+  }
+  /* Both sides of the same record are shown whatever the participant
+     filed it under, then their filing is commented on separately. */
+  var note = role==='sup' ? tx(T.res.filedSup) : tx(T.res.filedLim);
+  return '<div class="readout"><div class="readout-h">'
+    +'<span class="readout-who">'+esc(tx(PEOPLE[e.who].name))+' — '+esc(tx(KIND[e.factor]))+'</span>'
+    +'<span class="tagk '+(role==='sup'?'supports':'limits')+'">'+esc(note)+'</span></div>'
+    +'<p><b class="ro-k ro-sup">'+esc(tx(T.res.tagSupports))+'</b> '+esc(tx(R.supports))+'</p>'
+    +'<p><b class="ro-k ro-lim">'+esc(tx(T.res.tagLimits))+'</b> '+esc(tx(R.limits))+'</p>'
+    +'<p style="color:var(--text-3)"><b class="ro-k">'+esc(tx(T.res.tagNot))+'</b> '+esc(tx(R.notes))+'</p>'
+    +'</div>';
+}
+
+function lensRead(sn){
+  var out='<div class="lens"><div class="lens-k">01</div><div class="lens-t">'+esc(tx(T.res.lens1))+'</div>';
+  if(sn.noSup) out+='<p>'+esc(tx(T.res.noSupport))+'</p>';
+  else sn.evSup.forEach(function(id){ out+=readoutFor(id,'sup',sn.who); });
+  if(sn.noLim) out+='<p>'+esc(tx(T.res.noLimit))+'</p>';
+  else sn.evLim.forEach(function(id){ out+=readoutFor(id,'lim',sn.who); });
+  out+='<p style="color:var(--text-3);margin-block-start:var(--s4)">'+esc(tx(T.res.oneFactor))+'</p>';
+  return out+'</div>';
+}
+function lensConclusion(sn){
+  return '<div class="lens"><div class="lens-k">02</div><div class="lens-t">'+esc(tx(T.res.lens2))+'</div>'
+    +'<p style="color:var(--text);font-weight:600">'+esc(tx(conclusionText(sn.conclusion)))+'</p>'
+    +'<p>'+esc(tx(conclusionFB(sn)))+'</p>'
+    +(sn.cnoPath==='cno_cond'?'<p style="color:var(--text);font-weight:600">'+esc(tx(byId(CNO_PATHS,'cno_cond').text))+'</p><p>'+esc(tx(CNO_FB.cno_cond))+'</p>':'')
+    +(sn.cnoCheck?'<div class="late" style="border-color:rgba(64,189,169,.5);background:rgba(64,189,169,.07)">'
+      +'<div class="late-k" style="color:var(--accent)">'+esc(tx(T.k.condition))+'</div>'
+      +'<div class="late-who">'+esc(tx(byId(CNO_CHECKS,sn.cnoCheck).text))+'</div>'
+      +'<p>'+esc(tx(CNO_CHECK_FB[sn.cnoCheck]))+'</p></div>':'')
+    +'</div>';
+}
+function lensSupport(sn){
+  var out='<div class="lens"><div class="lens-k">03</div><div class="lens-t">'+esc(tx(T.res.lens3))+'</div>';
+  var fb=SUPPORT_FB[sn.support];
+  if(fb){
+    out+='<p>'+esc(tx(fb.text))+'</p>';
+    (fb.key||[]).filter(function(id){return sn.openedAt.indexOf(id)===-1;}).forEach(function(id){
+      var e=EV[id];
+      out+='<div class="late"><div class="late-k">'+icoWarn()+esc(tx(T.res.lateK))+'</div>'
+        +'<div class="late-who">'+esc(tx(PEOPLE[e.who].name))+' — '+esc(tx(KIND[e.factor]))+'</div>'
+        +'<p>'+br(tx(e.text))+'</p><p class="late-note">'+esc(tx(T.res.lateNote))+'</p></div>';
+    });
+  }
+  return out+'</div>';
+}
+function lensMove(sn){
+  return '<div class="lens"><div class="lens-k">04</div><div class="lens-t">'+esc(tx(T.res.lens4))+'</div>'
+    +'<p>'+esc(tx(MOVE_FB[sn.move]))+'</p></div>';
+}
+function lensVerify(sn){
+  var rows=FACTORS.map(function(f){
+    var known=sn.openedAt.indexOf(sn.who+'_'+f)>-1;
+    return '<div class="factor '+(known?'known':'open')+'"><span class="f-dot"></span>'
+      +'<span class="f-name">'+esc(tx(FACTOR_NAME[f]))+'</span>'
+      +'<span class="f-state">'+esc(known?tx(T.res.known):tx(T.res.unknown))+'</span></div>';
+  }).join('');
+  return '<div class="lens"><div class="lens-k">05</div><div class="lens-t">'+esc(tx(T.res.lens5))+'</div>'
+    +'<div class="factors">'+rows+'</div></div>';
+}
+function lensPledge(sn){
+  return '<div class="lens"><div class="lens-k">06</div><div class="lens-t">'+esc(tx(T.res.lens6))+'</div>'
+    +'<p style="color:var(--text);font-weight:600">'+esc(tx(T.wiz.q7))+' '+esc(tx(pledgeText(sn.pledge)))+'</p>'
+    +'<p>'+esc(tx(PLEDGE_FB[sn.pledge]))+'</p></div>';
+}
+
+function viewResult(){
+  var first=S.submitted, shown=S.revised||first;
+  var arch=ORDER.map(function(w){
+    return '<div class="arch-col"><h4><i></i>'+esc(tx(PEOPLE[w].name))+'</h4>'
+      +FACTORS.map(function(f){
+        var id=w+'_'+f, before=first.openedAt.indexOf(id)>-1, now=S.opened.indexOf(id)>-1;
+        var tag=before?'<span class="arch-tag before">'+esc(tx(T.res.before))+'</span>'
+               :(now?'<span class="arch-tag after">'+esc(tx(T.res.after))+'</span>':'');
+        return '<div class="arch-item"><div class="arch-kind">'+esc(tx(KIND[f]))+'</div>'+tag
+          +(now?'<div><span class="arch-open" data-act="read" data-v="'+id+'" role="button" tabindex="0">'+esc(tx(T.wiz.readFull))+'</span></div>'
+               :'<div><span class="arch-open" data-act="free" data-v="'+id+'" role="button" tabindex="0">'+esc(tx(T.res.openFree))+'</span></div>')
+          +'</div>';
+      }).join('')+'</div>';
+  }).join('');
+
+  var compare='';
+  if(S.revised){
+    var rowf=function(k,a,b){var d=a!==b;
+      return '<tr><th>'+esc(k)+'</th><td'+(d?' class="diff"':'')+'>'+esc(a)+'</td>'
+        +'<td'+(d?' class="diff"':'')+'>'+esc(b)+(d?'<span class="diff-pin">'+esc(tx(T.res.changed))+'</span>':'')+'</td></tr>';};
+    compare='<h3 class="h-sec">'+esc(tx(T.res.compareT))+'</h3><div class="compare-wrap"><table class="compare">'
+      +'<thead><tr><th></th><th>'+esc(tx(T.res.original))+'</th><th>'+esc(tx(T.res.revised))+'</th></tr></thead><tbody>'
+      +rowf(tx(T.k.leader),tx(PEOPLE[first.who].name),tx(PEOPLE[S.revised.who].name))
+      +rowf(tx(T.k.conclusion),tx(conclusionText(first.conclusion)),tx(conclusionText(S.revised.conclusion)))
+      +rowf(tx(T.k.support),tx(supportText(first.support)),tx(supportText(S.revised.support)))
+      +rowf(tx(T.k.move),tx(moveTextOf(first.move)),tx(moveTextOf(S.revised.move)))
+      +'</tbody></table></div>';
+  }
+
+  var ask='';
+  if(S.revising) ask=viewRevise();
+  else if(!S.revised&&!S.kept){
+    ask='<div class="verdict-card" style="text-align:center;margin-block:var(--s7)">'
+      +'<p style="font-weight:700;font-size:1.05rem;margin-block-end:var(--s5);line-height:1.7">'+esc(tx(T.res.askKeep))+'</p>'
+      +'<div class="btns" style="justify-content:center">'
+      +'<button class="btn btn-ghost" type="button" data-act="keep">'+esc(tx(T.res.keep))+'</button>'
+      +'<button class="btn btn-primary" type="button" data-act="revise">'+esc(tx(T.res.revise))+'</button></div></div>';
+  }else if(S.kept&&!S.revised){
+    ask='<p class="empty-note" style="margin-block:var(--s7)">'+esc(tx(T.res.kept))+'</p>';
+  }
+
+  return '<section class="screen"><div class="wrap-n">'
+    +progress()
+    +'<p class="eyebrow">'+esc(tx(T.res.eyebrow))+'</p>'
+    +'<h1 class="h-screen">'+esc(tx(T.res.title))+'</h1>'
+    +'<div class="verdict-card" style="margin-block:var(--s5) var(--s7)">'
+      +'<p class="meta-k" style="margin-block-end:var(--s3)">'+esc(tx(T.res.yours))+'</p>'+sumRows(first)+'</div>'
+    +lensRead(shown)+lensConclusion(shown)+lensSupport(shown)+lensMove(shown)+lensVerify(shown)+lensPledge(shown)
+    +'<div class="concept"><h3>'+esc(tx(T.res.conceptT))+'</h3><p>'+esc(tx(T.res.conceptB))+'</p><div class="triad">'
+      +'<div><b>'+esc(tx(FACTOR_NAME.ability))+'</b><span>'+esc(tx(T.res.cAbility))+'</span></div>'
+      +'<div><b>'+esc(tx(FACTOR_NAME.care))+'</b><span>'+esc(tx(T.res.cCare))+'</span></div>'
+      +'<div><b>'+esc(tx(FACTOR_NAME.integrity))+'</b><span>'+esc(tx(T.res.cIntegrity))+'</span></div></div></div>'
+    +'<h3 class="h-sec">'+esc(tx(T.res.archT))+'</h3>'
+    +'<p class="lede" style="font-size:.94rem;margin-block-end:var(--s5)">'+esc(tx(T.res.archB))+'</p>'
+    +'<div class="archive">'+arch+'</div>'
+    +compare+ask+reflectBlock(shown)
+    +'<div class="finale"><h2>'+esc(T.res.finaleT)+'</h2>'
+      +'<p>'+esc(tx(T.res.finaleB))+'</p>'
+      +'<div class="pledge"><div class="pledge-k">'+esc(tx(T.k.pledge))+'</div>'
+        +'<div class="pledge-v">'+esc(tx(T.wiz.q7))+' '+esc(tx(pledgeText(shown.pledge)))+'</div></div>'
+      +'<div class="qs"><span>'+esc(tx(T.res.ask1))+'</span><span>'+esc(tx(T.res.ask2))+'</span></div>'
+      +'<div class="btns" style="justify-content:center">'
+        +'<button class="btn btn-primary" type="button" data-act="dl">'+esc(tx(T.res.download))+'</button>'
+        +'<button class="btn btn-ghost" type="button" data-act="again" style="color:#F2F5FF;border-color:rgba(255,255,255,.35)">'+esc(tx(T.res.again))+'</button>'
+      +'</div></div>'
+  +'</div></section>';
+}
+
+function viewRevise(){
+  var b=S.buf, out='';
+  for(var n=1;n<=STEPS;n++){
+    out+='<div class="block-head" style="display:flex;align-items:baseline;gap:var(--s3);margin-block:var(--s5) var(--s3)">'
+      +'<span style="font-family:var(--f-display);font-style:italic;color:var(--accent)">0'+n+'</span>'
+      +'<span style="font-weight:700">'+esc(tx(stepQ(n)))+'</span></div>'
+      +'<div class="picks">'+stepBody(n,b,'r')+'</div>'
+      +(S.errs['r'+n]?'<p class="err">'+icoWarn()+esc(tx(stepErr(n)))+'</p>':'');
+  }
+  return '<div class="verdict-card" style="margin-block:var(--s7)">'
+    +'<p class="lede" style="font-size:.95rem">'+esc(tx(T.res.editNote))+'</p>'+out
+    +'<div class="btns" style="margin-block-start:var(--s6)">'
+      +'<button class="btn btn-primary" type="button" data-act="revOk">'+esc(tx(T.res.confirmRev))+'</button>'
+      +'<button class="btn btn-ghost" type="button" data-act="revNo">'+esc(tx(T.res.cancel))+'</button></div></div>';
+}
+
+
+/* =================== reflection =================== */
+function reflectBlock(sn){
+  var who=tx(PEOPLE[sn.who].name);
+  var nOwn=sn.openedAt.filter(function(id){return EV[id].who===sn.who;}).length;
+  var miss=FACTORS.filter(function(f){return sn.openedAt.indexOf(sn.who+'_'+f)===-1;});
+  var c1=nOwn?tx(T.reflect.c1).replace('{n}',nOwn):tx(T.reflect.c1none);
+  var c2=miss.length?tx(T.reflect.c2).replace('{f}',miss.map(function(f){return tx(FACTOR_NAME[f]);}).join(sep())):tx(T.reflect.c2all);
+  var qs=[
+    {k:'r1',q:tx(T.reflect.q1).replace('{who}',who),c:c1},
+    {k:'r2',q:tx(T.reflect.q2),c:c2},
+    {k:'r3',q:tx(T.reflect.q3),c:tx(T.reflect.c3)}
+  ];
+  return '<div class="reflect"><h3>'+esc(tx(T.reflect.title))+'</h3>'
+    +'<p class="lede">'+esc(tx(T.reflect.lede))+'</p>'
+    +qs.map(function(o){
+      var v=(S.notes&&S.notes[o.k])||'';
+      return '<div class="rq"><label for="n-'+o.k+'"><span class="rq-q">'+esc(o.q)+'</span>'
+        +'<span class="rq-ctx">'+esc(o.c)+'</span></label>'
+        +'<textarea id="n-'+o.k+'" data-act="note" data-v="'+o.k+'" rows="3" placeholder="'+esc(tx(T.reflect.placeholder))+'">'+esc(v)+'</textarea>'
+        +'<span class="rq-count">'+(v?esc(tx(T.reflect.saved)):'')+'</span></div>';
+    }).join('')
+    +'<p class="reflect-note">'+esc(tx(T.reflect.note))+'</p></div>';
+}
+
+/* =================== draw =================== */
+function draw(){
+  var h=document.documentElement;
+  h.lang=S.lang; h.dir=S.lang==='ar'?'rtl':'ltr'; h.setAttribute('data-theme',S.theme);
+  $('skip-link').textContent=tx(T.nav.skip);
+  $('lang-current').textContent=tx(T.nav.langName);
+  $('theme-current').textContent=tx(S.theme==='dark'?T.nav.dark:T.nav.light);
+  $('opt-light').childNodes[0].nodeValue=tx(T.nav.light);
+  $('opt-dark').childNodes[0].nodeValue=tx(T.nav.dark);
+  document.querySelectorAll('#lang-menu [data-act="lang"]').forEach(function(b){ b.setAttribute('aria-checked',b.dataset.v===S.lang?'true':'false'); });
+  document.querySelectorAll('#theme-menu [data-act="theme"]').forEach(function(b){ b.setAttribute('aria-checked',b.dataset.v===S.theme?'true':'false'); });
+
+  var m=$('main'),html;
+  if(S.stage==='start') html=viewStart();
+  else if(S.stage==='brief') html=viewBrief();
+  else if(S.stage==='inv') html=viewInv();
+  else if(S.stage==='decide') html=viewDecide();
+  else if(S.stage==='result'&&S.submitted) html=viewResult();
+  else { S.stage='start'; html=viewStart(); }
+  m.innerHTML=html;
+  if(S.stage==='start'){ requestAnimationFrame(function(){ var el=$('hero'); if(el) el.classList.add('is-ready'); }); }
+  if(typeof fxAfterDraw==='function') fxAfterDraw();
+  save();
+}
+addEventListener('scroll',function(){ var t=$('topbar'); if(t) t.classList.toggle('scrolled',scrollY>10); },{passive:true});
+
+/* =================== dialog / reader =================== */
+var lastFocus=null;
+function closeLayer(){
+  var l=$('layer'); if(!l.innerHTML) return;
+  SFX.close();
+  if(l._esc) document.removeEventListener('keydown',l._esc);
+  l.innerHTML=''; l._esc=null;
+  if(lastFocus&&lastFocus.focus) lastFocus.focus();
+}
+function mountLayer(html,boxSel,onAct){
+  lastFocus=document.activeElement;
+  var l=$('layer'); l.innerHTML=html;
+  var scrim=l.firstElementChild, box=l.querySelector(boxSel);
+  scrim.addEventListener('click',function(e){ if(e.target===scrim) closeLayer(); });
+  box.addEventListener('click',function(e){
+    var el=e.target.closest('[data-dlg]'); if(!el) return;
+    if(el.dataset.dlg==='no'){ closeLayer(); return; }
+    if(onAct) onAct(el.dataset.dlg,el);
+  });
+  l._esc=function(e){
+    if(e.key==='Escape'){ closeLayer(); return; }
+    if(e.key==='Tab'){
+      var f=box.querySelectorAll('button,[href],input,select,textarea,[tabindex]:not([tabindex="-1"])');
+      if(!f.length) return;
+      var a=f[0],z=f[f.length-1];
+      if(e.shiftKey&&document.activeElement===a){ e.preventDefault(); z.focus(); }
+      else if(!e.shiftKey&&document.activeElement===z){ e.preventDefault(); a.focus(); }
+    }
+  };
+  document.addEventListener('keydown',l._esc);
+  setTimeout(function(){ if(box.focus) box.focus(); },20);
+}
+function dialog(html,onAct){
+  mountLayer('<div class="scrim"><div class="dialog" role="dialog" aria-modal="true" tabindex="-1">'+html+'</div></div>','.dialog',onAct);
+}
+function toast(msg){
+  $('toast-layer').innerHTML='<div class="toast"><div>'+esc(msg)+'</div></div>';
+  setTimeout(function(){ $('toast-layer').innerHTML=''; },2600);
+}
+
+/* focused reading space for one piece of evidence */
+function openReader(id){
+  var e=EV[id];
+  mountLayer('<div class="scrim reader-scrim"><div class="reader" role="dialog" aria-modal="true" tabindex="-1" aria-label="'+esc(tx(KIND[e.factor]))+'">'
+    +'<button class="reader-close" type="button" data-dlg="no" aria-label="'+esc(tx(T.inv.close))+'">&times;</button>'
+    +'<div class="reader-head"><div class="reader-who">'+esc(tx(PEOPLE[e.who].name))+'</div>'
+    +'<div class="reader-kind">'+esc(tx(KIND[e.factor]))+'</div></div>'
+    +'<div class="reader-body"><p class="reader-q">'+esc(tx(ASK[e.factor]))+'</p>'
+    +'<p class="reader-text">'+br(tx(e.text))+'</p></div>'
+    +'<span class="reader-stamp">'+esc(tx(T.inv.record))+'</span>'
+    +'<div class="reader-foot"><button class="btn btn-primary" type="button" data-dlg="no">'+esc(tx(T.inv.gotIt))+'</button></div>'
+    +'</div></div>','.reader');
+}
+function openVault(){
+  var body = S.opened.length
+    ? '<div class="vault-list">'+S.opened.map(function(id){var e=EV[id];
+        return '<div class="vault-item"><div class="vault-who">'+esc(tx(PEOPLE[e.who].name))+'</div>'
+          +'<div class="vault-kind">'+esc(tx(KIND[e.factor]))+'</div>'
+          +'<p class="vault-text">'+br(tx(e.text))+'</p></div>';}).join('')+'</div>'
+    : '<p class="empty-note">'+esc(tx(T.inv.vaultEmpty))+'</p>';
+  dialog('<h3>'+esc(tx(T.inv.vault))+'</h3>'+body
+    +'<div class="btns" style="margin-block-start:var(--s5)"><button class="btn btn-ghost" type="button" data-dlg="no">'+esc(tx(T.inv.close))+'</button></div>');
+}
+
+/* =================== reveal =================== */
+var busy=false;
+/* One click on the question opens the record. The cost is shown on the
+   button itself, so a confirmation step would only add friction. */
+function askReveal(id){
+  if(busy||S.opened.indexOf(id)>-1||S.budget<=0) return;
+  doReveal(id);
+}
+function doReveal(id){
+  if(busy||S.opened.indexOf(id)>-1||S.budget<=0) return;
+  busy=true;
+  var dock=$('dock'), orb=dock?dock.querySelectorAll('.orb')[S.budget-1]:null;
+  SFX.spend();
+  if(orb&&!rm()){ orb.classList.add('spending'); try{ flySpark(orb); }catch(e){} }
+  S.opened.push(id); S.budget-=1; save();
+  setTimeout(function(){
+    draw(); openReader(id); SFX.open();
+    say(S.budget<=0?tx(T.inv.out):tx(leftLabel()));
+    busy=false;
+  }, rm()?0:430);
+}
+function flySpark(from){
+  if(typeof Element==='undefined'||!Element.prototype.animate) return;
+  var target=document.querySelector('[data-act="vault"]'); if(!target) return;
+  var a=from.getBoundingClientRect(), b=target.getBoundingClientRect();
+  var s=document.createElement('span'); s.className='spark';
+  s.style.left=(a.left+a.width/2-6)+'px'; s.style.top=(a.top+a.height/2-6)+'px';
+  document.body.appendChild(s);
+  var dx=(b.left+b.width/2)-(a.left+a.width/2), dy=(b.top+b.height/2)-(a.top+a.height/2);
+  s.animate([{transform:'translate(0,0) scale(1)',opacity:1},
+    {transform:'translate('+(dx*.5)+'px,'+(dy*.5-50)+'px) scale(1.6)',opacity:.95,offset:.55},
+    {transform:'translate('+dx+'px,'+dy+'px) scale(.3)',opacity:0}],
+    {duration:640,easing:'cubic-bezier(.4,0,.2,1)'}).onfinish=function(){ s.remove(); };
+}
+
+/* ======================================================================
+   SOUND — every cue is synthesised with WebAudio, so the file stays
+   self-contained. The context is only created after a real user
+   gesture, and nothing plays while the toggle is off.
+   ====================================================================== */
+var AC=null, master=null;
+function audioReady(){
+  if(S.sfx===false) return false;
+  try{
+    if(!AC){
+      var Ctx=window.AudioContext||window.webkitAudioContext;
+      if(!Ctx) return false;
+      AC=new Ctx();
+      master=AC.createGain();
+      master.gain.value=0.5;
+      master.connect(AC.destination);
+    }
+    if(AC.state==='suspended') AC.resume();
+    return true;
+  }catch(e){ return false; }
+}
+function tone(freq,dur,type,vol,delay,slideTo){
+  if(!AC) return;
+  var t0=AC.currentTime+(delay||0);
+  var o=AC.createOscillator(), g=AC.createGain();
+  o.type=type||'sine';
+  o.frequency.setValueAtTime(freq,t0);
+  if(slideTo) o.frequency.exponentialRampToValueAtTime(slideTo,t0+dur);
+  g.gain.setValueAtTime(0,t0);
+  g.gain.linearRampToValueAtTime(vol||0.05,t0+0.012);
+  g.gain.exponentialRampToValueAtTime(0.0001,t0+dur);
+  o.connect(g); g.connect(master);
+  o.start(t0); o.stop(t0+dur+0.02);
+}
+function noiseSwell(dur,vol){
+  if(!AC) return;
+  var n=Math.floor(AC.sampleRate*dur);
+  var buf=AC.createBuffer(1,n,AC.sampleRate), ch=buf.getChannelData(0);
+  for(var i=0;i<n;i++){ ch[i]=(Math.random()*2-1)*(1-i/n); }
+  var src=AC.createBufferSource(); src.buffer=buf;
+  var f=AC.createBiquadFilter(); f.type='bandpass'; f.frequency.value=1200; f.Q.value=0.8;
+  var g=AC.createGain(); g.gain.value=vol||0.03;
+  src.connect(f); f.connect(g); g.connect(master);
+  src.start();
+}
+var SFX={
+  tap:function(){ if(audioReady()) tone(520,0.07,'sine',0.035); },
+  step:function(){ if(audioReady()){ tone(440,0.09,'sine',0.04); tone(660,0.12,'sine',0.032,0.07); } },
+  back:function(){ if(audioReady()){ tone(520,0.09,'sine',0.035); tone(390,0.12,'sine',0.03,0.06); } },
+  open:function(){ if(audioReady()){ noiseSwell(0.3,0.025); tone(300,0.26,'sine',0.04,0,520); } },
+  spend:function(){ if(audioReady()){ tone(760,0.1,'triangle',0.04); tone(380,0.3,'sine',0.03,0.06); } },
+  select:function(){ if(audioReady()) tone(620,0.06,'triangle',0.03); },
+  confirm:function(){ if(audioReady()){ tone(523.25,0.14,'sine',0.04); tone(659.25,0.14,'sine',0.038,0.09); tone(783.99,0.26,'sine',0.036,0.18); } },
+  error:function(){ if(audioReady()){ tone(200,0.14,'square',0.028); tone(160,0.18,'square',0.024,0.1); } },
+  close:function(){ if(audioReady()) tone(340,0.1,'sine',0.028,0,250); }
+};
+
+/* ======================================================================
+   RIPPLE + TILT + POINTER SHEEN
+   ====================================================================== */
+function ripple(el,ev){
+  if(rm()||!el) return;
+  try{
+    var r=el.getBoundingClientRect();
+    var size=Math.max(r.width,r.height);
+    var s=document.createElement('span');
+    s.className='rip';
+    s.style.width=s.style.height=size+'px';
+    s.style.left=((ev.clientX||r.left+r.width/2)-r.left-size/2)+'px';
+    s.style.top=((ev.clientY||r.top+r.height/2)-r.top-size/2)+'px';
+    el.appendChild(s);
+    setTimeout(function(){ s.remove(); },620);
+  }catch(e){}
+}
+document.addEventListener('pointerdown',function(e){
+  var el=e.target.closest('.btn,.cta,.pick,.ask-btn,.sw-btn');
+  if(el) ripple(el,e);
+},{passive:true});
+
+document.addEventListener('pointermove',function(e){
+  var el=e.target.closest('.scard,.person');
+  if(!el||rm()) return;
+  var r=el.getBoundingClientRect();
+  el.style.setProperty('--mx',(e.clientX-r.left)+'px');
+  el.style.setProperty('--my',(e.clientY-r.top)+'px');
+  var rx=((e.clientY-r.top)/r.height-0.5)*-4;
+  var ry=((e.clientX-r.left)/r.width-0.5)*4;
+  el.style.transform='perspective(900px) rotateX('+rx+'deg) rotateY('+ry+'deg) translateY(-5px)';
+},{passive:true});
+document.addEventListener('pointerleave',function(e){
+  var el=e.target.closest && e.target.closest('.scard,.person');
+  if(el) el.style.transform='';
+},true);
+
+/* keeps the ambience in step with the stage */
+function fxAfterDraw(){
+  document.documentElement.setAttribute('data-stage',S.stage);
+  var btn=$('sfx-toggle');
+  if(btn){
+    var on=S.sfx!==false;
+    btn.setAttribute('aria-pressed',on?'true':'false');
+    btn.setAttribute('aria-label',tx(on?T.nav.sfxOn:T.nav.sfxOff));
+    btn.setAttribute('title',tx(on?T.nav.sfxOn:T.nav.sfxOff));
+  }
+}
+
+/* =================== events =================== */
+function closeMenus(){
+  document.querySelectorAll('.pill-menu').forEach(function(m){ m.classList.remove('open'); });
+  document.querySelectorAll('[data-act="menu"]').forEach(function(b){ b.setAttribute('aria-expanded','false'); });
+}
+function scrollTop(){ try{ window.scrollTo({top:0,behavior:rm()?'auto':'smooth'}); }catch(e){ try{window.scrollTo(0,0);}catch(e2){} } }
+
+function handle(a,v,el){
+  if(a==='sfx'){
+    S.sfx=(S.sfx===false);
+    save(); fxAfterDraw();
+    if(S.sfx){ audioReady(); SFX.select(); }
+    say(tx(S.sfx?T.nav.sfxOn:T.nav.sfxOff));
+    return;
+  }
+  if(a==='menu'){ var mn=$(el.dataset.menu+'-menu'); if(!mn) return;
+    var o=mn.classList.contains('open'); closeMenus();
+    if(!o){ mn.classList.add('open'); el.setAttribute('aria-expanded','true'); } return; }
+  if(a==='lang'){ closeMenus(); if(S.lang!==v){ S.lang=v; save(); draw(); say(v==='ar'?'العربية':'English'); } return; }
+  if(a==='theme'){ closeMenus(); if(S.theme!==v){ S.theme=v; save(); draw(); } return; }
+  if(a==='go'){ SFX.tap(); go(v); return; }
+  if(a==='acc'){ S[v]=!S[v]; save(); draw(); return; }
+  if(a==='ask'){ askReveal(v); return; }
+  if(a==='read'){ SFX.open(); openReader(v); return; }
+  if(a==='vault'){ SFX.tap(); openVault(); return; }
+  if(a==='free'){ if(S.opened.indexOf(v)===-1){ S.opened.push(v); save(); draw(); } openReader(v); return; }
+
+  if(a==='toDecide'){
+    if(S.budget>0){
+      dialog('<h3>'+esc(tx(T.inv.dlgLeftT))+'</h3><p>'+esc(tx(T.inv.dlgLeftB))+'</p>'
+        +'<div class="dlg-cost"><span class="orbs">'+orbs(S.budget)+'</span><span>'+esc(tx(leftLabel()))+'</span></div>'
+        +'<div class="btns"><button class="btn btn-primary" type="button" data-dlg="ok">'+esc(tx(T.inv.dlgLeftOk))+'</button>'
+        +'<button class="btn btn-ghost" type="button" data-dlg="no">'+esc(tx(T.inv.dlgLeftNo))+'</button></div>',
+        function(k){ if(k==='ok'){ closeLayer(); go('decide'); } });
+    } else go('decide');
+    return;
+  }
+  if(a==='prev'){ if(S.step>1){ SFX.back(); S.step--; S.dir=-1; S.errs={}; save(); draw(); scrollTop(); } return; }
+  if(a==='next'){
+    if(!stepValid(S.step,S)){ SFX.error(); S.errs={step:1}; save(); draw(); say(tx(stepErr(S.step))); return; }
+    S.errs={};
+    if(S.step===4 && S.conclusion==='c_no' && S.cnoPath==='cno_change'){
+      SFX.back(); S.step=1; S.dir=-1; S.conclusion=null; S.cnoPath=null; S.cnoCheck=null; S.support=null; S.move=null;
+      save(); draw(); scrollTop(); say(tx(T.wiz.q1)); return;
+    }
+    if(S.step<STEPS){ SFX.step(); S.step++; S.dir=1; save(); draw(); scrollTop(); return; }
+    dialog('<h3>'+esc(tx(T.wiz.confirmT))+'</h3><p>'+esc(tx(T.wiz.confirmB))+'</p>'
+      +'<div class="verdict-card" style="padding:var(--s4);margin-block-end:var(--s5)">'+sumRows(snap(S))+'</div>'
+      +'<div class="btns"><button class="btn btn-primary" type="button" data-dlg="ok">'+esc(tx(T.wiz.confirmOk))+'</button>'
+      +'<button class="btn btn-ghost" type="button" data-dlg="no">'+esc(tx(T.wiz.confirmNo))+'</button></div>',
+      function(k){ if(k==='ok'){ closeLayer(); S.submitted=snap(S); S.revised=null; S.kept=false; S.revising=false; save(); go('result'); SFX.confirm(); } });
+    return;
+  }
+  if(a==='keep'){ S.kept=true; save(); draw(); return; }
+  if(a==='revise'){
+    S.revising=true; S.errs={};
+    S.buf={who:S.submitted.who,evSup:S.submitted.evSup.slice(),noSup:S.submitted.noSup,
+      evLim:S.submitted.evLim.slice(),noLim:S.submitted.noLim,conclusion:S.submitted.conclusion,
+      cnoPath:S.submitted.cnoPath,cnoCheck:S.submitted.cnoCheck,
+      support:S.submitted.support,move:S.submitted.move,pledge:S.submitted.pledge};
+    save(); draw(); return;
+  }
+  if(a==='revNo'){ S.revising=false; S.buf=null; S.errs={}; save(); draw(); return; }
+  if(a==='revOk'){
+    var errs={};
+    for(var n=1;n<=STEPS;n++){ if(!stepValid(n,S.buf)) errs['r'+n]=1; }
+    S.errs=errs; save();
+    if(Object.keys(errs).length){ draw(); var e1=document.querySelector('.err');
+      if(e1&&e1.scrollIntoView){ try{e1.scrollIntoView({block:'center',behavior:rm()?'auto':'smooth'});}catch(e){} } return; }
+    SFX.confirm();
+    S.revised=snap(S.buf); S.revised.openedAt=S.opened.slice();
+    S.revising=false; S.buf=null; save(); draw(); scrollTop(); return;
+  }
+  if(a==='dl'){ download(); return; }
+  if(a==='again'){
+    dialog('<h3>'+esc(tx(T.res.againT))+'</h3><p>'+esc(tx(T.res.againB))+'</p>'
+      +'<div class="btns"><button class="btn btn-primary" type="button" data-dlg="ok">'+esc(tx(T.res.againOk))+'</button>'
+      +'<button class="btn btn-ghost" type="button" data-dlg="no">'+esc(tx(T.res.againNo))+'</button></div>',
+      function(k){ if(k==='ok'){ var lg=S.lang,th=S.theme; S=fresh(); S.lang=lg; S.theme=th; save(); closeLayer(); go('start'); } });
+    return;
+  }
+}
+
+document.addEventListener('click',function(e){
+  var el=e.target.closest('[data-act]'); if(!el) return;
+  if(el.closest('[data-dlg]')&&el.dataset.act!=='read') return;
+  handle(el.dataset.act,el.dataset.v,el);
+});
+document.addEventListener('keydown',function(e){
+  if(e.key==='Enter'||e.key===' '){
+    var el=e.target.closest('[role="button"][data-act]');
+    if(el){ e.preventDefault(); handle(el.dataset.act,el.dataset.v,el); }
+  }
+});
+document.addEventListener('click',function(e){ if(!e.target.closest('.pill-select')) closeMenus(); });
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'&&document.querySelector('.pill-menu.open')) closeMenus();
+});
+
+/* choice changes — preserved across steps */
+function toggleEv(list,v,checked,clearFlag,src){
+  var i=list.indexOf(v);
+  if(checked){ if(list.length<2){ list.push(v); src[clearFlag]=false; } else { toast(tx(T.wiz.max)); } }
+  else if(i>-1) list.splice(i,1);
+}
+document.addEventListener('input',function(e){
+  var el=e.target.closest('[data-act="note"]'); if(!el) return;
+  if(!S.notes) S.notes={};
+  S.notes[el.dataset.v]=el.value;
+  save();
+  var c=el.parentNode.querySelector('.rq-count');
+  if(c) c.textContent=el.value?tx(T.reflect.saved):'';
+});
+document.addEventListener('change',function(e){
+  var el=e.target.closest('[data-act]'); if(!el) return;
+  if(el.dataset.act==='note') return;
+  var a=el.dataset.act, v=el.value, R=a.charAt(0)==='r', src=R?S.buf:S, k=R?a.slice(1):a;
+  if(!src) return;
+  if(k==='who'){ if(src.who!==v){ src.who=v; src.conclusion=null; src.cnoPath=null; src.cnoCheck=null; src.support=null; src.move=null; } }
+  else if(k==='evs'){ toggleEv(src.evSup,v,el.checked,'noSup',src); }
+  else if(k==='nos'){ src.noSup=el.checked; if(el.checked) src.evSup=[]; }
+  else if(k==='evl'){ toggleEv(src.evLim,v,el.checked,'noLim',src); }
+  else if(k==='nol'){ src.noLim=el.checked; if(el.checked) src.evLim=[]; }
+  else if(k==='con'){ src.conclusion=v; if(v!=='c_no'){ src.cnoPath=null; src.cnoCheck=null; } }
+  else if(k==='cno'){ src.cnoPath=v; if(v!=='cno_cond') src.cnoCheck=null; }
+  else if(k==='cnoc'){ src.cnoCheck=v; }
+  else if(k==='sup'){ src.support=v; }
+  else if(k==='mv'){ src.move=v; }
+  else if(k==='pl'){ src.pledge=v; }
+  else return;
+  SFX.select();
+  if(!R) S.errs={};
+  save(); draw();
+});
+
+/* =================== summary download =================== */
+function download(){
+  var sn=S.revised||S.submitted, lang=S.lang, dir=lang==='ar'?'rtl':'ltr';
+  var font=lang==='ar'?"'Noto Sans Arabic',Tahoma,sans-serif":"'Inter',system-ui,sans-serif";
+  function R(k,v){ return '<tr><th>'+esc(k)+'</th><td>'+v+'</td></tr>'; }
+  function evList(ids,none){
+    if(none) return esc(tx(T.k.none));
+    if(!ids.length) return '—';
+    return '<ul>'+ids.map(function(id){var e=EV[id];
+      return '<li><b>'+esc(tx(PEOPLE[e.who].name))+' — '+esc(tx(KIND[e.factor]))+'</b><br>'+esc(tx(e.text))+'</li>';}).join('')+'</ul>';
+  }
+  var opened=S.submitted.openedAt.length
+    ? '<ul>'+S.submitted.openedAt.map(function(id){var e=EV[id];
+        return '<li><b>'+esc(tx(PEOPLE[e.who].name))+' — '+esc(tx(KIND[e.factor]))+'</b><br>'+esc(tx(e.text))+'</li>';}).join('')+'</ul>'
+    : '<p>'+esc(tx(T.k.none))+'</p>';
+  var notes='';
+  if(S.notes){
+    var keys=['r1','r2','r3'].filter(function(k){ return (S.notes[k]||'').trim(); });
+    if(keys.length){
+      notes='<h2>'+esc(tx(T.reflect.inSummary))+'</h2><ul>'
+        +keys.map(function(k){ return '<li>'+esc(S.notes[k])+'</li>'; }).join('')+'</ul>';
+    }
+  }
+  var rev=S.revised?('<h2>'+esc(tx(T.res.revised))+'</h2><table>'
+    +R(tx(T.k.leader),esc(tx(PEOPLE[S.revised.who].name)))
+    +R(tx(T.k.conclusion),esc(tx(conclusionText(S.revised.conclusion))))
+    +R(tx(T.k.support),esc(tx(supportText(S.revised.support))))
+    +R(tx(T.k.move),esc(tx(moveTextOf(S.revised.move))))+'</table>'):'';
+
+  var doc='<!DOCTYPE html><html lang="'+lang+'" dir="'+dir+'"><head><meta charset="UTF-8">'
+    +'<meta name="viewport" content="width=device-width,initial-scale=1"><title>'+esc(tx(T.sum.title))+'</title><style>'
+    +'body{font-family:'+font+';max-width:760px;margin:40px auto;padding:0 24px;color:#14142B;line-height:1.9;background:#fff}'
+    +'h1{font-size:1.5rem;border-bottom:2px solid #4D88E8;padding-bottom:12px}h2{font-size:1.05rem;margin-top:34px}'
+    +'table{width:100%;border-collapse:collapse;margin:16px 0}'
+    +'th{text-align:start;width:30%;color:#555;font-size:.88rem;padding:12px;border-bottom:1px solid #e3e3ea;vertical-align:top}'
+    +'td{padding:12px;border-bottom:1px solid #e3e3ea;vertical-align:top}'
+    +'ul{margin:0;padding-inline-start:20px}li{margin-bottom:12px}.m{color:#666;font-size:.85rem}'
+    +'@media print{body{margin:0}.noprint{display:none}}</style></head><body>'
+    +'<h1>'+esc(tx(T.sum.title))+'</h1><h2>'+esc(tx(T.res.original))+'</h2><table>'
+      +R(tx(T.k.leader),esc(tx(PEOPLE[S.submitted.who].name)))
+      +R(tx(T.k.supports),evList(S.submitted.evSup,S.submitted.noSup))
+      +R(tx(T.k.limits),evList(S.submitted.evLim,S.submitted.noLim))
+      +R(tx(T.k.conclusion),esc(tx(conclusionText(S.submitted.conclusion)))
+         +(S.submitted.cnoPath?'<br>'+esc(tx(byId(CNO_PATHS,S.submitted.cnoPath).text)):'')
+         +(S.submitted.cnoCheck?'<br><b>'+esc(tx(T.k.condition))+'</b> '+esc(tx(byId(CNO_CHECKS,S.submitted.cnoCheck).text)):''))
+      +R(tx(T.k.support),esc(tx(supportText(S.submitted.support))))
+      +R(tx(T.k.move),esc(tx(moveTextOf(S.submitted.move))))
+      +R(tx(T.k.pledge),esc(tx(pledgeText(S.submitted.pledge))))
+    +'</table>'+rev
+    +'<h2>'+esc(tx(T.sum.openedBefore))+'</h2>'+opened+notes
+    +'<p class="m">'+esc(tx(T.sum.method))+'</p><p class="m">'+esc(tx(T.sum.note))+'</p>'
+    +'<p class="noprint"><button onclick="print()">'+esc(tx(T.sum.print))+'</button></p></body></html>';
+  try{
+    var blob=new Blob([doc],{type:'text/html;charset=utf-8'});
+    var url=URL.createObjectURL(blob), a=document.createElement('a');
+    a.href=url; a.download='credibility-decision-summary.html';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(url); },3000);
+    toast(tx(T.res.saved));
+  }catch(e){ var w=window.open(); if(w){ w.document.write(doc); w.document.close(); } }
+}
+
+draw();
+</script>
+</body>
+</html>
